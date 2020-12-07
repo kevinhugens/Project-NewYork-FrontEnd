@@ -31,6 +31,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -60,7 +62,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     DragDropModule,
     MatTooltipModule,
     RouterModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule
   ], exports: [
     CommonModule,
     FormsModule,
@@ -88,7 +91,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     DragDropModule,
     MatTooltipModule,
     RouterModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'nl-BE' },

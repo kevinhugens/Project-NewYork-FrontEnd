@@ -14,6 +14,10 @@ import { HomeModule } from './home/home.module';
 import { SecurityModule } from './security/security.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SecurityInterceptor } from './security/security.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +32,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     SharedModule,
     HomeModule,
     FlexLayoutModule,
-    SecurityModule
+    SecurityModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [    
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: SecurityInterceptor,
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

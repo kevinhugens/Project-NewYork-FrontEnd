@@ -1,51 +1,95 @@
 <div class="row">
   <div class="col-12 text-center">
     <h1>Registreren</h1>
-    <!-- <p>User: {{newUser|json}}</p> -->
+    <!-- <p>User: {{user|json}}</p> -->
+    <p>{{ signupForm.value | json}}</p>
+
   </div>
 </div>
 
-<form #signupForm="ngForm" (ngSubmit)="onSubmit()" class="row text-center">
+<!-- #signupForm="ngForm" -->
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="row text-center">
 
-  <!-- First name -->
-  <div class="col-10 offset-1">
-    <mat-form-field>
-      <input matInput placeholder="Firstname" type="text" required minlength="2" name="firstName" />
-      <!--[(ngModel)]="" -->
-    </mat-form-field>
+  <div class="col-6">
+    <div class="row">
+      <!-- First name -->
+      <div class="col-12 border border-info">
+        <mat-form-field>
+          <input matInput placeholder="Voornaam" type="text" required minlength="2" name="firstName"
+            formControlName="firstName" />
+
+        </mat-form-field>
+      </div>
+
+      <!-- Last name -->
+      <div class="col-12 border border-info">
+        <mat-form-field>
+          <input matInput placeholder="Achternaam" type="text" required minlength="2" name="lastName"
+            formControlName="lastName" />
+        </mat-form-field>
+      </div>
+
+      <!-- DateOfBirth -->
+      <div class="col-12 border border-info">
+        <mat-form-field color="primary">
+          <mat-label>Geboortedatum</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" required
+            formControlName="dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+
+
+
+
+      <div class="col-10 offset-1">
+        <mat-form-field>
+          <mat-label>Deelnemen aan betsaand team</mat-label>
+          <mat-select formControlName="team">
+            <mat-option value="0">Nieuw team aanmaken/geen team</mat-option>
+            <!-- <mat-option *ngFor="let team of teams" [value]="teams.teamID">{{team.name}}</mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-10 offset-1">
+        <p class="text-danger">Foto niet vergeten</p>
+        <!-- <p>{{maxDate}} {{minDate}}</p> -->
+      </div>
+    </div>
   </div>
 
-  <!-- Last name -->
-  <div class="col-10 offset-1">
-    <mat-form-field>
-      <input matInput placeholder="Lastname" type="text" required minlength="2" name="lastName" />
-    </mat-form-field>
+  <div class="col-6">
+    <div class="row text-center">
+      <div class="col-12 border border-danger">
+          <img src="../../../assets/account_image.png" class="img-fluid w-50" alt="profiel afbeelding"> <br>
+          <button mat-button color="accent">Upload foto</button>
+      </div>
+    </div>
   </div>
 
   <!-- E-mail -->
-  <div class="col-10 offset-1">
+  <div class="col-6">
     <mat-form-field>
-      <input matInput placeholder="E-mail" type="email" required minlength="2" name="email" />
-    </mat-form-field>
-  </div>
-
-  <!-- Username -->
-  <div class="col-10 offset-1">
-    <mat-form-field>
-      <input matInput placeholder="Username" type="text" required minlength="2" name="username" />
+      <input matInput placeholder="E-mail" type="email" required minlength="2" name="email" formControlName="email" />
     </mat-form-field>
   </div>
 
   <!-- Password -->
-  <div class="col-10 offset-1">
+  <div class="col-6">
     <mat-form-field>
-      <input matInput placeholder="Password" type="password" required name="password" #passwordcontrol/>
+      <input matInput placeholder="Wachtwoord" type="password" required name="password" #passwordcontrol
+        formControlName="password" />
     </mat-form-field>
   </div>
 
+
   <!-- Submit -->
   <div class="col-10 offset-1">
-    <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.form.valid || submitted">Registreer</button>
+    <button mat-raised-button color="primary" type="submit"
+      [disabled]="!signupForm.valid || submitted">Registreer</button>
     <div class="text-muted mt-2">Al een account?<a [routerLink]="['/aanmelden']">Meld je nu aan!</a></div>
   </div>
 
