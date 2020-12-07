@@ -7,10 +7,13 @@ import { LoginComponent } from './security/login/login.component';
 import { SignupComponent } from './security/signup/signup.component';
 import { WildcardRouteComponent } from './wildcard-route/wildcard-route.component';
 
+// Guards
+import { AuthGuard } from './security/guards/auth.guard';
+
 const routes: Routes = [
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'aanmelden', component: LoginComponent },
   { path: 'registreren', component: SignupComponent },
 

@@ -33,8 +33,13 @@ export class LoginComponent implements OnInit {
           this._authenticateService.isLoggedin.next(result.token ? true : false);
           this.router.navigate(['']); 
           this.snackBar.open("Welkom " + result.firstName + " " + result.lastName + "!", "", { duration: 5000 });
+        }else{
+          this.snackBar.open("Aanmelden niet gelukt!", "", { duration: 5000 });
         }
       },
+      error => {
+        this.snackBar.open("Aanmelden niet gelukt!", "", { duration: 5000 });
+      }
 
     )
   }
