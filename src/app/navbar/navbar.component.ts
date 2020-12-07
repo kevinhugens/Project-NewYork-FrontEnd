@@ -18,9 +18,9 @@ export class NavbarComponent implements OnInit {
     console.log("User wants to logout");
     alert("Logout")
     localStorage.clear();
-    this.snackBar.open("Tot later!", "", { duration: 5000 });
+    this.snackBar.open("Tot later ...!", "", { duration: 5000 });
     // this._authenticateService.isLoggedin.next(false);
-    this.router.navigate(['']); // Redirect to home page after logout
+    this.router.navigate(['aanmelden']); // Redirect to login page after logout
   }
 
 

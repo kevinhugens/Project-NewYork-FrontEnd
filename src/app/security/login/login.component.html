@@ -1,0 +1,44 @@
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Aanmelden</h1>
+        <!-- <p>User: {{userLogin|json}}</p> -->
+      </div>
+    </div>
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="row text-center mt-3 mt-md-5">
+
+      <!-- Username -->
+      <div class="col-10 offset-1">
+        <mat-form-field>
+          <input matInput placeholder="Username" type="text" required minlength="2" />
+        </mat-form-field>
+      </div>
+
+      <!-- Password -->
+      <div class="col-10 offset-1">
+        <mat-form-field>
+           <input matInput placeholder="Password" type="password" required name=""  /> <!--[(ngModel)]="" -->
+        </mat-form-field>
+      </div>
+
+      <!-- Submit -->
+      <div class="col-10 offset-1">
+        <button mat-raised-button color="primary" type="submit"
+          [disabled]="!loginForm.form.valid || submitted">Aanmelden</button>
+        <div class="text-muted mt-2">Nog geen account? <a [routerLink]="['/registreren']">Registreer</a> je nu!
+        </div>
+      </div>
+
+    </form>
+
+    <!-- If the user is logged in and gets on this page for some reason -->
+    <!-- <section *ngIf="loggedIn">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>You are logged in, {{username}}!</h1>
+        </div>
+        <div class="col-10 offset-1 text-center">
+          <button class="m-2" mat-raised-button color="warn" (click)="clearLocalStorage()">Logout</button>
+        </div>
+      </div>
+    </section> -->
