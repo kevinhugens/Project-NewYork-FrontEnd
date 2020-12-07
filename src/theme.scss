@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$newYork-app-primary: mat-palette($mat-blue); 
+$newYork-app-accent: mat-palette($mat-orange); 
+$newYork-app-warn: mat-palette($mat-red);
+
+$newYork-app-theme: mat-light-theme($newYork-app-primary, $newYork-app-accent, $newYork-app-warn);
+@include angular-material-theme($newYork-app-theme);
