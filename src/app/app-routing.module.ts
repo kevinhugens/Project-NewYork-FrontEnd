@@ -8,7 +8,7 @@ import { SignupComponent } from './security/signup/signup.component';
 import { WildcardRouteComponent } from './wildcard-route/wildcard-route.component';
 
 // Guards
-import { AuthGuard } from './security/guards/auth.guard';
+import { AuthGuard } from './security/guards/auth.guard'
 
 const routes: Routes = [
 

@@ -8,13 +8,13 @@
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
   
           <!-- Sign Up -->
-          <li><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
+          <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
           <!-- Log In -->
-          <li class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
+          <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
   
-          <li>
+          <li *ngIf="loggedIn">
   
             <!-- <a class="profile-menu" [matMenuTriggerFor]="menu">
               {{username}}<mat-icon>more_vert</mat-icon>
