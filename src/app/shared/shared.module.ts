@@ -30,6 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
+import { GameCardComponent } from './game-card/game-card.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -39,7 +40,7 @@ import { TeamListItemComponent } from './team-list-item/team-list-item.component
 // import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
-  declarations: [TeamListItemComponent],
+  declarations: [TeamListItemComponent, GameCardComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -104,7 +105,9 @@ import { TeamListItemComponent } from './team-list-item/team-list-item.component
     // MatCarouselModule
     MatStepperModule,
     NgxMaterialTimepickerModule,
-    TeamListItemComponent
+    TeamListItemComponent,
+    GameCardComponent,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'nl-BE' },
