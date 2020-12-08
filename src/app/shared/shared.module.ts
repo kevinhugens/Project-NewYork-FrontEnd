@@ -30,11 +30,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
+import { GameCardComponent } from './game-card/game-card.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [GameCardComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -92,6 +93,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
+    GameCardComponent,
     ReactiveFormsModule
   ],
   providers: [
