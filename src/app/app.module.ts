@@ -12,6 +12,7 @@ import { WildcardRouteComponent } from './wildcard-route/wildcard-route.componen
 
 import { HomeModule } from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UsersModule } from './users/users.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

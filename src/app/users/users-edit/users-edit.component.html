@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Edit user</h1>
+            <form #updateUserForm="ngForm" (ngSubmit)="onSubmitUpdateUser()">
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedUser["firstName"]' placeholder="first name" name="firstname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedUser["lastName"]' placeholder="last name" name="lastname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedUser["email"]' placeholder="email" name="email" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedUser["password"]' placeholder="password" name="password" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="date" [(ngModel)]='selectedUser["dateOfBirth"]' placeholder="date of birth" name="dateofbirth" required/>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!updateUserForm.form.valid || submittedSelected">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToUsers()">Back to users</button>
+        </div>
+    </div>
+</div>
