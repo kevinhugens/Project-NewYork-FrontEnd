@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col col-md-12" style="text-align: center;">
             <h1>Edit user</h1>
-            <form #updateUserForm="ngForm" (ngSubmit)="onSubmitUpdateUser()">
+            <form #updateUserForm="ngForm" (ngSubmit)="onSubmitUpdateUser()" *ngIf="selectedUser">
                 <p>
                     <mat-form-field>
                         <input matInput type="text" [(ngModel)]='selectedUser["firstName"]' placeholder="first name" name="firstname" required/>

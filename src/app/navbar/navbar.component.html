@@ -6,29 +6,35 @@
   
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-  
-          <!-- Sign Up -->
-          <li><a class="align-middle" routerLink="/signup" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Test</a></li>
-          <!-- Log In -->
-          <li class="ml-3"><a class="align-middle" routerLink="/login" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Test2</a></li>
           <li>
             <!-- Users -->
             <li class="ml-3"><a class="align-middle" routerLink="/users" routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
           <li>
+            <li>
+              <!-- Users -->
+              <li class="ml-3"><a class="align-middle" routerLink="/teams" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Teams</a></li>
+            <li>
+          <!-- Sign Up -->
+          <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
+          <!-- Log In -->          
+          <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
+  
+          <li *ngIf="loggedIn">
   
             <!-- <a class="profile-menu" [matMenuTriggerFor]="menu">
               {{username}}<mat-icon>more_vert</mat-icon>
             </a> -->
-            <a>Hallo</a>
+            <a class="profile-menu" [matMenuTriggerFor]="menu">Menu<mat-icon>more_vert</mat-icon></a>
   
             <mat-menu #menu="matMenu">
               <a class="profile-menu-item" mat-menu-item routerLink="/profile" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>account_circle</mat-icon>
-                <span>Profile</span>
+                <span>Profiel</span>
               </a>
               <!-- <a class="profile-menu-item" mat-menu-item routerLink="/my-likes" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">
@@ -67,7 +73,7 @@
               <!-- Logout -->
               <a class="profile-menu-item" mat-menu-item (click)="logout()">
                 <mat-icon id="logout" color="warn">power_settings_new</mat-icon>
-                <span>Logout</span>
+                <span>Afmelden</span>
               </a>
             </mat-menu>
           </li>

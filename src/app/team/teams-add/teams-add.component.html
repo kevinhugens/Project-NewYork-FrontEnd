@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Create team</h1>
+            <form #createTeamForm="ngForm" (ngSubmit)="onSubmitCreateTeam()">
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTeam["teamName"]' placeholder="teamname" name="teamname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTeam["companyName"]' placeholder="companyname" name="companyname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTeam["address"]' placeholder="address" name="address" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTeam["photo"]' placeholder="photo" name="photo" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTeam["captainID"]' placeholder="captainID" name="captain" required/>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!createTeamForm.form.valid || submittedNew">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToTeams()">Back to teams</button>
+        </div>
+    </div>
+</div>
