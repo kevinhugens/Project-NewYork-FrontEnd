@@ -4,11 +4,15 @@
             <img src="../../../assets/tableFootball2.jpg" alt="tableFootball" class="img-fluid">
             <h1>Welkom!</h1>
             <p>Welkom op de startpagina. Hieronder vindt u enkele handige snelkoppelingen.</p>
-            <div class="row">
+            <div *ngIf="competition" class="row">
 
                 <div class="col-lg-8">
-                    <app-game-card [competition]="competition" [game]="game" [team1] ="team1" [team2]="team2" [latest]="true"></app-game-card>
-                    <app-game-card></app-game-card>
+                    <div class="mb-3">
+                        <app-game-card [competitionid]="competition.competitionID" [gameid]="game.gameID" [team1id] ="team1.teamID" [team2id]="team2.teamID" [next]="true"></app-game-card>
+
+                    </div>
+                    
+                    <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id] ="team1.teamID" [team2id]="team2.teamID" [next]="false"></app-game-card>
                 </div>
                 
                 <div class="col-lg-4">
@@ -18,7 +22,6 @@
                             <h2 class="card-title">{{competition.name}}</h2>
                             <p class="card-text">Hier kan u een wedstrijd starten</p>
                             <button mat-raised-button color="primary">Wedstrijd starten</button>
-
                         </div>
                     </div>
                 </div>
