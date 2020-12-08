@@ -14,7 +14,8 @@ import { HomeModule } from './home/home.module';
 import { SecurityModule } from './security/security.module';
 import { MatchesModule } from './matches/matches.module';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { UsersModule } from './users/users.module';
+import { TeamModule } from './team/team.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
@@ -33,9 +34,11 @@ import { SecurityInterceptor } from './security/security.interceptor';
     SharedModule,
     HomeModule,
     FlexLayoutModule,
+    UsersModule,
     SecurityModule,
     HttpClientModule,
-    MatchesModule
+    MatchesModule,
+    TeamModule,
   ],
   providers: [    
     {

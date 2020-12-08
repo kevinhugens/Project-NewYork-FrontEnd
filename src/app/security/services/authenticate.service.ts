@@ -8,6 +8,12 @@ import { UserLogin } from '../../shared/models/user-login.model';
   providedIn: 'root'
 })
 export class AuthenticateService {
+  private userLogged = new BehaviorSubject(this.getCurrentUser());
+  loggedUser = this.userLogged.asObservable();
+
+  logUser(user : User){
+    this.userLogged.next(user);
+  }
 
   isLoggedin = new BehaviorSubject(false);
 
@@ -16,6 +22,14 @@ export class AuthenticateService {
       return true;
     } else {
       return false;
+    }
+  }
+  getCurrentUser() {
+    if(localStorage.getItem("currentUser")){
+      return JSON.parse(localStorage.getItem("currentUser"));
+    }
+    else {
+      return null;
     }
   }
 

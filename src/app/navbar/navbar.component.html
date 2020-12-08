@@ -6,11 +6,20 @@
   
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-  
+          <li>
+            <!-- Users -->
+            <li class="ml-3"><a class="align-middle" routerLink="/users" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
+          <li>
+            <li>
+              <!-- Users -->
+              <li class="ml-3"><a class="align-middle" routerLink="/teams" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Teams</a></li>
+            <li>
           <!-- Sign Up -->
           <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
-          <!-- Log In -->
+          <!-- Log In -->          
           <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
   

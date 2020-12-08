@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-
+  selectedUser : User = null;
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]>{
@@ -16,6 +16,9 @@ export class UserService {
 
   getUser(id: number): Observable<User>{
     return this.http.get<User>("https://localhost:44300/api/user/" + id);
+  }
+  getUsersByTeamID(teamid: number): Observable<User[]>{
+    return this.http.get<User[]>("https://localhost:44300/api/user/team/" + teamid);
   }
 
   updateUser(id: number, user: User){

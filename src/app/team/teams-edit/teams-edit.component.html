@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Update team</h1>
+            <form #createTeamForm="ngForm" (ngSubmit)="onSubmitUpdateTeam()" *ngIf="selectedTeam">
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedTeam["teamName"]' placeholder="teamname" name="teamname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedTeam["companyName"]' placeholder="companyname" name="companyname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedTeam["address"]' placeholder="address" name="address" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedTeam["photo"]' placeholder="photo" name="photo" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <!-- <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='selectedTeam["captainID"]' placeholder="captainID" name="captain" required/>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Captain</mat-label>
+                        <mat-select name="captain" [(ngModel)]='selectedTeam["captainID"]' required>
+                            <mat-option *ngFor="let user of usersByTeamID" [value]='user["userID"]'>
+                                {{user["firstName"]}} {{user["lastName"]}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!createTeamForm.form.valid || submittedSelected">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToTeams()">Back to teams</button>
+        </div>
+    </div>
+</div>
