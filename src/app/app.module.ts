@@ -12,6 +12,7 @@ import { WildcardRouteComponent } from './wildcard-route/wildcard-route.componen
 
 import { HomeModule } from './home/home.module';
 import { SecurityModule } from './security/security.module';
+import { MatchesModule } from './matches/matches.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +34,8 @@ import { SecurityInterceptor } from './security/security.interceptor';
     HomeModule,
     FlexLayoutModule,
     SecurityModule,
-    HttpClientModule
+    HttpClientModule,
+    MatchesModule
   ],
   providers: [    
     {

@@ -1,0 +1,168 @@
+<mat-horizontal-stepper #stepper>
+
+  <mat-step [stepControl]="teamFormGroup" [editable]="isEditable">
+    <form [formGroup]="teamFormGroup" class="">
+      <ng-template matStepLabel>Ploeg</ng-template>
+      <!-- <mat-selection-list #teams [multiple]="false">
+            <mat-list-option *ngFor="let team of teams" [value]="team.teamID">
+                {{team.companyName}} - {{team.teamName}}
+            </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Challenge deze ploeg: {{teams.selectedOptions.selected[0]?.value}}
+          </p> -->
+      <mat-selection-list #teams [multiple]="true">
+        <mat-list-option class="border d-block" [value]="0">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>image</mat-icon>
+              <div mat-line>Ploegnaam</div>
+              <div mat-line>Bedrijfnaam</div>
+              <div mat-line>Adres</div>
+            </mat-list-item>
+          </mat-list>
+        </mat-list-option>
+        <mat-list-option class="border d-block" [value]="1">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>image</mat-icon>
+              <div mat-line>Ploegnaam</div>
+              <div mat-line>Bedrijfnaam</div>
+              <div mat-line>Adres</div>
+            </mat-list-item>
+          </mat-list>
+        </mat-list-option>
+        <mat-list-option class="border d-block" [value]="1">
+            <mat-list>
+              <mat-list-item>
+                <mat-icon mat-list-icon>image</mat-icon>
+                <div mat-line>Ploegnaam</div>
+                <div mat-line>Bedrijfnaam</div>
+                <div mat-line>Adres</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-list-option>
+
+      </mat-selection-list>
+      <p>
+        Challenge deze ploeg: {{teams.selectedOptions.selected[0]?.value}}
+      </p>
+      <mat-form-field appearance="fill" class="mt-2 mt-lg-4">
+        <mat-label>Ploegen</mat-label>
+        <mat-select formControlName="team">
+          <mat-option value="0">Bedrijfsnaam - ploegnaam</mat-option>
+          <mat-option value="0">Bedrijfsnaam - ploegnaam</mat-option>
+          <mat-option value="0">Bedrijfsnaam - ploegnaam</mat-option>
+          <!-- <mat-option *ngFor="let team of teams" [value]="team.teamID">{{team.companyName}} - {{team.teamName}}</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button color="accent" class="float-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Tijdstip -->
+  <mat-step [stepControl]="timeFormGroup" [editable]="isEditable">
+    <form [formGroup]="timeFormGroup" class="text-center">
+      <ng-template matStepLabel>Tijdstip</ng-template>
+      <div class="mt-2 mt-lg-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Kies een datum</mat-label>
+          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+<br>
+          <mat-form-field appearance="fill">
+            <mat-label>Kies een tijd</mat-label>
+            <input matInput type="time" required min="06:00" max="23:59" [ngxTimepicker]="fullTime" [format]="24"
+               formControlName="time">
+              <!-- <mat-icon matSuffix [ngxTimepicker]="fullTime">schedule</mat-icon> -->
+          <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+        </mat-form-field>
+
+      </div>
+      <div>
+        <button mat-button color="accent" class="float-left" (click)="goBack(stepper)" matStepperPrevious>Terug</button>
+        <button color="accent" class="float-md-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Locatie -->
+  <mat-step [stepControl]="locationFormGroup" [editable]="isEditable">
+    <form [formGroup]="locationFormGroup" class="text-center">
+      <ng-template matStepLabel>Locatie</ng-template>
+      <!-- <mat-selection-list #tafels [multiple]="false">
+            <mat-list-option *ngFor="let tafel of tafels" [value]="tafel.tafelID">
+                {{team.companyName}} - {{team.teamName}}
+            </mat-list-option>
+          </mat-selection-list>
+          -->
+      <mat-form-field appearance="fill" class="mt-2 mt-lg-4">
+        <mat-label>Tafels</mat-label>
+        <mat-select formControlName="table">
+          <mat-option value="0">Tafelnaam - foto - adres</mat-option>
+          <mat-option value="0">Bedrijfsnaam - ploegnaam</mat-option>
+          <mat-option value="0">Bedrijfsnaam - ploegnaam</mat-option>
+          <!-- <mat-option *ngFor="let team of teams" [value]="team.teamID">{{team.companyName}} - {{team.teamName}}</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button color="accent" class="float-left" (click)="goBack(stepper)" matStepperPrevious>Terug</button>
+        <button color="accent" class="float-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Spelers -->
+  <mat-step [stepControl]="playerFormGroup" [editable]="isEditable">
+    <form [formGroup]="playerFormGroup" class="text-center">
+      <ng-template matStepLabel>Spelers</ng-template>
+
+      <label id="type-game-label">Welk type wedstrijd wil je spelen:</label> <br>
+      <mat-radio-group aria-labelledby="type-game-label">
+        <mat-radio-button value="1">1 VS 1</mat-radio-button> <br>
+        <mat-radio-button value="2">2 VS 2</mat-radio-button>
+      </mat-radio-group>
+
+      <hr>
+
+      <!-- <mat-selection-list #players [disabled]="test.selectedOptions.selected[1]?.value" [multiple]="true">
+            <mat-list-option *ngFor="let player of players" [value]="player.userID">
+                {{player.firstName}} - {{player.lastName}} Foto? -->
+      <!-- </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Speler 1: {{players.selectedOptions.selected[0]?.value}} <br>
+            Speler 1: {{players.selectedOptions.selected[1]?.value}}
+          </p> -->
+      <mat-form-field appearance="fill" class="mt-2 mt-lg-4">
+        <mat-label>Spelers</mat-label>
+        <mat-select formControlName="player">
+          <mat-option value="0">Voornaam - Achternaam - Foto</mat-option>
+          <mat-option value="0">Voornaam - Achternaam - Foto</mat-option>
+          <mat-option value="0">Voornaam - Achternaam - Foto</mat-option>
+          <!-- <mat-option *ngFor="let team of teams" [value]="team.teamID">{{team.companyName}} - {{team.teamName}}</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button color="accent" class="float-left" (click)="goBack(stepper)" matStepperPrevious>Terug</button>
+        <button color="accent" class="float-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Check / Challenge -->
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>CHALLENGE</ng-template>
+    <p>Deze wedstrijd zal door u aangemaakt worden:</p>
+    <div>
+      <button mat-stroked-button color="primary" matStepperPrevious>Terug</button>
+      <button mat-raised-button color="primary" class="float-md-right" matStepperPrevious>Challenge</button>
+      <button mat-stroked-button class="float-md-right mr-2" color="warn" (click)="stepper.reset()">Annuleer</button>
+    </div>
+  </mat-step>
+
+</mat-horizontal-stepper>

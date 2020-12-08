@@ -32,9 +32,14 @@ import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { TeamListItemComponent } from './team-list-item/team-list-item.component';
+
+// import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
-  declarations: [],
+  declarations: [TeamListItemComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -63,7 +68,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // MatCarouselModule.forRoot(),
+    MatStepperModule,
+    NgxMaterialTimepickerModule
   ], exports: [
     CommonModule,
     FormsModule,
@@ -92,7 +100,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // MatCarouselModule
+    MatStepperModule,
+    NgxMaterialTimepickerModule,
+    TeamListItemComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'nl-BE' },
