@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RankingService } from '../ranking.service';
+import { RankingService } from '../../shared/services/ranking.service';
 import { Ranking } from '../../shared/models/ranking.model';
+import { TeamService } from '../../shared/services/team.service';
 import { Team } from '../../shared/models/team.model';
 
 @Component({
@@ -15,7 +16,7 @@ export class RankingComponent implements OnInit {
   rankLength: number;
   teams: Team[];
 
-  constructor(private router: Router, private _rankingService: RankingService) {
+  constructor(private router: Router, private _rankingService: RankingService, private _teamService: TeamService) {
     this._rankingService.getRankings().subscribe(result => {
       this.rankings = result;
       this.rankings.sort((a, b) => b.points - a.points);
@@ -25,7 +26,7 @@ export class RankingComponent implements OnInit {
         this.rankings[i]["rank"] = i+1;
       }
     });
-    this._rankingService.getTeams().subscribe(result=>{
+    this._teamService.getTeams().subscribe(result=>{
       this.teams = result;
     });
   }

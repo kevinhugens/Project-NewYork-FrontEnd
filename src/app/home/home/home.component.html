@@ -5,33 +5,20 @@
             <h1>Welkom!</h1>
             <p>Welkom op de startpagina. Hieronder vindt u enkele handige snelkoppelingen.</p>
             <div class="row">
-                <div class="col">
-                    <div class="card h-100" >
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                            <h2 class="card-title">Rangschikking competitie</h2>
-                            <p class="card-text">Hier vindt u de huidige rangschikking van uw team.</p>
-                            <button mat-raised-button color="primary">Volledige rangschikking</button>
-                        </div>
-                    </div>
+
+                <div class="col-lg-8">
+                    <app-game-card [competition]="competition" [game]="game" [team1] ="team1" [team2]="team2" [latest]="true"></app-game-card>
+                    <app-game-card></app-game-card>
                 </div>
-                <div class="col">
-                    <div class="card h-100">
+                
+                <div class="col-lg-4">
+                    <div class="card" >
                         <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                         <div class="card-body">
-                            <h2 class="card-title">Eerstvolgende wedstrijd</h2>
-                            <p class="card-text">Hier kan u de eerstvolgende wedstrijd dat u moet spelen vinden.</p>
-                            <button mat-raised-button color="primary">Alle wedstrijden</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100" >
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                            <h2 class="card-title">Vriendschappelijke wedstrijd</h2>
-                            <p class="card-text">Hier kan u een vriendschappelijke wedstrijd starten door een ander team uit te dagen.</p>
-                            <button mat-raised-button color="primary">Uitdagen</button>
+                            <h2 class="card-title">{{competition.name}}</h2>
+                            <p class="card-text">Hier kan u een wedstrijd starten</p>
+                            <button mat-raised-button color="primary">Wedstrijd starten</button>
+
                         </div>
                     </div>
                 </div>
