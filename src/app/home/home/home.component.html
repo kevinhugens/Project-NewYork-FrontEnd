@@ -3,7 +3,9 @@
         <div class="col-12 text-center">
             <img src="../../../assets/tableFootball2.jpg" alt="tableFootball" class="img-fluid">
             <h1>Welkom!</h1>
+            <p>Welkom op de startpagina. Hieronder vindt u enkele handige snelkoppelingen.</p>
             <div class="row">
+
                 <div class="col-lg-8">
                     <app-game-card [competition]="competition" [game]="game" [team1] ="team1" [team2]="team2" [latest]="true"></app-game-card>
                     <app-game-card></app-game-card>
@@ -16,6 +18,7 @@
                             <h2 class="card-title">{{competition.name}}</h2>
                             <p class="card-text">Hier kan u een wedstrijd starten</p>
                             <button mat-raised-button color="primary">Wedstrijd starten</button>
+
                         </div>
                     </div>
                 </div>

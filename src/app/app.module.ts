@@ -11,7 +11,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { WildcardRouteComponent } from './wildcard-route/wildcard-route.component';
 
 import { HomeModule } from './home/home.module';
+import { SecurityModule } from './security/security.module';
 import { NavbarComponent } from './navbar/navbar.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SecurityInterceptor } from './security/security.interceptor';
 
 
 @NgModule({
@@ -26,9 +31,16 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SecurityModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [    
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: SecurityInterceptor,
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

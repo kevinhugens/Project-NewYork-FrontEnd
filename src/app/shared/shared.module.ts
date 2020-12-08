@@ -32,6 +32,8 @@ import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { GameCardComponent } from './game-card/game-card.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [GameCardComponent],
   imports: [
@@ -61,7 +63,8 @@ import { GameCardComponent } from './game-card/game-card.component';
     DragDropModule,
     MatTooltipModule,
     RouterModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule
   ], exports: [
     CommonModule,
     FormsModule,
@@ -90,7 +93,8 @@ import { GameCardComponent } from './game-card/game-card.component';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
-    GameCardComponent
+    GameCardComponent,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'nl-BE' },
