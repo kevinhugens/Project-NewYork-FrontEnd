@@ -12,6 +12,8 @@ import { WildcardRouteComponent } from './wildcard-route/wildcard-route.componen
 
 import { HomeModule } from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RankingModule } from './ranking/ranking.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RankingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
