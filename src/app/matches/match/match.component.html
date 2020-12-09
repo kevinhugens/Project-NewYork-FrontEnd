@@ -1,35 +1,56 @@
-<div class="row">
-    <div class="col-12">
-        <h1>Eerstvolgende wedstrijd:</h1>
+<div class="row mt-2">
+  <div class="col-12 col-md-6">
+    <div class="row">
+      <div class="col-12">
+        <h2>Eerstvolgende wedstrijd:</h2>
+        <p class="text-danger">Nog aanvullen (kijken uit Home)!!!!</p>
+      </div>
+      <div class="col-12 text-center">
+        <app-game-card [competitionid]="" [gameid]="1" [team1id]="1" [team2id]="2" [next]="false"></app-game-card>
+      </div>
     </div>
-    <div class="col-12 text-center">
-        <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="row">
+      <div class="col-12">
+        <h2><span matBadge="{{numberNewChallenges}}" matBadgeOverlap="false" matBadgeColor="warn">Nieuwe challenges</span></h2>
+        <p class="text-danger">Openstaande challenges tonen & nieuwe challenge maken (Badge on challenges)</p>
+      </div>
+      <div class="col-12">
+          <app-open-challenges [currentUser]="currentUser"  (numberNewChallenges)="onNumberNewChallenges($event)"></app-open-challenges>
+      </div>
+      <div class="col-12 text-center">
+        <button mat-raised-button color="accent" (click)="toggleStepper()" class="mt-2">Team uitdagen</button>
+      </div>
     </div>
+  </div>
+
 </div>
 
-<div class="row">
-    <div class="col-12 text-center">
-        <button mat-raised-button color="accent">Team uitdagen</button>
-    </div>
+<div *ngIf="showStepper" class="row">
+    <hr>
     <div class="col-12">
         <app-challenge-team></app-challenge-team>
-    </div>
+      </div>
 </div>
 
+
 <div class="row">
-    <div class="col-12">
-        <h2>Gespeelde wedstrijden:</h2>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-        <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-        <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-        <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-        <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-    </div>
+  <div class="col-12">
+    <h2>Gespeelde wedstrijden:</h2>
+    <p class="text-danger">Lijst van alle wedstrijden die voorbij zijn</p>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  </div>
 </div>

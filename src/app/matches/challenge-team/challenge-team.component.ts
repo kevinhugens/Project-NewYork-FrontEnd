@@ -13,10 +13,14 @@ import { TeamService } from 'src/app/shared/services/team.service';
 import { TableService } from 'src/app/shared/services/table.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GameService } from 'src/app/shared/services/game.service';
+import { UserGameService } from 'src/app/shared/services/user-game.service';
 
 
 import { map, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { UserGame } from 'src/app/shared/models/user-game.model';
 
 
 @Component({
@@ -42,7 +46,7 @@ export class ChallengeTeamComponent implements OnInit {
   maxDate = new Date();
   minDate = new Date();
 
-  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog) {
+  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private _userGameService: UserGameService) {
     // Get Teams
     this._teamService.getTeams()
       .pipe(
@@ -141,9 +145,11 @@ export class ChallengeTeamComponent implements OnInit {
     this._gameService.addGame(this.game).subscribe(
       result => {
         console.log("Game added:", result);
+        this.game.gameID = result.gameID;
 
         this._gameService.getGame(result.gameID).subscribe(
           result => {
+
             console.log("Game get by id:", result);
             // Show dialog with the game that is made
             let dialogRef = this.dialog.open(CreatedMatchDialogComponent, { data: { game: result } });
@@ -151,48 +157,41 @@ export class ChallengeTeamComponent implements OnInit {
             dialogRef.afterClosed().subscribe(result => {
               console.log("Dialog result:", result);
 
-              // // Discard the article
-              // if (result == "discard") {
-              //   // Article back to draft so journalist can change the article
-              //   article.articleStatusID = 3;
-              //   delete (article.articleStatus);
-              //   console.log("Admin wants to discard article with id:", article.articleID);
-              //   console.log("Admin wants to discard article:", article);
-              //   this._articleService.updateArticle(article.articleID, article).subscribe(
-              //     () => {
-              //       console.log("Article is discarded (back to draft)");
-              //       this.dataSource = this.articles.filter(item => item.articleID !== article.articleID); // Remove the published article from the table
-              //       this.openSnackBar("Article is discarded", "Undo", article);
-              //     }
-              //   );
-              // }
-
-              // // Publish the article
-              // else if (result == "publish") {
-              //   // Publisch the article
-              //   article.articleStatusID = 1;
-              //   delete (article.articleStatus);
-              //   console.log("Publish article:", article);
-              //   this._articleService.updateArticle(article.articleID, article).subscribe(
-              //     () => {
-              //       console.log("Article is published");
-              //       this.dataSource = this.articles.filter(item => item.articleID !== article.articleID); // Remove the published article from the table
-              //       this.openSnackBar("Article is published", "Undo", article);
-              //     }
-              //   );
-              // } else {
-              //   // Closing the dialog means do nothing
-              //   this.snackBar.open("Status of article isn't changed!", "", { duration: 5000 });
-              // }
+              // Undo / delete the challenge & userGames (auto deleted when game is deleted)
+              if (result == "undo") {
+                // Delete the game and usergames and refresh the page
+                console.log("The challenge with id:", this.game.gameID, "needs to be deleted!");
+                this._gameService.deleteGame(this.game.gameID).subscribe(
+                  () => {
+                    console.log("De wedstrijd is verwijderd");
+                    this.snackBar.open("De wedstrijd is verwijderd!", "");
+                  }
+                );
+              } else {
+                // Add the game and navigate to "wedstrijden"
+                this.snackBar.open("De wedstrijd is aangemaakt!", "");
+              }
+              this.router.navigate(['wedstrijden']);
             });
           }
         );
 
+        // Create new userGames (append players to a game)
+        for (let userID of this.playerFormGroup.controls.player.value){
+          console.log("PlayerID:", userID);
+          // this._userGameService.addUserGame(new UserGame(0, userID, this.game.gameID)).subscribe(
+            this._userGameService.addUserGame(new UserGame(0, userID, this.game.gameID)).subscribe(
+            () => {
+              console.log("User with id:", userID, "added to the game challenge");
+            }
+          );
+        }
+        
 
       }
     );
 
-    // Create new userGames
+
   }
 
 }

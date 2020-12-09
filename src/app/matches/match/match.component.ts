@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from 'src/app/security/services/authenticate.service';
+import { User } from 'src/app/shared/models/user.model';
 import { Game } from '../../shared/models/game.model';
 
 @Component({
@@ -8,9 +10,25 @@ import { Game } from '../../shared/models/game.model';
 })
 export class MatchComponent implements OnInit {
 
-  games : Game[];
+  games: Game[];
+  showStepper: boolean = false;
+  numberNewChallenges: number;
 
-constructor(){}
+  currentUser: User;
+
+  constructor(private _authService: AuthenticateService) {
+    this._authService.loggedUser.subscribe(
+      result => {
+        console.log("Current user is:", result);
+        this.currentUser = result;
+      }
+
+    )
+  }
+
+  onNumberNewChallenges(numberNewChallenges: number) {
+    this.numberNewChallenges = numberNewChallenges;
+  }
 
   // constructor(private _gameService: GameService) {
   //   this._gameService.getGames()
@@ -25,6 +43,10 @@ constructor(){}
   //  }
 
   ngOnInit(): void {
+  }
+
+  toggleStepper() {
+    this.showStepper = !this.showStepper; // Toggle the show stepper
   }
 
 }

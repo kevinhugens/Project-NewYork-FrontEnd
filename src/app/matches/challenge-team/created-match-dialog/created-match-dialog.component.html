@@ -10,7 +10,7 @@
   <!-- Game -->
   <div class="row">
     <div mat-dialog-content class="col-12 content">
-        <app-game-card [competition]="game.competitionID" [game]="game" [team1] ="game.team1" [team2]="game.team2" [latest]="false"></app-game-card>
+      <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id] ="game.team1.teamID" [team2id]="game.team2.teamID" [next]="false"></app-game-card>
     </div>
   </div>
 
@@ -18,7 +18,7 @@
   <div class="row">
     <div id="actions" class="col-12">
       <mat-dialog-actions align="center">
-        <button mat-button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="discard">Ongedaan maken</button>
+        <button mat-button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="undo">Ongedaan maken</button>
         <button mat-button mat-raised-button color="primary" mat-dialog-close
           mat-dialog-close>OK</button>
       </mat-dialog-actions>
