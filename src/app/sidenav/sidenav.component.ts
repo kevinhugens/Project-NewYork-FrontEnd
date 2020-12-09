@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { AuthenticateService } from '../security/services/authenticate.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class SidenavComponent implements OnInit {
 
-  @Output() public sidenavToggle = new EventEmitter();
+  @Output() sidenavClose = new EventEmitter();
 
   loggedIn = false;
 
@@ -23,6 +23,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public onSidenavClose = () => {
+    this.sidenavClose.emit();
+  }
+
   logout() {
     console.log("User wants to logout");
     localStorage.clear();
@@ -31,10 +35,5 @@ export class NavbarComponent implements OnInit {
     // this._authenticateService.isLoggedin.next(false);
     this.router.navigate(['aanmelden']); // Redirect to login page after logout
   }
-
-  public onToggleSidenav = () => {
-    this.sidenavToggle.emit();
-  }
-
 
 }

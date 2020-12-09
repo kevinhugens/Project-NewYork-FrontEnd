@@ -1,0 +1,22 @@
+a {
+    text-decoration: none;
+  
+  
+    &:hover,
+    &:active {
+      font-weight: bold;
+  
+      #likes,
+      #logout {
+        color: red;
+        font-weight: bold;
+      }
+  
+    }
+  }
+  
+  .nav-caption {
+    display: inline-block;
+    padding-left: 6px;
+  }
+  

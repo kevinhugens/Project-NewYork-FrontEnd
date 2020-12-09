@@ -1,4 +1,11 @@
 <mat-toolbar color="primary">
+
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
   <div>
     <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -6,7 +13,7 @@
 
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-      
+
       <!-- Registreren -->
       <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
