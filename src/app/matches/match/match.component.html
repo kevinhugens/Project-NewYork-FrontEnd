@@ -1,56 +1,80 @@
-<div class="row mt-2">
+<!-- <div *ngIf="showStepper" class="row">
+  <hr>
+  <div class="col-12">
+    <app-challenge-team></app-challenge-team>
+  </div>
+</div> -->
+
+<!-- Planned games & challenges -->
+<div class="row mt-2 mb-1">
+
   <div class="col-12 col-md-6">
     <div class="row">
       <div class="col-12">
         <h2>Eerstvolgende wedstrijd:</h2>
         <p class="text-danger">Nog aanvullen (kijken uit Home)!!!!</p>
       </div>
-      <div class="col-12 text-center">
-        <app-game-card [competitionid]="" [gameid]="1" [team1id]="1" [team2id]="2" [next]="false"></app-game-card>
+      <div class="col-12 text-center p-2 pl-md-5 pr-md-5">
+        <app-game-card [competitionid]="" [gameid]="1" [team1id]="1" [team2id]="2" [next]="true"></app-game-card>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h3>Andere geplande wedstrijden:</h3>
+        <p class="text-danger">Lijst met andere geplande wedstrijden (kaarten kleiner) <br>Max aantal tonen?</p>
+      </div>
+      <div class="row" id="plannedGamesSection">
+        <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 text-center">
+          <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
+            [next]="false"></app-game-card>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="col-12 col-md-6">
     <div class="row">
-      <div class="col-12">
-        <h2><span matBadge="{{numberNewChallenges}}" matBadgeOverlap="false" matBadgeColor="warn">Nieuwe challenges</span></h2>
-        <p class="text-danger">Openstaande challenges tonen & nieuwe challenge maken (Badge on challenges)</p>
-      </div>
-      <div class="col-12">
-          <app-open-challenges [currentUser]="currentUser"  (numberNewChallenges)="onNumberNewChallenges($event)"></app-open-challenges>
-      </div>
-      <div class="col-12 text-center">
-        <button mat-raised-button color="accent" (click)="toggleStepper()" class="mt-2">Team uitdagen</button>
+      <div>
+        <div class="col-12">
+          <div *ngIf="numberNewChallenges">
+            <h2><span matBadge="{{numberNewChallenges}}" matBadgeOverlap="false" matBadgeColor="warn">Nieuwe
+                challenges</span></h2>
+            <p>Klik op "Deelnemen" als u een van de openstaande challenges wilt spelen.</p>
+          </div>
+          <div *ngIf="!numberNewChallenges">
+            <h2><span>Nieuwe
+                challenges</span></h2>
+            <p>Uw team heeft momenteel geen openstaande challenges! Geen zorgen u kan zelf een andere ploeg uitdagen
+              m.b.v. onderstaande knop.</p>
+          </div>
+          <!-- <p class="text-danger">Openstaande challenges tonen & nieuwe challenge maken (Badge on challenges)</p> -->
+        </div>
+        <div class="col-12 text-center">
+          <button mat-raised-button color="accent" (click)="toggleStepper()" id="challengeButton" class="mt-2">Team
+            uitdagen</button>
+        </div>
+        <hr>
+        <div id="challengesSection" class="col-12 mt-2">
+          <app-open-challenges [currentUser]="currentUser" (numberNewChallenges)="onNumberNewChallenges($event)">
+          </app-open-challenges>
+        </div>
       </div>
     </div>
   </div>
 
 </div>
 
-<div *ngIf="showStepper" class="row">
-    <hr>
-    <div class="col-12">
-        <app-challenge-team></app-challenge-team>
-      </div>
-</div>
+<hr>
 
-
-<div class="row">
+<!-- Played games -->
+<div class="row mt-1 mt-lg-3">
   <div class="col-12">
     <h2>Gespeelde wedstrijden:</h2>
     <p class="text-danger">Lijst van alle wedstrijden die voorbij zijn</p>
   </div>
-  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-  </div>
-  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-  </div>
-  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
-  </div>
-  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
-    <div class="border border-info">Ik ben eerst volgende wedstrijd</div>
+  <div *ngFor="let game of playedGames" class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+    <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
+      [next]="false"></app-game-card>
   </div>
 </div>

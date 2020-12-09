@@ -1,4 +1,8 @@
-<mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper>
+<button mat-icon-button color="accent" (click)="dialog.closeAll();" class="float-right">
+  <mat-icon>close</mat-icon>
+</button>
+
+<mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper class="p-1 pl-md-5 pr-md-5">
 
   <!-- Team -->
   <mat-step [stepControl]="teamFormGroup" [editable]="isEditable">
@@ -23,7 +27,7 @@
         </mat-list-option>
       </mat-selection-list>
       <div class="mt-1 mt-lg-3">
-        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Annuleer</button>
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
         <button [color]="teamFormGroup.controls.team.value ? 'primary' : 'accent'"
           [matTooltip]="teamFormGroup.controls.team.value ? 'Volgende stap' : 'Selecteer een ploeg!'"
           class="float-right" mat-button matStepperNext>Volgende</button>
@@ -53,7 +57,7 @@
 
       </div>
       <div class="mt-1 mt-lg-3">
-        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Annuleer</button>
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
         <button type="button"
           [color]="(timeFormGroup.controls.date.value && timeFormGroup.controls.time.value) ? 'primary' : 'accent'"
           [matTooltip]="(timeFormGroup.controls.date.value && timeFormGroup.controls.time.value) ? 'Volgende stap' : 'Selecteer een datum en tijd!'"
@@ -84,7 +88,7 @@
         </mat-list-option>
       </mat-selection-list>
       <div class="mt-1 mt-lg-3">
-        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Annuleer</button>
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
         <button [color]="locationFormGroup.controls.table.value ? 'primary' : 'accent'"
           [matTooltip]="locationFormGroup.controls.table.value ? 'Volgende stap' : 'Selecteer een tafel om de wedstrijd te spelen!'"
           class="float-right" mat-button matStepperNext>Volgende</button>
@@ -131,7 +135,7 @@
       </div>
 
       <div class="mt-1 mt-lg-3">
-        <button mat-button class="float-left" color="warn" (click)="stepper.reset()">Annuleer</button>
+        <button mat-button class="float-left" color="warn" (click)="stepper.reset()">Opnieuw</button>
         <button *ngIf="gameType=='1vs1'" mat-raised-button
           [color]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value) ? 'primary' : 'accent'"
           [matTooltip]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value) ? 'Challenge them!' : 'Selecteer het type wedstrijd en één speler!'"

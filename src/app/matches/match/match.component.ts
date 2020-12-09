@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { User } from 'src/app/shared/models/user.model';
+import { GameService } from 'src/app/shared/services/game.service';
 import { Game } from '../../shared/models/game.model';
+import { ChallengeTeamComponent } from '../challenge-team/challenge-team.component';
 
 @Component({
   selector: 'app-match',
@@ -14,15 +17,30 @@ export class MatchComponent implements OnInit {
   showStepper: boolean = false;
   numberNewChallenges: number;
 
+  // The first next game that is planned (closest to today)
+  nextGame: Game;
+  // All the games that are planned (except the one that is first next)
+  plannedGames: Game[];
+  // All the games that are past (sorteren volgens)
+  playedGames: Game[];
+
   currentUser: User;
 
-  constructor(private _authService: AuthenticateService) {
+  constructor(private _authService: AuthenticateService, public dialog: MatDialog, private _gameService: GameService) {
     this._authService.loggedUser.subscribe(
       result => {
         console.log("Current user is:", result);
         this.currentUser = result;
       }
+    );
 
+    this._gameService.getGames().subscribe(
+      result => {
+        this.games = result;
+        this.nextGame = result[0]; // NEEDS TO BE CHANGEDDDDDDDDDD
+        this.plannedGames = result; // NEEDS TO BE CHANGEDDDDDDDDDD and filtered
+        this.playedGames = result; // NEEDS TO BE CHANGEDDDDDDDDDD and filtered
+      }
     )
   }
 
@@ -30,23 +48,13 @@ export class MatchComponent implements OnInit {
     this.numberNewChallenges = numberNewChallenges;
   }
 
-  // constructor(private _gameService: GameService) {
-  //   this._gameService.getGames()
-  //   .pipe(
-  //     map(games => games.filter(game => article.articleStatusID === 1)), // Only get the aricles ready for publication
-  //     tap(t => console.log("Get Articles tap:", t))
-  //   )
-  //   .subscribe(
-  //   result => {
-  //     this.articles = result;
-  //   });
-  //  }
-
   ngOnInit(): void {
   }
 
   toggleStepper() {
     this.showStepper = !this.showStepper; // Toggle the show stepper
+    // Open dialog
+    this.dialog.open(ChallengeTeamComponent, { data: { currentUser: this.currentUser } });
   }
 
 }

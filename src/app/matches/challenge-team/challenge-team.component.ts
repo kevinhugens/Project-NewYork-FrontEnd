@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Team } from 'src/app/shared/models/team.model';
@@ -17,7 +17,7 @@ import { UserGameService } from 'src/app/shared/services/user-game.service';
 
 
 import { map, tap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserGame } from 'src/app/shared/models/user-game.model';
@@ -29,6 +29,8 @@ import { UserGame } from 'src/app/shared/models/user-game.model';
   styleUrls: ['./challenge-team.component.scss']
 })
 export class ChallengeTeamComponent implements OnInit {
+
+currentUser: User;
 
   teamFormGroup: FormGroup;
   timeFormGroup: FormGroup;
@@ -46,12 +48,15 @@ export class ChallengeTeamComponent implements OnInit {
   maxDate = new Date();
   minDate = new Date();
 
-  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private _userGameService: UserGameService) {
+  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private _userGameService: UserGameService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.currentUser = this.data.currentUser;
+    
     // Get Teams
     this._teamService.getTeams()
       .pipe(
         tap(t => console.log("All teams:", t)),
         // Need to only get the teams were the user isn't part of
+        map(teams => teams.filter(team => team.teamID!=this.currentUser.teamID)),
         tap(t => console.log("Filtered teams:", t))
       ).subscribe(
         result => {
@@ -73,6 +78,8 @@ export class ChallengeTeamComponent implements OnInit {
       .pipe(
         tap(t => console.log("All users:", t)),
         // Need to get only the players of the user his team
+        map(players => players.filter(player => player.teamID==this.currentUser.teamID)),
+        tap(t => console.log("Players of the same team as the logged in user:", t))
       ).subscribe(
         result => {
           this.players = result;
@@ -147,6 +154,9 @@ export class ChallengeTeamComponent implements OnInit {
         console.log("Game added:", result);
         this.game.gameID = result.gameID;
 
+        // Close the stepper dialog
+        this.dialog.closeAll();
+
         this._gameService.getGame(result.gameID).subscribe(
           result => {
 
@@ -177,16 +187,16 @@ export class ChallengeTeamComponent implements OnInit {
         );
 
         // Create new userGames (append players to a game)
-        for (let userID of this.playerFormGroup.controls.player.value){
+        for (let userID of this.playerFormGroup.controls.player.value) {
           console.log("PlayerID:", userID);
           // this._userGameService.addUserGame(new UserGame(0, userID, this.game.gameID)).subscribe(
-            this._userGameService.addUserGame(new UserGame(0, userID, this.game.gameID)).subscribe(
+          this._userGameService.addUserGame(new UserGame(0, userID, this.game.gameID)).subscribe(
             () => {
               console.log("User with id:", userID, "added to the game challenge");
             }
           );
         }
-        
+
 
       }
     );
