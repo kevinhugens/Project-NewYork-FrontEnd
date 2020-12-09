@@ -24,12 +24,9 @@
     "@angular/router": "~10.0.3",
     "@ngmodule/material-carousel": "^0.6.0",
     "bootstrap": "^4.5.3",
-<<<<<<< HEAD
     "ngx-material-timepicker": "^5.5.3",
-=======
     "chart.js": "^2.9.4",
     "ng2-charts": "^2.4.2",
->>>>>>> 38d05f8129508514e43eb787928b4d746a863802
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
