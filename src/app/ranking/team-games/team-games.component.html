@@ -1,0 +1,6 @@
+<div class="container">
+    <h1 class="text-center">Alle wedstrijden van <span class="font-weight-bold">{{team1.teamName}}</span></h1>
+    <ng-container *ngFor="let g of games" >
+        <app-game-card *ngIf="team1.teamID == g.team1ID||team1.teamID==g.team2ID" [competitionid]="g.competitionID" [gameid]="g.gameID" [team1id]="g.team1ID" [team2id]="g.team2ID" [next]="false"></app-game-card>
+    </ng-container>
+</div>
