@@ -87,9 +87,7 @@ export class GameCardComponent implements OnInit {
         this.userParticipateGame = false;
         this.getData();
         this.snackBar.open("Deelname verwijderd!", "");
-        // Event emitter
         this.participationChanged.emit(true);
-
       }
     )
   }
