@@ -34,24 +34,26 @@ export class GameCardComponent implements OnInit {
   }
 
   getData(){
-    if(this.competitionid, this.team1id, this.team2id, this.gameid){
+    if(this.team1id, this.team2id, this.gameid){
+      if(this.competitionid){
+        this._competitionService.getCompetition(this.competitionid).subscribe((value) => {
+          //console.log("competition", value);
+          this.competition = value;
+          //console.log('competition this', this.competition)
+        })
+      }
       
-      this._competitionService.getCompetition(this.competitionid).subscribe((value) => {
-        console.log("competition", value);
-        this.competition = value;
-        console.log('competition this', this.competition)
-      })
       this._teamService.getTeam(this.team1id).subscribe((value) => {
         this.team1 = value;
-        console.log("team1:", this.team1)
+        //console.log("team1:", this.team1)
       })
       this._teamService.getTeam(this.team2id).subscribe((value) => {
         this.team2 = value;
-        console.log("team2:", this.team2)
+        //console.log("team2:", this.team2)
       })
       this._gameService.getGame(this.gameid).subscribe((value) => {
         this.game = value;
-        console.log("game", this.game)
+        //console.log("game", this.game)
       })
     }
     
