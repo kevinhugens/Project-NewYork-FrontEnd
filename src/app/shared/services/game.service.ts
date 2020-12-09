@@ -14,6 +14,14 @@ export class GameService {
     return this.http.get<Game[]>("https://localhost:44300/api/game");
   }
 
+  GetNextCompetitionGame(): Observable<Game>{
+    return this.http.get<Game>("https://localhost:44300/api/game/competition/next");
+  }
+
+  GetNextFriendlyGame(): Observable<Game>{
+    return this.http.get<Game>("https://localhost:44300/api/game/friendly/next");
+  }
+
   getGame(id: number): Observable<Game>{
     return this.http.get<Game>("https://localhost:44300/api/game/" + id);
   }
