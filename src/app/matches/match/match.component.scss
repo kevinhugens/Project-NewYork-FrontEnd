@@ -26,18 +26,25 @@
 #challengesSection {
   max-height: 60vh;
   overflow: auto;
-//   background:linear-gradient(transparent 150px, hotpink);
+  //   background:linear-gradient(transparent 150px, hotpink);
 
 }
 
-#plannedGamesSection{
-    max-height: 50vh;
-    overflow: auto;
-    direction:rtl; 
-    // background:linear-gradient(transparent 150px, hotpink);
-  }
-  
+#plannedGamesSection {
+  max-height: 50vh;
+  overflow: auto;
+  direction: rtl;
+  // background:linear-gradient(transparent 150px, hotpink);
+}
 
+
+.equal-height-test {
+    height: 250px;
+  //   width: auto;
+  width: auto;
+  margin: auto;
+  border-bottom: 2px dotted hotpink;
+}
 
 #challengeButton {
   &:hover {

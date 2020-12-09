@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { tap, map } from 'rxjs/operators';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { User } from 'src/app/shared/models/user.model';
 import { GameService } from 'src/app/shared/services/game.service';
@@ -37,11 +38,36 @@ export class MatchComponent implements OnInit {
     this._gameService.getGames().subscribe(
       result => {
         this.games = result;
-        this.nextGame = result[0]; // NEEDS TO BE CHANGEDDDDDDDDDD
-        this.plannedGames = result; // NEEDS TO BE CHANGEDDDDDDDDDD and filtered
-        this.playedGames = result; // NEEDS TO BE CHANGEDDDDDDDDDD and filtered
       }
-    )
+    );
+
+    this._gameService.GetNextFriendlyGameUser(this.currentUser.teamID).pipe(
+      tap(t => console.log("Next friendly game of the user his team:", t)),
+    ).subscribe(
+      result => {
+        console.log("Next friendly game of the user his team:", result);
+        this.nextGame = result;
+      }
+    );
+
+    this._gameService.GetPlannedFriendlyTeamGames(this.currentUser.teamID).pipe(
+      map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
+    ).subscribe(
+      result => {
+        console.log("Planned games for the user his team:", result);
+        this.plannedGames = result;
+      }
+    );
+
+    this._gameService.GetPlayedFriendlyTeamGames(this.currentUser.teamID).pipe(
+      tap(t => console.log("Played games of the user his team:", t)),
+    ).subscribe(
+      result => {
+        console.log("Played games of the user his team:", result);
+        this.playedGames = result;
+      }
+    );
+
   }
 
   onNumberNewChallenges(numberNewChallenges: number) {
@@ -49,6 +75,7 @@ export class MatchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   toggleStepper() {

@@ -22,9 +22,34 @@ export class OpenChallengesComponent implements OnInit {
   // numberOfNewChallenges to parent
 
   constructor(private _gameService: GameService, private _userGameService: UserGameService, private snackBar: MatSnackBar) {
+
+    this.getGameChallenges();
+
+  }
+
+  participateGame(gameID: number) {
+    console.log("User wants to participate on game with id:", gameID);
+    // Make new user game
+    this._userGameService.addUserGame(new UserGame(0, this.currentUser.userID, gameID)).subscribe(
+      result => {
+        console.log("User participates on the game!", result);
+        this.snackBar.open("Je neemt deel aan de wedstrijd!", "", { duration: 5000 }); // UNDO ERBIJ STEKEN?
+        // Filter the list of challenges
+        this.challenges.filter(challenge => challenge.gameID == gameID);
+        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        this.getGameChallenges();
+      }
+    )
+  }
+
+
+  getGameChallenges() {
     this._gameService.getGames().pipe(
       tap(t => console.log("All games:", t)),
-      // NOG FILTER OP TEAM!!! ALLEEN CHALLENGES TEGEN DE USER ZIJN TEAM TONEN EN WAAR USER NOG NIET AAN DEELNEEMT
       map(challenges => challenges.filter(challenge => (challenge.type == "2vs2" && challenge.userGames.length < 4 && challenge.team2ID == this.currentUser.teamID) || (challenge.type == "1vs1" && challenge.userGames.length < 2 && challenge.team2ID == this.currentUser.teamID))), // only show the games where there are empty players
       tap(t => console.log("Filtered games (challenges):", t)),
     )
@@ -33,20 +58,6 @@ export class OpenChallengesComponent implements OnInit {
           this.challenges = result;
           this.numberNewChallenges.emit(result?.length);
         });
-  }
-
-  participateGame(gameID: number) {
-    console.log("User wants to participate on game with id:", gameID);
-    // Make new user game
-    // CHANGE TO THE USER ID OF THE LOGGED IN USER
-    this._userGameService.addUserGame(new UserGame(0, 1, gameID)).subscribe(
-      result => {
-        console.log("User participates on the game!", result);
-        this.snackBar.open("Je neemt deel aan de wedstrijd!", "", { duration: 5000 }); // UNDO ERBIJ STEKEN?
-        // Filter the list of challenges
-        this.challenges.filter(challenge => challenge.gameID == gameID);
-      }
-    )
   }
 
 
