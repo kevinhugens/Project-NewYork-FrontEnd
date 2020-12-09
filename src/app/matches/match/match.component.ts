@@ -18,6 +18,8 @@ export class MatchComponent implements OnInit {
   showStepper: boolean = false;
   numberNewChallenges: number;
 
+  renderOpen: boolean = false;
+
   // The first next game that is planned (closest to today)
   nextGame: Game;
   // All the games that are planned (except the one that is first next)
@@ -28,6 +30,7 @@ export class MatchComponent implements OnInit {
   currentUser: User;
 
   constructor(private _authService: AuthenticateService, public dialog: MatDialog, private _gameService: GameService) {
+
     this._authService.loggedUser.subscribe(
       result => {
         console.log("Current user is:", result);
@@ -72,16 +75,53 @@ export class MatchComponent implements OnInit {
 
   onNumberNewChallenges(numberNewChallenges: number) {
     this.numberNewChallenges = numberNewChallenges;
+    this._gameService.GetNextFriendlyGameUser(this.currentUser.teamID).pipe(
+      tap(t => console.log("Next friendly game of the user his team:", t)),
+    ).subscribe(
+      result => {
+        this.nextGame = result;
+      }
+    );
+
+    this._gameService.GetPlannedFriendlyTeamGames(this.currentUser.teamID).pipe(
+      map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
+    ).subscribe(
+      result => {
+        this.plannedGames = result;
+      }
+    );
+
   }
 
   ngOnInit(): void {
-
   }
 
   toggleStepper() {
     this.showStepper = !this.showStepper; // Toggle the show stepper
     // Open dialog
     this.dialog.open(ChallengeTeamComponent, { data: { currentUser: this.currentUser } });
+  }
+
+  onParticipationChanged(event) {
+    this._gameService.GetNextFriendlyGameUser(this.currentUser.teamID).pipe(
+      tap(t => console.log("Next friendly game of the user his team:", t)),
+    ).subscribe(
+      result => {
+        console.log("Next friendly game of the user his team:", result);
+        this.nextGame = result;
+      }
+    );
+
+    this._gameService.GetPlannedFriendlyTeamGames(this.currentUser.teamID).pipe(
+      map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
+    ).subscribe(
+      result => {
+        console.log("Planned games for the user his team:", result);
+        this.plannedGames = result;
+      }
+    );
+    // Re make Challenges??????????????????????????µ
+    this.renderOpen = !this.renderOpen;
   }
 
 }

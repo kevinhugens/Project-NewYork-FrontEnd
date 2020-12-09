@@ -34,18 +34,11 @@ export class OpenChallengesComponent implements OnInit {
       result => {
         console.log("User participates on the game!", result);
         this.snackBar.open("Je neemt deel aan de wedstrijd!", "", { duration: 5000 }); // UNDO ERBIJ STEKEN?
-        // Filter the list of challenges
-        this.challenges.filter(challenge => challenge.gameID == gameID);
-        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // REFRESH THE LIST ON THE WEDSTRIJD PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // Refresh the list of challenges
         this.getGameChallenges();
       }
     )
   }
-
 
   getGameChallenges() {
     this._gameService.getGames().pipe(
