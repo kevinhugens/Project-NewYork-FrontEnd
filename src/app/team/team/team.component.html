@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row" *ngIf='activeUser["role"] == "admin"'>
+        <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
+            <h1>Overzicht van teams</h1>
+            <mat-selection-list #teams [multiple]="false" *ngIf="lijstTeams != null && lijstTeams.length > 0; else noteams">
+                <div style="text-align: right;">
+                    <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
+                    <button mat-raised-button color="accent" (click)="onEdit(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onDelete(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
+                </div>
+                <div mat-subheader>Teams</div>
+                <mat-list-option *ngFor="let team of lijstTeams" [value]="team">
+                    <mat-icon mat-list-icon>groups</mat-icon>
+                    <div mat-line>{{team.teamName}}</div>
+                    <div mat-line> {{team.companyName}} - {{team.address}}</div>
+                </mat-list-option>
+                
+            </mat-selection-list>
+            <ng-template #noteams>
+                <h3>Geen teams</h3>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row" >
+
+    </div>
+</div>

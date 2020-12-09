@@ -14,7 +14,11 @@ import { HomeModule } from './home/home.module';
 import { SecurityModule } from './security/security.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RankingModule } from './ranking/ranking.module';
+import { ProfileModule } from './profile/profile.module';
+import { ChartsModule } from 'ng2-charts';
 
+import { UsersModule } from './users/users.module';
+import { TeamModule } from './team/team.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
@@ -34,15 +38,19 @@ import { SecurityInterceptor } from './security/security.interceptor';
     HomeModule,
     FlexLayoutModule,
     RankingModule,
+    UsersModule,
     SecurityModule,
-    HttpClientModule
+    HttpClientModule,
+    TeamModule,
+    ProfileModule,
+    ChartsModule
   ],
-  providers: [    
+  providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: SecurityInterceptor,
-    multi: true
-  },],
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

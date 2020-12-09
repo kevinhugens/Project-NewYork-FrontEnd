@@ -1,0 +1,18 @@
+<div class="container">
+    <h1 class="text-center  font-weight-bold">Profiel</h1>
+    <h2 class="text-center">{{activeUser.firstName.toLowerCase()|titlecase}}
+        {{activeUser.lastName.toLowerCase()|titlecase}}</h2>
+    <p class="text-center">
+        <img id="profilePicture" class="img-fluid rounded-circle border" src="../../../assets/userTest.jpg" alt="profielFoto">
+    </p>
+    <h1 class="text-center font-weight-bold">Statistieken</h1>
+    <div class="text-center center">
+        <h2>Gespeelde wedstrijden: {{playedGames}}</h2>
+        <div class="text-center">
+            <canvas  baseChart [colors]="pieChartColors" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="barChartOptions"></canvas>
+        </div>
+    </div>
+
+
+</div>

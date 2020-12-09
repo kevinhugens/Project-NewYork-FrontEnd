@@ -7,7 +7,7 @@ import { Team } from '../models/team.model';
   providedIn: 'root'
 })
 export class TeamService {
-
+  selectedTeam : Team;
   constructor(private http: HttpClient) { }
 
   getTeams(): Observable<Team[]>{
