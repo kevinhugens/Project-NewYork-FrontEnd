@@ -1,38 +1,47 @@
-<div  class="card">
-    <div class="card-body">
-      <h2 *ngIf="competition" class="card-title">{{competition.name}}</h2>
-      <h2 *ngIf="!competition" class="card-title">{{vriendschappelijk}}</h2>
+<div class="card">
+  <div class="card-body">
+    <h2 *ngIf="competition" class="card-title">{{competition.name}}</h2>
+    <h2 *ngIf="!competition" class="card-title">{{vriendschappelijk}}</h2>
 
-      <h3 *ngIf="game" class="card-subtitle">{{game.date | date}}</h3>
-          <div class="row card-text">
-                <div *ngIf="team1" class="col text-center">
-                    <div class="row justify-content-center">
-                        {{team1.teamName}}
-                    </div>
-                    <div class="row justify-content-center">
-                        <span class="material-icons">
-                            stars
-                            </span>
-                    </div>
+    <h3 *ngIf="game" class="card-subtitle">{{game.date | date:"dd LLL yyyy - HH:mm"}}</h3>
+    <div class="row card-text">
+      <div *ngIf="team1" class="col text-center">
+        <div class="row justify-content-center">
+          {{team1.teamName}}
+        </div>
+        <div class="row justify-content-center">
+          <span class="material-icons">
+            stars
+          </span>
+        </div>
 
-                </div>
-                <div class="col centerV">
-                    <p class="dash">-</p>
-                </div>
-                <div *ngIf="team2" class="col">
-                    <div class="row justify-content-center">
-                        {{team2.teamName}}
-                    </div>
-                    <div class="row justify-content-center">
-                        <span class="material-icons" style="font-size: 30px;">
-                            stars
-                            </span>
-                    </div>
-                </div>
-          </div>
-          <div *ngIf="next" class="pt-3"> 
-            <a href="#" class="card-link">Start wedstrijd</a>
-          </div>
-      
+      </div>
+      <div class="col centerV">
+        <p class="dash">-</p>
+      </div>
+      <div *ngIf="team2" class="col">
+        <div class="row justify-content-center">
+          {{team2.teamName}}
+        </div>
+        <div class="row justify-content-center">
+          <span class="material-icons" style="font-size: 30px;">
+            stars
+          </span>
+        </div>
+      </div>
     </div>
+    <div *ngIf="next" class="pt-1">
+      <a href="#" class="card-link">Start wedstrijd</a>
+    </div>
+    <div *ngIf="userParticipateGame && !next">
+      <button mat-icon-button color="warn" matTooltip="Verwijder deelname" (click)="deleteParticipation()" [disabled]="passed"><mat-icon>person_remove</mat-icon></button>
+    </div>
+    <div *ngIf="game?.type=='1vs1'&&game.userGames?.length!=2" class="pt-3">
+        <p class="text-danger">Let op: te weining spelers!</p>
+      </div>
+      <div *ngIf="game?.type=='2vs2'&&game.userGames?.length!=4" class="pt-3">
+        <p class="text-danger">Let op: te weining spelers!</p>
+      </div>
+
   </div>
+</div>

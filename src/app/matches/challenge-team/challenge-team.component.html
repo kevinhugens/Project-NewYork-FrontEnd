@@ -1,0 +1,168 @@
+<button mat-icon-button color="accent" (click)="dialog.closeAll();" class="float-right">
+  <mat-icon>close</mat-icon>
+</button>
+
+<mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper class="p-1 pl-md-5 pr-md-5">
+
+  <!-- Team -->
+  <mat-step [stepControl]="teamFormGroup" [editable]="isEditable">
+    <form [formGroup]="teamFormGroup" class="">
+      <ng-template matStepLabel>Ploeg</ng-template>
+      <label id="team-label">Selecteer welke ploeg je wilt uitdagen:</label> <br>
+      <mat-selection-list #teamsForm [multiple]="false" required formControlName="team">
+        <mat-list-option aria-labelledby="team-label" *ngFor="let team of teams" class="border d-block"
+          [value]="team.teamID">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>image</mat-icon>
+              <div mat-line>{{team.teamName}} - <span class="text-muted">{{team.companyName}}</span></div>
+              <div mat-line>
+                <mat-icon>location_on</mat-icon> {{team.address}}
+              </div>
+              <div *ngIf="team.captain" mat-line class="text-danger">
+                <mat-icon>military_tech</mat-icon>Captain name
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-list-option>
+      </mat-selection-list>
+      <div class="mt-1 mt-lg-3">
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
+        <button [color]="teamFormGroup.controls.team.value ? 'primary' : 'accent'"
+          [matTooltip]="teamFormGroup.controls.team.value ? 'Volgende stap' : 'Selecteer een ploeg!'"
+          class="float-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Tijdstip -->
+  <mat-step [stepControl]="timeFormGroup" [editable]="isEditable">
+    <form [formGroup]="timeFormGroup" class="text-center">
+      <ng-template matStepLabel>Tijdstip</ng-template>
+      <div class="mt-2 mt-lg-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Kies een datum</mat-label>
+          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Kies een tijd</mat-label>
+          <input matInput required min="06:00" max="23:59" [ngxTimepicker]="fullTime" [format]="24"
+            formControlName="time">
+          <mat-icon matSuffix [ngxTimepicker]="fullTime">schedule</mat-icon>
+          <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="mt-1 mt-lg-3">
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
+        <button type="button"
+          [color]="(timeFormGroup.controls.date.value && timeFormGroup.controls.time.value) ? 'primary' : 'accent'"
+          [matTooltip]="(timeFormGroup.controls.date.value && timeFormGroup.controls.time.value) ? 'Volgende stap' : 'Selecteer een datum en tijd!'"
+          class="float-md-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Locatie -->
+  <mat-step [stepControl]="locationFormGroup" [editable]="isEditable">
+    <form [formGroup]="locationFormGroup" class="">
+      <ng-template matStepLabel>Locatie</ng-template>
+      <mat-selection-list #locationForm [multiple]="false" formControlName="table" required>
+        <label id="team-label">Selecteer op welke tafel je de wedstijd wilt spelen:</label> <br>
+        <mat-list-option *ngFor="let table of tables" class="border d-block" [value]="table.tableID">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>image</mat-icon>
+              <div mat-line>{{table.tableName}} - <span class="text-muted">{{table.companyName}}</span></div>
+              <div mat-line>
+                <mat-icon>location_on</mat-icon> {{table.address}}
+              </div>
+              <div mat-line>
+                <mat-icon>engineering</mat-icon> {{table.manager.firstName}} {{table.manager.lastName}}
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-list-option>
+      </mat-selection-list>
+      <div class="mt-1 mt-lg-3">
+        <button type="button" mat-button color="warn" class="float-left" (click)="stepper.reset()">Opnieuw</button>
+        <button [color]="locationFormGroup.controls.table.value ? 'primary' : 'accent'"
+          [matTooltip]="locationFormGroup.controls.table.value ? 'Volgende stap' : 'Selecteer een tafel om de wedstrijd te spelen!'"
+          class="float-right" mat-button matStepperNext>Volgende</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Spelers -->
+  <mat-step [stepControl]="playerFormGroup" [editable]="isEditable">
+    <form [formGroup]="playerFormGroup" class="text-center">
+      <ng-template matStepLabel>Spelers</ng-template>
+
+      <!-- Type of game -->
+      <label id="type-game-label">Welk type wedstrijd wil je spelen:</label> <br>
+      <mat-radio-group aria-labelledby="type-game-label" formControlName="type" [disabled]="gameType ? true : false">
+        <mat-radio-button value="1vs1" (change)="changeType($event)">1 VS 1</mat-radio-button> <br>
+        <mat-radio-button value="2vs2" (change)="changeType($event)">2 VS 2</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <button *ngIf="gameType" mat-stroked-button color="warn" class="mt-2"
+        (click)="playerFormGroup.reset();clearRadioButtons()">Reset stap</button>
+
+      <hr>
+
+      <div *ngIf="gameType">
+        <!-- <label *ngIf="gameType==1vs1">Selecteer wie van jouw team zal spelen:</label> <br>
+        <label *ngIf="gameType==2vs2">Selecteer 2 spelers van jouw team die deze wedstrijd zullen spelen:</label> <br> -->
+        <mat-selection-list #playersForm
+          [disabled]="gameType=='1vs1' ? playersForm.selectedOptions.selected[0]?.value : playersForm.selectedOptions.selected[1]?.value "
+          [multiple]="true" formControlName="player" required>
+          <mat-list-option *ngFor="let player of players" class="border d-block" [value]="player.userID">
+            <mat-list>
+              <mat-list-item>
+                <mat-icon mat-list-icon>image</mat-icon>
+                <div mat-line class="font-weight-bold">{{player.firstName}} {{player.lastName}}</div>
+                <div mat-line>
+                  <mat-icon>today</mat-icon> {{player.dateOfBirth|date:"dd/MM/yyyy"}}
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-list-option>
+        </mat-selection-list>
+
+      </div>
+
+      <div class="mt-1 mt-lg-3">
+        <button mat-button class="float-left" color="warn" (click)="stepper.reset()">Opnieuw</button>
+        <button *ngIf="gameType=='1vs1'" mat-raised-button
+          [color]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value) ? 'primary' : 'accent'"
+          [matTooltip]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value) ? 'Challenge them!' : 'Selecteer het type wedstrijd en één speler!'"
+          class="float-md-right" (click)="challenge()">Challenge</button>
+        <button *ngIf="gameType=='2vs2'" mat-raised-button
+          [color]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value && playerFormGroup.controls.player.value.length==2) ? 'primary' : 'accent'"
+          [matTooltip]="(playerFormGroup.controls.type.value && playerFormGroup.controls.player.value && playerFormGroup.controls.player.value.length==2) ? 'Challenge them!' : 'Selecteer het type wedstrijd en 2 spelers!'"
+          class="float-md-right" (click)="challenge()">Challenge</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <!-- Check / Challenge -->
+  <!-- <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>CHALLENGE</ng-template>
+    <p>Deze wedstrijd zal door u aangemaakt worden:</p>
+    <ul>
+      <li>
+        Gekozen ploeg: {{teamsForm.selectedOptions.selected[0]?.value}}
+      </li>
+    </ul>
+    <div>
+      <button mat-stroked-button color="primary" matStepperPrevious>Terug</button>
+      <button mat-raised-button color="primary" class="float-md-right" (click)="challenge()">Challenge</button>
+      <button mat-stroked-button class="float-md-right mr-2" color="warn" (click)="stepper.reset()">Annuleer</button>
+    </div>
+  </mat-step> -->
+
+</mat-horizontal-stepper>

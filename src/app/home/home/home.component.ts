@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   competition: Competition;
+
   nextGameComp: Game;
   nextGameFriend: Game = null;
   rankings: Ranking[];
