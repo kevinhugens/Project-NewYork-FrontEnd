@@ -1,0 +1,26 @@
+<div class="container">
+    <h1 class="text-center">Ranking <span class="font-weight-bold">{{competition.name}}</span></h1>
+    <table *ngIf="rankings" class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Club</th>
+                <th scope="col" class="text-right">Punten</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let r of rankings">
+                <tr>
+                    <td>{{r.rank}}</td>
+                    <ng-container *ngFor="let t of teams">
+                        <td (click)="teamMatches(r.teamID)" *ngIf="t.teamID == r.teamID">
+                            <span id="team">{{t.teamName}}</span>
+                        </td>
+                    </ng-container>
+                    <td class="text-right">{{r.points}}</td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>

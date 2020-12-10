@@ -1,24 +1,40 @@
 <div class="container">
-    <h1 class="text-center">Ranking <span *ngIf="userCompetition" class="font-weight-bold">{{userCompetition.name}}</span></h1>
-    <table class="table">
+    <h1 class="text-center">Ranking <span *ngIf="userCompetition"
+            class="font-weight-bold">{{userCompetition.name}}</span></h1>
+    <table *ngIf="rankings" class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Club</th>
-                <th scope="col" class="text-right">Points</th>
+                <th scope="col" class="text-right">Punten</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let r of rankings">
-                <td>{{r.rank}}</td>
-                <ng-container *ngFor="let t of teams">
-                    <td  (click)="teamMatches(r.teamID)" *ngIf="t.teamID == r.teamID">
-                        <span id="team">{{t.teamName}}</span>
-                    </td>
-                </ng-container>
+            <ng-container *ngFor="let r of rankings">
+                <tr *ngIf="r.teamID == activeUser.teamID; else otherClubs">
+                    <td class="font-weight-bold">{{r.rank}}</td>
+                    <ng-container *ngFor="let t of teams">
+                        <td class="font-weight-bold" (click)="teamMatches(r.teamID)" *ngIf="t.teamID == r.teamID">
+                            <span id="team">{{t.teamName}}</span>
+                        </td>
+                    </ng-container>
+                    <td class="text-right font-weight-bold">{{r.points}}</td>
+                </tr>
+                <ng-template #otherClubs>
+                    <tr >
+                        <td>{{r.rank}}</td>
+                        <ng-container *ngFor="let t of teams">
+                            <td (click)="teamMatches(r.teamID)" *ngIf="t.teamID == r.teamID">
+                                <span id="team">{{t.teamName}}</span>
+                            </td>
+                        </ng-container>
+                        <td class="text-right">{{r.points}}</td>
+                    </tr>
 
-                <td class="text-right">{{r.points}}</td>
-            </tr>
+                </ng-template>
+            </ng-container>
+
         </tbody>
     </table>
+    <h3 *ngIf="!rankings" class="text-center">Je team is niet ingeschreven voor een competitie</h3>
 </div>

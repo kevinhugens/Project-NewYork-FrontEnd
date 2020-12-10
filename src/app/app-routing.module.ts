@@ -24,6 +24,10 @@ import { TablesComponent } from './tables/tables/tables.component';
 import { TablesAddComponent } from './tables/tables-add/tables-add.component';
 import { TablesEditComponent } from './tables/tables-edit/tables-edit.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { CompetitionComponent } from './competition/competition/competition.component';
+import { AdminRankingComponent } from './competition/admin-ranking/admin-ranking.component';
+import { EditCompetitionComponent } from './competition/edit-competition/edit-competition.component';
+import { AddCompetitionComponent } from './competition/add-competition/add-competition.component';
 
 
 
@@ -49,6 +53,10 @@ const routes: Routes = [
   { path: 'tablesadd', component: TablesAddComponent },
   { path: 'tablesedit', component: TablesEditComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'competition', component: CompetitionComponent },
+  { path: 'competition/:id', component: EditCompetitionComponent },
+  { path: 'addCompetition', component: AddCompetitionComponent },
+  { path: 'adminRanking/:id', component: AdminRankingComponent },
 
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found
 ];

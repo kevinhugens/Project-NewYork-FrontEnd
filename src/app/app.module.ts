@@ -19,6 +19,7 @@ import { RankingModule } from './ranking/ranking.module';
 import { ProfileModule } from './profile/profile.module';
 import { ChartsModule } from 'ng2-charts';
 
+import { CompetitionModule } from './competition/competition.module';
 import { UsersModule } from './users/users.module';
 import { TeamModule } from './team/team.module';
 import { TablesModule } from './tables/tables.module';
@@ -53,6 +54,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     TeamModule,
     ProfileModule,
     ChartsModule,
+    CompetitionModule,
   ],
   providers: [
     {
