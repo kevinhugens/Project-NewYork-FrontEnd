@@ -2,25 +2,36 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticateService } from '../security/services/authenticate.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class SidenavComponent implements OnInit {
 
-  @Output() public sidenavToggle = new EventEmitter();
+  @Output() sidenavClose = new EventEmitter();
 
   loggedIn = false;
+  currentUser: User;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
     this._authenticateService.isLoggedin.subscribe(e => {
       this.loggedIn = this._authenticateService.isLoggedIn();
     })
+    this._authenticateService.loggedUser.subscribe(
+      result => {
+        this.currentUser = result;
+      }
+    );
   }
 
   ngOnInit(): void {
+  }
+
+  public onSidenavClose = () => {
+    this.sidenavClose.emit();
   }
 
   logout() {
@@ -31,10 +42,5 @@ export class NavbarComponent implements OnInit {
     // this._authenticateService.isLoggedin.next(false);
     this.router.navigate(['aanmelden']); // Redirect to login page after logout
   }
-
-  public onToggleSidenav = () => {
-    this.sidenavToggle.emit();
-  }
-
 
 }

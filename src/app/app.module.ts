@@ -21,16 +21,19 @@ import { ChartsModule } from 'ng2-charts';
 
 import { UsersModule } from './users/users.module';
 import { TeamModule } from './team/team.module';
+import { TablesModule } from './tables/tables.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
-import { TablesModule } from './tables/tables.module'; 
+import { SidenavComponent } from './sidenav/sidenav.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     WildcardRouteComponent,
-    NavbarComponent
+    NavbarComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
