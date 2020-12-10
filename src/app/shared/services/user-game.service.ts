@@ -29,4 +29,10 @@ export class UserGameService {
   deleteUserGame(id: number){
     return this.http.delete<UserGame>("https://localhost:44300/api/userGame/" + id)
   }
+  
+  deleteUserGameByGameAndUser(gameID: number, userID: number){
+    console.log("Inside service, gameID:", gameID, "userID:", userID);
+    return this.http.delete<UserGame>("https://localhost:44300/deletegameanduser/" + gameID + "/" + userID)
+  }
+  
 }
