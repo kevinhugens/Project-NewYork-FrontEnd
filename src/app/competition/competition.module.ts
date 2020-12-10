@@ -6,10 +6,11 @@ import { AdminRankingComponent } from './admin-ranking/admin-ranking.component';
 import { EditCompetitionComponent } from './edit-competition/edit-competition.component';
 import { AddCompetitionComponent } from './add-competition/add-competition.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { AddTeamComponent } from './add-team/add-team.component';
 
 
 @NgModule({
-  declarations: [CompetitionComponent, AdminRankingComponent, EditCompetitionComponent, AddCompetitionComponent],
+  declarations: [CompetitionComponent, AdminRankingComponent, EditCompetitionComponent, AddCompetitionComponent, AddTeamComponent],
   imports: [
     CommonModule,
     SharedModule,

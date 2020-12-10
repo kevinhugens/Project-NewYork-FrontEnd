@@ -28,6 +28,7 @@ import { CompetitionComponent } from './competition/competition/competition.comp
 import { AdminRankingComponent } from './competition/admin-ranking/admin-ranking.component';
 import { EditCompetitionComponent } from './competition/edit-competition/edit-competition.component';
 import { AddCompetitionComponent } from './competition/add-competition/add-competition.component';
+import { AddTeamComponent } from './competition/add-team/add-team.component';
 
 
 
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'competition', component: CompetitionComponent },
   { path: 'competition/:id', component: EditCompetitionComponent },
   { path: 'addCompetition', component: AddCompetitionComponent },
+  { path: 'addTeam', component: AddTeamComponent },
   { path: 'adminRanking/:id', component: AdminRankingComponent },
 
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found

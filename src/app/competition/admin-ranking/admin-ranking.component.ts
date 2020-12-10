@@ -44,4 +44,8 @@ export class AdminRankingComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onAdd(competition: Competition) {
+    this._rankingService.selectedCompetion = competition;
+    this.router.navigate(['addTeam']);
+  }
 }
