@@ -5,12 +5,14 @@ import { Team } from '../models/team.model';
 import { CompetitionService } from '../services/competition.service';
 import { TeamService } from '../services/team.service';
 import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { UserGameService } from '../services/user-game.service';
 import { map, tap } from 'rxjs/operators';
 import { UserGame } from '../models/user-game.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -35,7 +37,8 @@ export class GameCardComponent implements OnInit {
   team2: Team = null;
   game: Game = null;
   vriendschappelijk: string = "Vriendschappelijke wedstrijd";
-  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar) {
+
+  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router) {
 
   }
 
@@ -90,6 +93,10 @@ export class GameCardComponent implements OnInit {
         this.participationChanged.emit(true);
       }
     )
+  }
+
+  goLive(id: number){
+    this.router.navigate(['wedstrijden/live', id])
   }
 
 }

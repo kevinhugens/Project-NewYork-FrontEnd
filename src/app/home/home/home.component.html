@@ -4,49 +4,77 @@
             <img src="../../../assets/tableFootball2.jpg" alt="tableFootball" class="img-fluid">
             <h1>Welkom!</h1>
             <p>Welkom op de startpagina. Hieronder vindt u enkele handige snelkoppelingen.</p>
-            <div *ngIf="competition" class="row">
+            <div *ngIf="!currentUser.teamID">
+                <div class="alert alert-primary" role="alert">
+                    <h4 class="alert-heading">Nog geen team!</h4>
+                    <p>Het lijkt erop dat u nog geen deel uitmaakt van een bestaand team. U kan hieronder een nieuw team aanmaken, of u kan aan een kapitein van een bestaand team vragen om u toe te voegen.</p>
+                    <hr>
+                    <p class="mb-0">Als u eenmaal in een team zit komen hieronder de volgende games van dat team te staan.</p>
+                  </div>
+            </div>
+            <div *ngIf="currentUser.teamID">
+                <div *ngIf="competition" class="row">
 
-                <div class="col-lg-8">
-                    <div *ngIf="nextGameComp" class="mb-3">
-                        <app-game-card [competitionid]="nextGameComp.competitionID" [gameid]="nextGameComp.gameID" [team1id] ="nextGameComp.team1ID" [team2id]="nextGameComp.team2ID" [next]="true"></app-game-card>
+                    <div *ngIf="sortedGames" class="col-lg-8">
+                        <div *ngIf="nextGameComp" class="mb-3">
+                            <app-game-card [competitionid]="nextGameComp.competitionID" [gameid]="nextGameComp.gameID"
+                                [team1id]="nextGameComp.team1ID" [team2id]="nextGameComp.team2ID" [next]="true">
+                            </app-game-card>
 
-                    </div>
-                    <div *ngIf="nextGameFriend">
-                        <app-game-card [competitionid]="nextGameFriend.competitionID" [gameid]="nextGameFriend.gameID" [team1id] ="nextGameFriend.team1ID" [team2id]="nextGameFriend.team2ID" [next]="true"></app-game-card>
+                        </div>
+                        <div *ngIf="nextGameFriend">
+                            <app-game-card [competitionid]="nextGameFriend.competitionID"
+                                [gameid]="nextGameFriend.gameID" [team1id]="nextGameFriend.team1ID"
+                                [team2id]="nextGameFriend.team2ID" [next]="true">
+                            </app-game-card>
 
-                    </div>
-                </div>
-                <br>
-                <div class="col-lg-4">
-                    <div class="card" >
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                        <div class="card-body">
-                            <h2 class="card-title">{{competition.name}}</h2>
-                            <p class="card-text">Hier ziet u de ranking van de competitie waarin in team zich bevindt.</p>
-                            <ol>
-                                <li *ngFor="let ranking of rankings">
-                                    <div class="row">
-                                        <div class="col">
-                                            {{ranking.team.teamName}}
-                                        </div>
-                                         <div class="col">
-                                            {{ranking.points}}
-                                         </div> 
-                                    </div>
-                                    
-                                    <hr>
-                                </li>
-                                
-                            </ol>
                         </div>
                     </div>
+                    <div *ngIf=!sortedGames class="col-lg-8">
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Geen games beschikbaar</h4>
+                            <p>Voolopig zijn er geen volgende keer beschikbaar. Gelieve wat geduld te hebben tot de
+                                administrator nieuwe games toevoegt. In de tussentijd kan u altijd een ander team
+                                challangen voor een vriendschappelijke match!</p>
+                            <hr>
+                            <p class="mb-0">Moesten er in de toekomst weer games beschikbaar komen, worden deze hier
+                                getoond.</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                            <div class="card-body" style="height: 450px; overflow-y: scroll;">
+                                <h2 class="card-title">{{competition.name}}</h2>
+                                <p class="card-text">Hier ziet u de ranking van de competitie waarin in team zich
+                                    bevindt.
+                                </p>
+                                <ol>
+                                    <li *ngFor="let ranking of rankings">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ranking.team.teamName}}
+                                            </div>
+                                            <div class="col">
+                                                {{ranking.points}}
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
             </div>
-<hr>
+            <hr>
 
-            <div class="row justify-content-center">
-                <div class="row align-items-center">
+            <div *ngIf="sortedGames" class="row justify-content-center">
+                <div class="row align-items-center p-2">
                     <div class="text-center">
                         <h2 class="text-center">Planning</h2>
 
@@ -54,13 +82,14 @@
                 </div>
                 <div class="row">
 
-               
-                <div *ngFor="let game of sortedGames" class="d-inline-flex m-4" > 
-                    
-                    <app-game-card style="width: 330px;"  [competitionid]="game.competitionID" [gameid]="game.gameID" [team1id] ="game.team1ID" [team2id]="game.team2ID" [next]="false"></app-game-card>
 
+                    <div *ngFor="let game of sortedGames" class="d-inline-flex m-4">
+
+                        <app-game-card style="width: 330px;" [competitionid]="game.competitionID" [gameid]="game.gameID"
+                            [team1id]="game.team1ID" [team2id]="game.team2ID" [next]="false"></app-game-card>
+
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>

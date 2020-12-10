@@ -15,20 +15,25 @@
           </span>
         </div>
 
-      </div>
-      <div class="col centerV">
-        <p class="dash">-</p>
-      </div>
-      <div *ngIf="team2" class="col">
-        <div class="row justify-content-center">
-          {{team2.teamName}}
-        </div>
-        <div class="row justify-content-center">
-          <span class="material-icons" style="font-size: 30px;">
-            stars
-          </span>
-        </div>
-      </div>
+                </div>
+                <div class="col centerV">
+                    <p class="dash">-</p>
+                </div>
+                <div *ngIf="team2" class="col">
+                    <div class="row justify-content-center">
+                        {{team2.teamName}}
+                    </div>
+                    <div class="row justify-content-center">
+                        <span class="material-icons" style="font-size: 30px;">
+                            stars
+                            </span>
+                    </div>
+                </div>
+          </div>
+          <div *ngIf="next" class="pt-3"> 
+            <a class="card-link btn btn-success" (click)="goLive(game.gameID)">Start wedstrijd</a>
+          </div>
+
     </div>
     <div *ngIf="next" class="pt-1">
       <a href="#" class="card-link">Start wedstrijd</a>
