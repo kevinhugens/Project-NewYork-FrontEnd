@@ -18,6 +18,10 @@ export class UserGameService {
     return this.http.get<UserGame>("https://localhost:44300/api/userGame/" + id);
   }
 
+  getUserGameByGame(id: number): Observable<UserGame[]>{
+    return this.http.get<UserGame[]>("https://localhost:44300/api/userGame/game/" + id);
+  }
+
   updateUserGame(id: number, userGame: UserGame){
     return this.http.put<UserGame>("https://localhost:44300/api/userGame/" + id, userGame)
   }

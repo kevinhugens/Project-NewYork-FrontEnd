@@ -5,6 +5,7 @@ import {Team} from '../models/team.model';
 import { CompetitionService } from '../services/competition.service';
 import {TeamService} from '../services/team.service';
 import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -22,7 +23,7 @@ export class GameCardComponent implements OnInit {
   team2:Team = null;
   game:Game = null;
   vriendschappelijk: string = "Vriendschappelijke wedstrijd";
-  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService) { 
+  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private router: Router) { 
 
     
     
@@ -57,6 +58,10 @@ export class GameCardComponent implements OnInit {
       })
     }
     
+  }
+
+  goLive(id: number){
+    this.router.navigate(['wedstrijden/live', id])
   }
 
 }

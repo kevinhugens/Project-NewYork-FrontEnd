@@ -18,13 +18,16 @@ import { TeamModule } from './team/team.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
+import { LiveComponent } from './wedstrijden/live/live.component';
+import { HomeComponent } from './home/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     WildcardRouteComponent,
-    NavbarComponent
+    NavbarComponent,
+    LiveComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { SecurityInterceptor } from './security/security.interceptor';
     provide: HTTP_INTERCEPTORS,
     useClass: SecurityInterceptor,
     multi: true
-  },],
+  },
+  HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

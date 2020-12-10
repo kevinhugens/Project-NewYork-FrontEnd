@@ -1,0 +1,76 @@
+<div class="container">
+    <div *ngIf="competition">
+        <h1 class="text-center">Wedstrijd uit: {{competition.name}}</h1>
+    </div>
+    <div *ngIf="!competition"> 
+        <h1 class="text-center">Vriendschappelijke wedstrijd</h1>
+    </div>
+   
+
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-sm-4 justify-content-center">
+            <h3 class="text-center">{{chosengame.team1.teamName}}</h3>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="row justify-content-center">
+                        <span class="material-icons" style="font-size: 100px;">
+                            stars
+                            </span>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-sm-8 centerV">
+                    <div class="row ">
+                        <ul style="list-style-type: none;">
+                            <li *ngFor="let usergame of spelersTeam1">{{usergame.user.firstName}} {{usergame.user.lastName}}</li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center pt-5 pb-5">
+                <button class="btn btn-success" (click)="scoreGoal(1)" [disabled]="!disabled">GOAL</button>
+            </div>
+        </div>  
+        <div class="col-lg-1 col-sm-1 centerV">
+            <p class="dash">{{chosengame.scoreTeam1}}</p>
+        </div>
+        <div class="col-lg-1 col-sm-1 centerV">
+            <p class="dash">-</p>
+        </div>
+        <div class="col-lg-1 col-sm-1 centerV">
+            <p class="dash">{{chosengame.scoreTeam2}}</p>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 justify-content-center">
+            <h3 class="text-center">{{chosengame.team2.teamName}}</h3>
+            <hr>
+            <div class="row">
+                <div class="col-lg-8 centerV">
+                    <div class="row ">
+                        <ul style="list-style-type: none;">
+                            <li *ngFor="let usergame of spelersTeam2">{{usergame.user.firstName}} {{usergame.user.lastName}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row justify-content-center">
+                        <span class="material-icons" style="font-size: 100px;">
+                            stars
+                            </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center pt-5">
+                <button class="btn btn-success" (click)="scoreGoal(2)" [disabled]="!disabled">GOAL</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row justify-content-center">
+        <button class="btn btn-danger m-5" (click)="validateGame()" [disabled]="disabled">Einde wedstrijd</button> <button class="btn btn-warning m-5" (click)="sendToModerator()">Vraag om een moderator</button>
+    </div>
+</div>
+

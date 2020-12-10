@@ -14,6 +14,7 @@ import {TeamComponent} from './team/team/team.component';
 import { AuthGuard } from './security/guards/auth.guard'
 import { TeamsAddComponent } from './team/teams-add/teams-add.component';
 import { TeamsEditComponent } from './team/teams-edit/teams-edit.component';
+import { LiveComponent } from './wedstrijden/live/live.component';
 
 const routes: Routes = [
 
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'teams', component: TeamComponent },
   { path: 'teamsadd', component: TeamsAddComponent },
   { path: 'teamsedit', component: TeamsEditComponent },
-
+  { path: 'wedstrijden/live/:id', component: LiveComponent},
+  
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found
 ];
 

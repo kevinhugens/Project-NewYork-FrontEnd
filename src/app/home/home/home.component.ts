@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/shared/services/team.service';
 import { RankingService} from '../../shared/services/ranking.service';
 import { Ranking } from 'src/app/shared/models/ranking.model';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,11 +16,11 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   competition: Competition;
-  nextGameComp: Game;
+  nextGameComp: Game = null;
   nextGameFriend: Game = null;
   rankings: Ranking[];
   sortedGames: Game[] = null;
-
+  currentUser: User;
   constructor(private _competitionService: CompetitionService, private _gameService: GameService, private _teamService: TeamService, 
     private _rankingService: RankingService ) { 
     
@@ -30,13 +31,19 @@ export class HomeComponent implements OnInit {
   }
 
   getData(): void{
+   
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    //this.currentUser.teamID = null
+    console.log(this.currentUser)
+    this._rankingService.getRankingByTeam(this.currentUser.teamID).subscribe((value) => {
+      this._competitionService.getCompetition(value.competitionID).subscribe(value => this.competition = value)
+    })
     //this._teamService.getTeam(user.teamid).subscribe(value => console.log(value))
-    this._competitionService.getCompetition(1).subscribe(value => this.competition = value);
-    this._gameService.GetNextCompetitionGame().subscribe(value => this.nextGameComp = value);
-    this._gameService.GetNextFriendlyGame().subscribe(value => this.nextGameFriend = value)
+    this._gameService.GetNextCompetitionGameByTeam(this.currentUser.teamID).subscribe(value => this.nextGameComp = value);
+    this._gameService.GetNextFriendlyGameByTeam(this.currentUser.teamID).subscribe(value => this.nextGameFriend = value)
 
     //Ophalen van alle games
-    this._gameService.getGames().subscribe((value) => {
+    this._gameService.getNextGamesByTeam(this.currentUser.teamID).subscribe((value) => {
       console.log("games", value);
       //Sorteren van de games obv datum
       this.sortedGames = value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())

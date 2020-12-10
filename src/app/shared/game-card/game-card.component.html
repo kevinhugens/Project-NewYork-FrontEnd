@@ -31,7 +31,7 @@
                 </div>
           </div>
           <div *ngIf="next" class="pt-3"> 
-            <a href="#" class="card-link">Start wedstrijd</a>
+            <a class="card-link btn btn-success" (click)="goLive(game.gameID)">Start wedstrijd</a>
           </div>
       
     </div>
