@@ -14,13 +14,18 @@ export class TeamsEditComponent implements OnInit {
   selectedTeam : Team;
   submittedSelected : boolean = false;
   usersByTeamID : User[];
+  usersZonderTeam: User[];
+  selectedUser : User;
+
   constructor(private router: Router, private apiTeams : TeamService, private apiUsers : UserService) { }
 
   ngOnInit(): void {
     this.selectedTeam = this.apiTeams.selectedTeam;
     this.apiUsers.getUsersByTeamID(this.selectedTeam.teamID).subscribe((result) => {
       this.usersByTeamID = result;
-      console.log(this.usersByTeamID);
+      if(result.length == 0){
+        this.getAllUsersWithoutTeam();
+      }
     });
   }
 
@@ -29,10 +34,23 @@ export class TeamsEditComponent implements OnInit {
   }
 
   onSubmitUpdateTeam() {
+    if(this.selectedUser){
+      this.selectedTeam.captainID = this.selectedUser.userID;
+      this.selectedUser.teamID = this.selectedTeam.teamID;
+      this.apiUsers.updateUser(this.selectedUser.userID,this.selectedUser).subscribe();
+    }
     this.submittedSelected = true;
     this.apiTeams.updateTeam(this.selectedTeam.teamID,this.selectedTeam).subscribe(() => {
       this.router.navigate(["/teams"]);
     });
+    
+  }
+
+  getAllUsersWithoutTeam(){
+    this.apiUsers.getUsersWithoutTeam().subscribe((result) => {
+      result.splice(result.indexOf(result.find(x=>x.email == "admin@admin.be")),1);
+      this.usersZonderTeam = result;
+    })
   }
 
 }

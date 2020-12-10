@@ -16,6 +16,7 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class HomeComponent implements OnInit {
   competition: Competition;
+
   nextGameComp: Game = null;
   nextGameFriend: Game = null;
   rankings: Ranking[];

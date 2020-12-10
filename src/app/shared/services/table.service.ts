@@ -7,7 +7,7 @@ import { Table } from '../models/table.model';
   providedIn: 'root'
 })
 export class TableService {
-
+  selectedTable : Table;
   constructor(private http: HttpClient) { }
 
   getTables(): Observable<Table[]>{

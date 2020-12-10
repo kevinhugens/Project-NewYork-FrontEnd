@@ -1,17 +1,21 @@
 <div class="container">
-    <div class="row" *ngIf='activeUser["role"] == "admin"'>
+    <div class="row" *ngIf='isAdmin'>
         <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
             <h1>Overzicht van teams</h1>
             <mat-selection-list #teams [multiple]="false" *ngIf="lijstTeams != null && lijstTeams.length > 0; else noteams">
                 <div style="text-align: right;">
-                    <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
-                    <button mat-raised-button color="accent" (click)="onEdit(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Edit</button>
-                    <button mat-raised-button color="warn" (click)="onDelete(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
+                    <button mat-raised-button color="primary" (click)="onAdminAdd()" style="margin-top: 10px;">Add</button>
+                    <button mat-raised-button color="accent" (click)="onAdminEdit(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onAdminDelete(teams.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
                 </div>
                 <div mat-subheader>Teams</div>
                 <mat-list-option *ngFor="let team of lijstTeams" [value]="team">
                     <mat-icon mat-list-icon>groups</mat-icon>
-                    <div mat-line>{{team.teamName}}</div>
+                    <div mat-line *ngIf='team["captainID"]; else nocaptain'>{{team.teamName}}</div>
+                    <ng-template #nocaptain>
+                        <div mat-line style="color:red" >{{team.teamName}} (Geen kapitein!!)</div>
+                    </ng-template>
+                    
                     <div mat-line> {{team.companyName}} - {{team.address}}</div>
                 </mat-list-option>
                 
@@ -21,7 +25,30 @@
             </ng-template>
         </div>
     </div>
-    <div class="row" >
-
+    <div class="row" *ngIf="!isAdmin">
+        <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
+            <div *ngIf="!noTeamJoined; else noteam">
+                <h1>Overzicht van het team</h1>
+                <mat-selection-list #users [multiple]="false" *ngIf="lijstUsersVanTeam != null && lijstUsersVanTeam.length > 0; else nousers">
+                    <div style="text-align: right;" *ngIf="isCaptain">
+                        <button mat-raised-button color="primary" (click)="onCaptainAddUserToTeam()" style="margin-top: 10px;">Add</button>
+                        <button mat-raised-button color="accent" (click)="onCaptainEditTeam()" style="margin-left: 10px;">Edit</button>
+                        <button mat-raised-button color="warn" (click)="onCaptainDeleteFromTeam(users.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
+                    </div>
+                    <div mat-subheader>Users</div>
+                    <mat-list-option *ngFor="let user of lijstUsersVanTeam" [value]="user">
+                        <mat-icon mat-list-icon>account_circle</mat-icon>
+                        <div mat-line>{{user.firstName}} {{user.lastName}}</div>
+                        <div mat-line> {{user.email}} </div>
+                    </mat-list-option>
+                </mat-selection-list>
+                <ng-template #nousers>
+                    <h3>Geen users in het team</h3>
+                </ng-template>
+            </div>
+            <ng-template #noteam>
+                <h3>Niet in een team!</h3>
+            </ng-template>
+        </div>
     </div>
 </div>

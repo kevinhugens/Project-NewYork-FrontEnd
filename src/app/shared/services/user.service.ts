@@ -17,6 +17,11 @@ export class UserService {
   getUser(id: number): Observable<User>{
     return this.http.get<User>("https://localhost:44300/api/user/" + id);
   }
+
+  getUsersWithoutTeam(): Observable<User[]> {
+    return this.http.get<User[]>("https://localhost:44300/api/user/team");
+  }
+  
   getUsersByTeamID(teamid: number): Observable<User[]>{
     return this.http.get<User[]>("https://localhost:44300/api/user/team/" + teamid);
   }
@@ -31,5 +36,8 @@ export class UserService {
 
   deleteUser(id: number){
     return this.http.delete<User>("https://localhost:44300/api/user/" + id)
+  }
+  deleteUserFromTeam(userid: number) {
+    return this.http.delete<User>("https://localhost:44300/api/user/team/" + userid)
   }
 }

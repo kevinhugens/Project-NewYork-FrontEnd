@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
+            <h1>Overzicht van tables</h1>
+            <mat-selection-list #tables [multiple]="false" *ngIf="lijstTables != null && lijstTables.length > 0; else notables">
+                <div style="text-align: right;">
+                    <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
+                    <button mat-raised-button color="accent" (click)="onEdit(tables.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onDelete(tables.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
+                </div>
+                <div mat-subheader>Tables</div>
+                <mat-list-option *ngFor="let table of lijstTables" [value]="table">
+                    <mat-icon mat-list-icon>info</mat-icon>
+                    <div mat-line>{{table.tableName}}</div>
+                    <div mat-line> {{table.companyName}} - {{table.address}} </div>
+                </mat-list-option>
+                <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
+                
+            </mat-selection-list>
+            <ng-template #notables>
+                <h3>Geen tables</h3>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticateService } from '../security/services/authenticate.service';
@@ -9,6 +9,8 @@ import { AuthenticateService } from '../security/services/authenticate.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  @Output() public sidenavToggle = new EventEmitter();
 
   loggedIn = false;
 
@@ -29,5 +31,10 @@ export class NavbarComponent implements OnInit {
     // this._authenticateService.isLoggedin.next(false);
     this.router.navigate(['aanmelden']); // Redirect to login page after logout
   }
+
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  }
+
 
 }

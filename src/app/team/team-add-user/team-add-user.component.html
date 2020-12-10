@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Add user to team</h1>
+            <form #addUserToTeam="ngForm" (ngSubmit)="onAddUser()" *ngIf="lijstUsers != null && lijstUsers.length > 0; else nousers">
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Users</mat-label>
+                        <mat-select name="user" [(ngModel)]='selectedUser' required>
+                            <mat-option *ngFor="let user of lijstUsers" [value]='user'>
+                                {{user["firstName"]}} {{user["lastName"]}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!addUserToTeam.form.valid">Save</button>               
+            </form>
+            <ng-template #nousers>
+                <h3>Geen users zonder team</h3>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToTeams()">Back to teams</button>
+        </div>
+    </div>
+</div>

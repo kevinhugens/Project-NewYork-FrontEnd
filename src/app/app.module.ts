@@ -12,14 +12,23 @@ import { WildcardRouteComponent } from './wildcard-route/wildcard-route.componen
 
 import { HomeModule } from './home/home.module';
 import { SecurityModule } from './security/security.module';
+import { MatchesModule } from './matches/matches.module';
 import { NavbarComponent } from './navbar/navbar.component';
+
+import { RankingModule } from './ranking/ranking.module';
+import { ProfileModule } from './profile/profile.module';
+import { ChartsModule } from 'ng2-charts';
+
 import { UsersModule } from './users/users.module';
 import { TeamModule } from './team/team.module';
+import { TablesModule } from './tables/tables.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
 import { LiveComponent } from './wedstrijden/live/live.component';
 import { HomeComponent } from './home/home/home.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+
 
 
 @NgModule({
@@ -27,7 +36,9 @@ import { HomeComponent } from './home/home/home.component';
     AppComponent,
     WildcardRouteComponent,
     NavbarComponent,
-    LiveComponent
+    LiveComponent,
+    SidenavComponent
+
   ],
   imports: [
     BrowserModule,
@@ -36,13 +47,21 @@ import { HomeComponent } from './home/home/home.component';
     SharedModule,
     HomeModule,
     FlexLayoutModule,
+    RankingModule,
     UsersModule,
     SecurityModule,
     HttpClientModule,
-    TeamModule
+    TeamModule,
+    TablesModule,
+    MatchesModule,
+    TeamModule,
+    TeamModule,
+    ProfileModule,
+    ChartsModule,
   ],
-  providers: [    
+  providers: [
     {
+
     provide: HTTP_INTERCEPTORS,
     useClass: SecurityInterceptor,
     multi: true

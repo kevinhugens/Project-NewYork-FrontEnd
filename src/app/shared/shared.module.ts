@@ -33,9 +33,14 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { GameCardComponent } from './game-card/game-card.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { TeamListItemComponent } from './team-list-item/team-list-item.component';
+
+// import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
-  declarations: [GameCardComponent],
+  declarations: [TeamListItemComponent, GameCardComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -64,7 +69,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // MatCarouselModule.forRoot(),
+    MatStepperModule,
+    NgxMaterialTimepickerModule
   ], exports: [
     CommonModule,
     FormsModule,
@@ -93,6 +101,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatBadgeModule,
+    ReactiveFormsModule,
+    // MatCarouselModule
+    MatStepperModule,
+    NgxMaterialTimepickerModule,
+    TeamListItemComponent,
     GameCardComponent,
     ReactiveFormsModule
   ],

@@ -40,6 +40,19 @@ export class GameService {
     return this.http.get<Game>("https://localhost:44300/api/game/friendly/next/" + teamid);
   }
 
+  // The next game for an user his team
+  GetNextFriendlyGameUser(teamID: number): Observable<Game>{
+    return this.http.get<Game>("https://localhost:44300/api/game/friendly/next/user/" + teamID.toString());
+  }
+
+  GetPlannedFriendlyTeamGames(teamID: number): Observable<Game[]>{
+    return this.http.get<Game[]>("https://localhost:44300/api/game/friendly/planned/team/" + teamID.toString());
+  }
+
+  GetPlayedFriendlyTeamGames(teamID: number): Observable<Game[]>{
+    return this.http.get<Game[]>("https://localhost:44300/api/game/friendly/played/team/" + teamID.toString());
+  }
+
   getGame(id: number): Observable<Game>{
     return this.http.get<Game>("https://localhost:44300/api/game/" + id);
   }
