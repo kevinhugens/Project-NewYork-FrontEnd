@@ -18,7 +18,7 @@ import { TeamModule } from './team/team.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
-
+import { TablesModule } from './tables/tables.module'; 
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { SecurityInterceptor } from './security/security.interceptor';
     UsersModule,
     SecurityModule,
     HttpClientModule,
-    TeamModule
+    TeamModule,
+    TablesModule
   ],
   providers: [    
     {

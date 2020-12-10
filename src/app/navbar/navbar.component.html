@@ -1,42 +1,47 @@
-<mat-toolbar color="primary">  
-      <div>  
-        <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      </div>
-  
-      <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-          <li>
-            <!-- Users -->
-            <li class="ml-3"><a class="align-middle" routerLink="/users" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
-          <li>
-            <li>
-              <!-- Users -->
-              <li class="ml-3"><a class="align-middle" routerLink="/teams" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">Teams</a></li>
-            <li>
-          <!-- Sign Up -->
-          <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
-          <!-- Log In -->          
-          <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
-  
-          <li *ngIf="loggedIn">
-  
-            <!-- <a class="profile-menu" [matMenuTriggerFor]="menu">
+<mat-toolbar color="primary">
+  <div>
+    <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">Home</a>
+  </div>
+
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <li>
+        <!-- Users -->
+      <li class="ml-3"><a class="align-middle" routerLink="/users" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
+      <li>
+      <li>
+        <!-- Teams -->
+      <li class="ml-3"><a class="align-middle" routerLink="/teams" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Teams</a></li>
+      <li>
+      <li>
+        <!-- Tables -->
+      <li class="ml-3"><a class="align-middle" routerLink="/tables" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Tables</a></li>
+      <li>
+        <!-- Sign Up -->
+      <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
+      <!-- Log In -->
+      <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
+
+      <li *ngIf="loggedIn">
+
+        <!-- <a class="profile-menu" [matMenuTriggerFor]="menu">
               {{username}}<mat-icon>more_vert</mat-icon>
             </a> -->
-            <a class="profile-menu" [matMenuTriggerFor]="menu">Menu<mat-icon>more_vert</mat-icon></a>
-  
-            <mat-menu #menu="matMenu">
-              <a class="profile-menu-item" mat-menu-item routerLink="/profile" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">
-                <mat-icon>account_circle</mat-icon>
-                <span>Profiel</span>
-              </a>
-              <!-- <a class="profile-menu-item" mat-menu-item routerLink="/my-likes" routerLinkActive="active"
+        <a class="profile-menu" [matMenuTriggerFor]="menu">Menu<mat-icon>more_vert</mat-icon></a>
+
+        <mat-menu #menu="matMenu">
+          <a class="profile-menu-item" mat-menu-item routerLink="/profile" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>account_circle</mat-icon>
+            <span>Profiel</span>
+          </a>
+          <!-- <a class="profile-menu-item" mat-menu-item routerLink="/my-likes" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon id="likes">favorite</mat-icon>
                 <span>Likes</span>
@@ -68,16 +73,15 @@
                   <span>Dashboard</span>
                 </a> 
               </div>-->
-  
-              <hr>
-              <!-- Logout -->
-              <a class="profile-menu-item" mat-menu-item (click)="logout()">
-                <mat-icon id="logout" color="warn">power_settings_new</mat-icon>
-                <span>Afmelden</span>
-              </a>
-            </mat-menu>
-          </li>
-        </ul>
-      </div>
-  </mat-toolbar>
-  
+
+          <hr>
+          <!-- Logout -->
+          <a class="profile-menu-item" mat-menu-item (click)="logout()">
+            <mat-icon id="logout" color="warn">power_settings_new</mat-icon>
+            <span>Afmelden</span>
+          </a>
+        </mat-menu>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

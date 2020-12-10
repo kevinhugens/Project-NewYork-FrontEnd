@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Create table</h1>
+            <form #createTableForm="ngForm" (ngSubmit)="onSubmitCreateTable()">
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTable["tableName"]' placeholder="table name" name="tablename" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTable["companyName"]' placeholder="company name" name="companyname" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTable["address"]' placeholder="address" name="address" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='newTable["photo"]' placeholder="photo" name="photo" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Manager</mat-label>
+                        <mat-select name="manager" [(ngModel)]='newTable["managerID"]' required>
+                            <mat-option *ngFor="let user of lijstUsers" [value]='user["userID"]'>
+                                {{user["firstName"]}} {{user["lastName"]}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!createTableForm.form.valid || submittedNew">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToTables()">Back to tables</button>
+        </div>
+    </div>
+</div>

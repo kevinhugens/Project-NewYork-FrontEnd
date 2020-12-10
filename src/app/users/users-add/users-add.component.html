@@ -25,7 +25,7 @@
                 </p>
                 <p>
                     <mat-form-field>
-                        <input matInput type="date" [(ngModel)]='newUser["dateOfBirth"]' placeholder="date of birth" name="dateofbirth" required/>
+                        <input matInput type="date" [(ngModel)]='newUser["dateOfBirth"]' [ngModel]='newUser["dateOfBirth"] | date:"yyyy-MM-dd"' placeholder="date of birth" name="dateofbirth" required/>
                     </mat-form-field>
                 </p>
                 <button mat-raised-button color="primary" type="submit" [disabled]="!createUserForm.form.valid || submittedNew">Save</button>

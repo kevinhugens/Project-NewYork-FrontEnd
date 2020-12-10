@@ -9,7 +9,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./users-add.component.scss']
 })
 export class UsersAddComponent implements OnInit {
-  newUser : User = new User(0,"","","","","",new Date,"",0,"");
+  newUser : User = new User(0,"","","","","",new Date,null,null,"");
   submittedNew : boolean = false;
   constructor(private router : Router, private api : UserService) { }
 
@@ -24,7 +24,7 @@ export class UsersAddComponent implements OnInit {
     this.api.addUser(this.newUser).subscribe(() => {
       this.submittedNew = false;
     });
-    this.newUser = new User(0,"","","","","",new Date,"",0,"");
+    this.newUser = new User(0,"","","","","",new Date,null,null,"");
     console.log(this.newUser);
   }
 

@@ -24,10 +24,7 @@
                     </mat-form-field>
                 </p>
                 <p>
-                    <!-- <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='selectedTeam["captainID"]' placeholder="captainID" name="captain" required/>
-                    </mat-form-field> -->
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" *ngIf="!usersZonderTeam; else nousers">
                         <mat-label>Captain</mat-label>
                         <mat-select name="captain" [(ngModel)]='selectedTeam["captainID"]' required>
                             <mat-option *ngFor="let user of usersByTeamID" [value]='user["userID"]'>
@@ -35,6 +32,17 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <ng-template #nousers>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Captain</mat-label>
+                            <mat-select name="fillcaptain" [(ngModel)]='selectedUser' required>
+                                <mat-option [value]='0'>Geen kapitein of geen users zonder team</mat-option>
+                                <mat-option *ngFor="let user of usersZonderTeam" [value]='user'>
+                                    {{user["firstName"]}} {{user["lastName"]}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-template>
                 </p>
                 <button mat-raised-button color="primary" type="submit" [disabled]="!createTeamForm.form.valid || submittedSelected">Save</button>
             </form>

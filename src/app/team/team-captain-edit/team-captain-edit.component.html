@@ -1,41 +1,39 @@
 <div class="container">
     <div class="row">
         <div class="col col-md-12" style="text-align: center;">
-            <h1>Create team</h1>
-            <form #createTeamForm="ngForm" (ngSubmit)="onSubmitCreateTeam()">
+            <h1>Update team</h1>
+            <form #updateTeam="ngForm" (ngSubmit)="onSubmitUpdateTeam()" *ngIf="team">
                 <p>
                     <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='newTeam["teamName"]' placeholder="teamname" name="teamname" required/>
+                        <input matInput type="text" [(ngModel)]='team["teamName"]' placeholder="teamname" name="teamname" required/>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='newTeam["companyName"]' placeholder="companyname" name="companyname" required/>
+                        <input matInput type="text" [(ngModel)]='team["companyName"]' placeholder="companyname" name="companyname" required/>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='newTeam["address"]' placeholder="address" name="address" required/>
+                        <input matInput type="text" [(ngModel)]='team["address"]' placeholder="address" name="address" required/>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='newTeam["photo"]' placeholder="photo" name="photo" required/>
+                        <input matInput type="text" [(ngModel)]='team["photo"]' placeholder="photo" name="photo" required/>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="fill">
                         <mat-label>Captain</mat-label>
-                        <mat-select name="captain" [(ngModel)]='selectedUser' required>
-                            <mat-option [value]='0'>Geen kapitein of geen users zonder team</mat-option>
-                            <mat-option *ngFor="let user of lijstUsers" [value]='user'>
+                        <mat-select name="user" [(ngModel)]='team["captainID"]' required>
+                            <mat-option *ngFor="let user of lijstUsersTeam" [value]='user["userID"]'>
                                 {{user["firstName"]}} {{user["lastName"]}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    
                 </p>
-                <button mat-raised-button color="primary" type="submit" [disabled]="!createTeamForm.form.valid || submittedNew">Save</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!updateTeam.form.valid || submitted">Save</button>
             </form>
         </div>
     </div>
