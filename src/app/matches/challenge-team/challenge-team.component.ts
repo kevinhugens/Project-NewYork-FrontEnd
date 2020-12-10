@@ -146,7 +146,8 @@ currentUser: User;
     console.log("Date object:", date);
 
     // Create a new game
-    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, parseInt(this.locationFormGroup.controls.table.value));
+    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, parseInt(this.locationFormGroup.controls.table.value), 1);
+
     // this.game = new Game(gameID, type, scoreteam1, scoreteam2, date, team1id, team2id, competitie, tableID);
     console.log("Create game", this.game);
     this._gameService.addGame(this.game).subscribe(

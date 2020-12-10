@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   getData(): void{
-   
+    
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
     //this.currentUser.teamID = null
     console.log(this.currentUser)
@@ -47,7 +47,13 @@ export class HomeComponent implements OnInit {
     this._gameService.getNextGamesByTeam(this.currentUser.teamID).subscribe((value) => {
       console.log("games", value);
       //Sorteren van de games obv datum
-      this.sortedGames = value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      if(value.length == 0){
+        this.sortedGames = null;
+      }
+      if(value.length>0){
+        this.sortedGames = value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      }
+      
       
     })
      
