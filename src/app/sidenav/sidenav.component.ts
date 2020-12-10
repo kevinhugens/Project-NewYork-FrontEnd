@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticateService } from '../security/services/authenticate.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,11 +14,17 @@ export class SidenavComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
 
   loggedIn = false;
+  currentUser: User;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
     this._authenticateService.isLoggedin.subscribe(e => {
       this.loggedIn = this._authenticateService.isLoggedIn();
     })
+    this._authenticateService.loggedUser.subscribe(
+      result => {
+        this.currentUser = result;
+      }
+    );
   }
 
   ngOnInit(): void {
