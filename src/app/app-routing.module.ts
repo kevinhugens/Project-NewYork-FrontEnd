@@ -28,7 +28,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 // Guards
 import { AuthGuard } from './security/guards/auth.guard'
-import { AdminGuard } from './security/guards/admin-guard.guard'
+import { AdminGuard } from './security/guards/admin.guard'
 
 const routes: Routes = [
 

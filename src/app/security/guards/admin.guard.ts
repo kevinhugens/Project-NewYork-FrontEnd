@@ -8,26 +8,25 @@ import { AuthenticateService } from '../services/authenticate.service';
 })
 export class AdminGuard implements CanActivate {
   constructor(private _authenticateService: AuthenticateService, private router: Router) { }
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
-      if (this._authenticateService.isLoggedIn()) {
-        this._authenticateService.loggedUser.subscribe(
-          result => {
-            if (result.role == "admin") {
-              return true;
-            }else{
-              this.router.navigate(['/geen-toegang']);
-              return false;
-            }
-          });
-      } else{
-        this.router.navigate(['/aanmelden']); // Redirect user to home page if he is not authenticated
+      if(localStorage.getItem("currentUser")){
+        const user = JSON.parse(localStorage.getItem("currentUser"));
+        if(user.role == "admin"){
+          console.log("TRUE");
+          return true;
+        }else{
+          console.log("FALSE");
+          this.router.navigate(['/geen-toegang']);
+          return false;
+        }
+      }else{
+        console.log("FALSE");
+        this.router.navigate(['/aanmelden']);
         return false;
       }
-
-
   }
-
+  
 }
