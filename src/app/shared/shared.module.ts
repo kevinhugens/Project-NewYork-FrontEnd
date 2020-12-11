@@ -36,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TeamListItemComponent } from './team-list-item/team-list-item.component';
-
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 // import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
@@ -72,7 +72,8 @@ import { TeamListItemComponent } from './team-list-item/team-list-item.component
     ReactiveFormsModule,
     // MatCarouselModule.forRoot(),
     MatStepperModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    DropzoneModule
   ], exports: [
     CommonModule,
     FormsModule,
@@ -107,7 +108,8 @@ import { TeamListItemComponent } from './team-list-item/team-list-item.component
     NgxMaterialTimepickerModule,
     TeamListItemComponent,
     GameCardComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropzoneModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'nl-BE' },
