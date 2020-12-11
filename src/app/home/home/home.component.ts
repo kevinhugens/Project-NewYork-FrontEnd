@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   rankings: Ranking[];
   sortedGames: Game[] = null;
   currentUser: User;
+  bezig: boolean = false;
   constructor(private _competitionService: CompetitionService, private _gameService: GameService, private _teamService: TeamService,
     private _rankingService: RankingService) {
 
@@ -36,16 +37,13 @@ export class HomeComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
     //this.currentUser.teamID = null
     if (this.currentUser) {
-
-
       console.log(this.currentUser)
       this._rankingService.getRankingByTeam(this.currentUser.teamID).subscribe((value) => {
         this._competitionService.getCompetition(value.competitionID).subscribe(value => this.competition = value)
       })
       //this._teamService.getTeam(user.teamid).subscribe(value => console.log(value))
       this._gameService.GetNextCompetitionGameByTeam(this.currentUser.teamID).subscribe(
-        value => this.nextGameComp = value,
-        error => console.log(error));
+        (value) => {this.nextGameComp = value; if(value.gameStatusID == 2){this.bezig = true}});
       this._gameService.GetNextFriendlyGameByTeam(this.currentUser.teamID).subscribe(value => this.nextGameFriend = value)
 
       //Ophalen van alle games
