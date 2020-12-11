@@ -94,6 +94,12 @@ export class MatchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._authService.loggedUser.subscribe(
+      result => {
+        console.log("Current user is:", result);
+        this.currentUser = result;
+      }
+    );
   }
 
   toggleStepper() {
