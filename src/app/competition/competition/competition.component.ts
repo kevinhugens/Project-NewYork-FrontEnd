@@ -44,6 +44,7 @@ export class CompetitionComponent implements OnInit {
   }
 
   onDelete(competition: Competition) {
+    console.log(competition);
     if (competition) {
       this._competitionService.deleteCompetition(competition.competitionID).subscribe(()=>{
         this.update();

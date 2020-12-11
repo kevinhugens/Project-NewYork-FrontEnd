@@ -31,6 +31,8 @@ import { AdminRankingComponent } from './competition/admin-ranking/admin-ranking
 import { EditCompetitionComponent } from './competition/edit-competition/edit-competition.component';
 import { AddCompetitionComponent } from './competition/add-competition/add-competition.component';
 import { AddTeamComponent } from './competition/add-team/add-team.component';
+import { MakeGamesComponent } from './competition/make-games/make-games.component';
+import { EditGameComponent } from './competition/edit-game/edit-game.component';
 
 
 const routes: Routes = [
@@ -60,6 +62,8 @@ const routes: Routes = [
   { path: 'addCompetition', component: AddCompetitionComponent },
   { path: 'addTeam', component: AddTeamComponent },
   { path: 'adminRanking/:id', component: AdminRankingComponent },
+  { path: 'makeGames/:id', component: MakeGamesComponent },
+  { path: 'editGame/:id', component: EditGameComponent },
 
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found
 ];

@@ -7,10 +7,12 @@ import { EditCompetitionComponent } from './edit-competition/edit-competition.co
 import { AddCompetitionComponent } from './add-competition/add-competition.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AddTeamComponent } from './add-team/add-team.component';
+import { MakeGamesComponent } from './make-games/make-games.component';
+import { EditGameComponent } from './edit-game/edit-game.component';
 
 
 @NgModule({
-  declarations: [CompetitionComponent, AdminRankingComponent, EditCompetitionComponent, AddCompetitionComponent, AddTeamComponent],
+  declarations: [CompetitionComponent, AdminRankingComponent, EditCompetitionComponent, AddCompetitionComponent, AddTeamComponent, MakeGamesComponent, EditGameComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -1,0 +1,31 @@
+<div class="container">
+    <h1 class="text-center">Wedstrijd bewerken</h1>
+
+    <form class="text-center" #updateGameForm="ngForm" (ngSubmit)="onSubmitUpdateGame()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Kies een datum</mat-label>
+                <input [(ngModel)]="date" matInput [min]="minDate" [matDatepicker]="picker" required name="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </p>
+        <!-- <p> -->
+
+            <!-- <mat-form-field appearance="fill"> -->
+            <!-- <mat-label>Kies een tijd</mat-label>
+                <input matInput [(ngModel)]="time" required min="06:00" max="23:59" [ngxTimepicker]="fullTime" [format]="24" name="time" >
+                <mat-icon matSuffix [ngxTimepicker]="fullTime">schedule</mat-icon>
+                <ngx-material-timepicker #fullTime></ngx-material-timepicker> -->
+
+            <!-- </mat-form-field> -->
+            <!-- <label for="hour">Uur:</label>
+            <input [(ngModel)]="hour" type="number" id="hour" name="hour" min="0" max="23">
+            <label for="minuten">Minuten:</label>
+            <input [(ngModel)]="minuten" type="number" id="minuten" name="minuten" min="0" max="59">
+        </p> -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="!updateGameForm.form.valid">Wijzig
+            wedstrijd</button>
+    </form>
+
+</div>
