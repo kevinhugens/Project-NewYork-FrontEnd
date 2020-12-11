@@ -15,7 +15,8 @@
       </div>
       <div *ngIf="nextGame" class="col-12 text-center p-2 pl-md-5 pr-md-5 equal-height-test">
         <app-game-card [competitionid]="" [gameid]="nextGame.gameID" [team1id]="nextGame.team1ID"
-          [team2id]="nextGame.team2ID" [next]="true" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)"></app-game-card>
+          [team2id]="nextGame.team2ID" [next]="true" [currentUser]="currentUser"
+          (participationChanged)="onParticipationChanged($event)"></app-game-card>
       </div>
       <div *ngIf="!nextGame" class="col-12 p-2 pl-md-5 pr-md-5 align-items-center tex-center d-flex equal-height-test">
         <div class="text-center">
@@ -32,10 +33,13 @@
         <p>Andere geplande wedstrijden:</p>
         <!-- <p class="text-danger">Lijst met andere geplande wedstrijden (kaarten kleiner) <br>Max aantal tonen?</p> -->
       </div>
-      <div *ngIf="plannedGames?.length" class="row" id="plannedGamesSection">
-        <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 text-center d-inline">
-          <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
-            [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)"></app-game-card>
+      <div class="col-12 border border-primary">
+        <div *ngIf="plannedGames?.length" class="row border border-danger" id="plannedGamesSection">
+          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 border border-info">
+            <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
+              [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)">
+            </app-game-card>
+          </div>
         </div>
       </div>
       <div *ngIf="!plannedGames?.length" class="row" id="plannedGamesSection">
@@ -63,9 +67,10 @@
         </div>
         <div class="col-12 text-center equal-height-test align-items-center d-flex">
           <div>
-            <p *ngIf="!numberNewChallenges">Uw team heeft momenteel geen openstaande challenges! Geen zorgen u kan zelf een
-                andere ploeg uitdagen
-                m.b.v. onderstaande knop.</p>
+            <p *ngIf="!numberNewChallenges">Uw team heeft momenteel geen openstaande challenges! Geen zorgen u kan zelf
+              een
+              andere ploeg uitdagen
+              m.b.v. onderstaande knop.</p>
             <p>Wilt u zelf een ander team uitdagen? <br>
               Door op onderstaande knop te duwen kan u door het uitvoeren van enkele simpele stappen zelf een wedstrijd
               organiseren en het door u gekozen team uitdagen.</p>
@@ -82,9 +87,9 @@
           </app-open-challenges>
         </div>
         <div *ngIf="renderOpen" id="challengesSection" class="col-12 mb-2">
-            <app-open-challenges [currentUser]="currentUser" (numberNewChallenges)="onNumberNewChallenges($event)">
-            </app-open-challenges>
-          </div>
+          <app-open-challenges [currentUser]="currentUser" (numberNewChallenges)="onNumberNewChallenges($event)">
+          </app-open-challenges>
+        </div>
       </div>
     </div>
   </div>

@@ -15,15 +15,15 @@ export class AdminGuard implements CanActivate {
       if(localStorage.getItem("currentUser")){
         const user = JSON.parse(localStorage.getItem("currentUser"));
         if(user.role == "admin"){
-          console.log("TRUE");
+          console.log("User is an admin");
           return true;
         }else{
-          console.log("FALSE");
+          console.log("User is no admin");
           this.router.navigate(['/geen-toegang']);
           return false;
         }
       }else{
-        console.log("FALSE");
+        console.log("User is not authenticated");
         this.router.navigate(['/aanmelden']);
         return false;
       }
