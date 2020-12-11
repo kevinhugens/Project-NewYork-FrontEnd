@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUser(id: number): Observable<User>{
-    return this.http.get<User>("https://localhost:44300/api/user/" + id);
+    return this.http.get<User>("https://newyork-backend.azurewebsites.net/api/user/" + id);
   }
 
   getUsersWithoutTeam(): Observable<User[]> {
@@ -31,7 +31,7 @@ export class UserService {
   }
 
   addUser(user: User){
-    return this.http.post<User>("https://localhost:44300/api/user" , user);
+    return this.http.post<User>("https://newyork-backend.azurewebsites.net/api/user" , user);
   }
 
   deleteUser(id: number){

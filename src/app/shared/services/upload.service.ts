@@ -9,6 +9,6 @@ export class UploadService {
   constructor(private http: HttpClient) { }
   
   getPhoto(filename : String) : any {
-    return this.http.get<any>("https://localhost:44300/api/upload/" +filename);
+    return this.http.get<any>("https://newyork-backend.azurewebsites.net/api/upload/" +filename);
   }
 }

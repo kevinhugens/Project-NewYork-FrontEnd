@@ -125,7 +125,8 @@ export class AuthenticateService {
   constructor(private _httpClient: HttpClient, private _teamService: TeamService) { }
 
   authenticate(userLogin: UserLogin): Observable<User> {
-    return this._httpClient.post<User>("https://localhost:44300/api/User/authenticate", userLogin);
+    console.log("Authenticate");
+    return this._httpClient.post<User>("https://newyork-backend.azurewebsites.net/api/User/authenticate", userLogin);
   }
 
 }
