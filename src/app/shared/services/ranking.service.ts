@@ -20,6 +20,10 @@ export class RankingService {
     return this.http.get<Ranking>("https://localhost:44300/api/ranking/" + id);
   }
 
+  getRankingByTeam(id: number): Observable<Ranking>{
+    return this.http.get<Ranking>("https://localhost:44300/api/ranking/team/" + id);
+  }
+
   updateRanking(id: number, ranking: Ranking){
     return this.http.put<Ranking>("https://localhost:44300/api/ranking/" + id, ranking)
   }

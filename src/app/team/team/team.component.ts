@@ -20,25 +20,25 @@ export class TeamComponent implements OnInit {
   isCaptain: boolean = false;
   noTeamJoined: boolean = false;
   lijstUsersVanTeam: User[];
-  constructor(private router: Router, private api: TeamService, private authApi: AuthenticateService, private userApi: UserService, private snackBar: MatSnackBar) { }
+
+  constructor(private router: Router, private api: TeamService, private authApi: AuthenticateService,
+    private userApi: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.authApi.loggedUser.subscribe((result) => {
       this.activeUser = result;
-      if (result.teamID != null) {
+      if (result.role == "admin") {
+        this.isAdmin = true;
+        this.api.getTeams().subscribe((result) => {
+          this.lijstTeams = result;
+        });
+      } else if (result.teamID != null) {
         this.api.getTeam(this.activeUser.teamID).subscribe((result) => {
           this.team = result;
           this.checkIfCaptain();
         });
       } else {
-        if (result.role == "admin") {
-          this.isAdmin = true;
-          this.api.getTeams().subscribe((result) => {
-            this.lijstTeams = result;
-          });
-        } else {
-          this.noTeamJoined = true;
-        }
+        this.noTeamJoined = true;
       }
     });
   }

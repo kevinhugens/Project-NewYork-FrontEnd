@@ -14,12 +14,30 @@ export class GameService {
     return this.http.get<Game[]>("https://localhost:44300/api/game");
   }
 
+  getGamesByTeam(teamid: number): Observable<Game[]>{
+    return this.http.get<Game[]>("https://localhost:44300/api/game/gamesbyteam/" + teamid);
+  }
+
+  getNextGamesByTeam(teamid: number): Observable<Game[]>{
+    return this.http.get<Game[]>("https://localhost:44300/api/game/nextgamesbyteam/" + teamid);
+  }
+
+
   GetNextCompetitionGame(): Observable<Game>{
     return this.http.get<Game>("https://localhost:44300/api/game/competition/next");
   }
 
+  GetNextCompetitionGameByTeam(teamid: number): Observable<Game>{
+    return this.http.get<Game>("https://localhost:44300/api/game/competition/next/" + teamid);
+  }
+
+
   GetNextFriendlyGame(): Observable<Game>{
     return this.http.get<Game>("https://localhost:44300/api/game/friendly/next");
+  }
+
+  GetNextFriendlyGameByTeam(teamid: number): Observable<Game>{
+    return this.http.get<Game>("https://localhost:44300/api/game/friendly/next/" + teamid);
   }
 
   // The next game for an user his team
@@ -34,8 +52,6 @@ export class GameService {
   GetPlayedFriendlyTeamGames(teamID: number): Observable<Game[]>{
     return this.http.get<Game[]>("https://localhost:44300/api/game/friendly/played/team/" + teamID.toString());
   }
-
-  
 
   getGame(id: number): Observable<Game>{
     return this.http.get<Game>("https://localhost:44300/api/game/" + id);

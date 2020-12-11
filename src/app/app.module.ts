@@ -26,7 +26,10 @@ import { TablesModule } from './tables/tables.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './security/security.interceptor';
+import { LiveComponent } from './wedstrijden/live/live.component';
+import { HomeComponent } from './home/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     AppComponent,
     WildcardRouteComponent,
     NavbarComponent,
+    LiveComponent,
     SidenavComponent
+
   ],
   imports: [
     BrowserModule,
@@ -58,10 +63,12 @@ import { SidenavComponent } from './sidenav/sidenav.component';
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SecurityInterceptor,
-      multi: true
-    },],
+
+    provide: HTTP_INTERCEPTORS,
+    useClass: SecurityInterceptor,
+    multi: true
+  },
+  HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
