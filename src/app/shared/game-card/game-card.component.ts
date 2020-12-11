@@ -12,7 +12,7 @@ import { UserGameService } from '../services/user-game.service';
 import { map, tap } from 'rxjs/operators';
 import { UserGame } from '../models/user-game.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -37,8 +37,10 @@ export class GameCardComponent implements OnInit {
   team2: Team = null;
   game: Game = null;
   vriendschappelijk: string = "Vriendschappelijke wedstrijd";
-
-  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router) {
+  team1Picture: string;
+  team2Picture: string;
+  constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router,
+    private _uploadService: UploadService) {
 
   }
 
@@ -59,10 +61,17 @@ export class GameCardComponent implements OnInit {
 
       this._teamService.getTeam(this.team1id).subscribe((value) => {
         this.team1 = value;
+        this._uploadService.getPhoto(value.photo).subscribe((value) => {
+          this.team1Picture = value
+          console.log("foto team1", this.team1Picture)
+        })
         //console.log("team1:", this.team1)
       })
       this._teamService.getTeam(this.team2id).subscribe((value) => {
         this.team2 = value;
+        this._uploadService.getPhoto(value.photo).subscribe((value) => {
+          this.team2Picture = value
+        })
         //console.log("team2:", this.team2)
       })
       this._gameService.getGame(this.gameid).subscribe((value) => {
@@ -71,18 +80,26 @@ export class GameCardComponent implements OnInit {
       })
     }
 
-    this._gameService.getGame(this.gameid).pipe(
-      map(game => game.userGames.filter(userGame => userGame.userID == this.currentUser.userID && (game.team1ID == this.currentUser.teamID || game.team2ID == this.currentUser.teamID))), // Select al the games that the user plays
-      tap(t => console.log("Games that the current user plays:", t))
-    ).subscribe(
-      result => {
-        if(result.length==1)this.userParticipateGame = true;
-      }
-    );
 
+    if (this.currentUser) {
+      this._gameService.getGame(this.gameid).pipe(
+
+        map(game => game.userGames.filter(userGame => userGame.userID == this.currentUser.userID && (game.team1ID == this.currentUser.teamID || game.team2ID == this.currentUser.teamID))), // Select al the games that the user plays
+        tap(t => console.log("Games that the current user plays:", t))
+
+      ).subscribe(
+
+        result => {
+          if (result.length == 1) this.userParticipateGame = true;
+        }
+
+      );
+    }
   }
 
-  deleteParticipation(){
+  
+
+  deleteParticipation() {
     console.log("User wants to delete his participation!");
     this._userGameService.deleteUserGameByGameAndUser(this.game.gameID, this.currentUser.userID).subscribe(
       result => {
@@ -95,7 +112,7 @@ export class GameCardComponent implements OnInit {
     )
   }
 
-  goLive(id: number){
+  goLive(id: number) {
     this.router.navigate(['wedstrijden/live', id])
   }
 
