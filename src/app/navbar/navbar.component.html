@@ -24,6 +24,11 @@
 
       <li *ngIf="loggedIn">
 
+        <!-- Overzicht van de live wedstrijden -->
+        <a class="mr-2" routerLink="/wedstrijden/live/overzicht" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Live</a>
+
+
         <!-- Wedstrijden -->
         <a class="mr-2" routerLink="/wedstrijden" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Wedstrijden</a>

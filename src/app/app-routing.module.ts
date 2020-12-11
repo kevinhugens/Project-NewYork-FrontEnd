@@ -26,6 +26,7 @@ import { TablesComponent } from './tables/tables/tables.component';
 import { TablesAddComponent } from './tables/tables-add/tables-add.component';
 import { TablesEditComponent } from './tables/tables-edit/tables-edit.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'teams', component: TeamComponent },
   { path: 'teamsadd', component: TeamsAddComponent },
   { path: 'teamsedit', component: TeamsEditComponent },
+  { path: 'wedstrijden/live/overzicht', component: LiveOverzichtComponent},
   { path: 'wedstrijden/live/:id', component: LiveComponent},
   { path: 'teamsadduser', component: TeamAddUserComponent },
   { path: 'teamscaptainedit', component: TeamCaptainEditComponent },

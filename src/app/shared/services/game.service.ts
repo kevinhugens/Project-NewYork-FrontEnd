@@ -18,6 +18,10 @@ export class GameService {
     return this.http.get<Game[]>("https://localhost:44300/api/game/gamesbyteam/" + teamid);
   }
 
+  getLiveGames(): Observable<Game[]>{
+    return this.http.get<Game[]>("https://localhost:44300/api/game/live");
+  }
+
   getNextGamesByTeam(teamid: number): Observable<Game[]>{
     return this.http.get<Game[]>("https://localhost:44300/api/game/nextgamesbyteam/" + teamid);
   }
