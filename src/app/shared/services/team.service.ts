@@ -12,7 +12,7 @@ export class TeamService {
   constructor(private http: HttpClient) { }
 
   getTeams(): Observable<Team[]>{
-    return this.http.get<Team[]>("https://localhost:44300/api/team");
+    return this.http.get<Team[]>("https://newyork-backend.azurewebsites.net/api/team");
   }
 
   getTeam(id: number): Observable<Team>{
