@@ -31,7 +31,7 @@ export class GameCardComponent implements OnInit {
 
 
   userParticipateGame: boolean = false;
-
+  datumVandaag: Date = new Date();
   competition: Competition = null;
   team1: Team = null;
   team2: Team = null;
@@ -39,6 +39,7 @@ export class GameCardComponent implements OnInit {
   vriendschappelijk: string = "Vriendschappelijke wedstrijd";
   team1Picture: string;
   team2Picture: string;
+  bezig: boolean = false;
   constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router,
     private _uploadService: UploadService) {
 
@@ -76,6 +77,9 @@ export class GameCardComponent implements OnInit {
       })
       this._gameService.getGame(this.gameid).subscribe((value) => {
         this.game = value;
+        if (this.game.gameStatusID == 2) {
+          this.bezig = true;
+        }
         //console.log("game", this.game)
       })
     }
@@ -97,7 +101,7 @@ export class GameCardComponent implements OnInit {
     }
   }
 
-  
+
 
   deleteParticipation() {
     console.log("User wants to delete his participation!");
@@ -113,6 +117,19 @@ export class GameCardComponent implements OnInit {
   }
 
   goLive(id: number) {
+    console.log("vergelijking datum vandaag", this.datumVandaag.toDateString(), new Date(this.game.date).toDateString())
+    if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
+      this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
+
+    }
+    else {
+      this.game.gameStatusID = 2;
+      this._gameService.updateGame(id, this.game).subscribe()
+      this.router.navigate(['wedstrijden/live', id])
+    }
+
+  }
+  goBackLive(id: number) {
     this.router.navigate(['wedstrijden/live', id])
   }
 

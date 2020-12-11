@@ -67,10 +67,12 @@ export class LiveComponent implements OnInit {
       }
 
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
-        this.spelersTeam1 = value.filter((userGame: UserGame) => userGame.user.teamID == this.chosengame.team1ID)
+        console.log("value", value)
+        this.spelersTeam1 = value.filter((userGame: UserGame) => userGame.player.teamID== this.chosengame.team1ID)
+        console.log("spelers Team 1", this.spelersTeam1)
       })
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
-        this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.user.teamID == this.chosengame.team2ID)
+        this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.player.teamID == this.chosengame.team2ID)
       })
     })
 

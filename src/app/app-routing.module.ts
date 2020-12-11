@@ -32,6 +32,9 @@ import { AuthGuard } from './security/guards/auth.guard'
 import { CaptainGuard } from './security/guards/captain.guard';
 import { AdminGuard } from './security/guards/admin.guard'
 
+import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
+
+
 
 const routes: Routes = [
 
@@ -66,7 +69,8 @@ const routes: Routes = [
 
   { path: 'geen-toegang', component: NoAccessComponent }, // 403 for no allowed access
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found 404
-];
+
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
