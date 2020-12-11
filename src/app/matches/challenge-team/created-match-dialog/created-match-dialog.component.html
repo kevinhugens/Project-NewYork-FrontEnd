@@ -1,28 +1,25 @@
-<div mat-dialog-content>
+<div class="row">
 
   <!-- Title -->
-  <div class="row">
-    <div class="col-12">
-      <h1 mat-dialog-title>Je heb deze wedstrijd aangemaakt</h1>
-    </div>
+  <div class="col-12">
+    <h1 mat-dialog-title>Je heb deze wedstrijd aangemaakt:</h1>
   </div>
 
   <!-- Game -->
-  <div class="row">
-    <div mat-dialog-content class="col-12 content">
-      <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id] ="game.team1.teamID" [team2id]="game.team2.teamID" [next]="false"></app-game-card>
+  <mat-dialog-content>
+    <div mat-dialog-content class="col-12 content d-inline text-center">
+      <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1.teamID"
+        [team2id]="game.team2.teamID" [next]="false"></app-game-card>
     </div>
-  </div>
+    <!-- </div> -->
+  </mat-dialog-content>
 
   <!-- Actions -->
-  <div class="row">
-    <div id="actions" class="col-12">
-      <mat-dialog-actions align="center">
-        <button mat-button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="undo">Ongedaan maken</button>
-        <button mat-button mat-raised-button color="primary" mat-dialog-close
-          mat-dialog-close>OK</button>
-      </mat-dialog-actions>
-    </div>
+  <div id="actions" class="col-12">
+    <mat-dialog-actions align="center">
+      <button mat-button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="undo">Ongedaan maken</button>
+      <button mat-button mat-raised-button color="primary" mat-dialog-close mat-dialog-close>OK</button>
+    </mat-dialog-actions>
   </div>
 
 </div>

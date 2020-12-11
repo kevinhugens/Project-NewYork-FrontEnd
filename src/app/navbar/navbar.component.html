@@ -1,11 +1,18 @@
 <mat-toolbar color="primary">
 
+  <!-- Small -->
   <div fxHide.gt-xs>
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 
+  <div fxHide.gt-xs fxFlex fxLayout fxLayoutAlign="end">
+    <a class="" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">{{currentUser.firstName}}</a>
+  </div>
+
+  <!-- Large -->
   <div>
     <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -15,8 +22,8 @@
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
 
       <!-- Registreren -->
-      <li *ngIf="!loggedIn"><a class="align-middle mr-2 mr-lg-4" routerLink="/registreren"
-          routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
+      <li *ngIf="!loggedIn"><a class="align-middle mr-2 mr-lg-4" routerLink="/registreren" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
 
       <!-- Aanmelden -->
       <li *ngIf="!loggedIn"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
@@ -25,7 +32,7 @@
       <li *ngIf="loggedIn">
 
         <!-- Overzicht van de live wedstrijden -->
-        <a class="mr-2" routerLink="/wedstrijden/live/overzicht" routerLinkActive="active"
+        <a class="mr-2 mr-lg-4" routerLink="/wedstrijden/live/overzicht" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Live</a>
 
 

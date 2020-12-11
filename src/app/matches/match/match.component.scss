@@ -39,11 +39,11 @@
 
 
 .equal-height-test {
-    height: 250px;
+  height: 270px;
   //   width: auto;
   width: auto;
   margin: auto;
-//   border-bottom: 2px dotted hotpink;
+  //   border-bottom: 2px dotted hotpink;
 }
 
 #challengeButton {
@@ -96,5 +96,13 @@
 
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+
+.gamecard {
+  transition: all .5s ease-in-out;
+  &:hover {
+    transform: scale(0.9);
   }
 }

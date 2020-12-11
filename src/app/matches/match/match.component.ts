@@ -53,14 +53,16 @@ export class MatchComponent implements OnInit {
       }
     );
 
-    this._gameService.GetPlannedFriendlyTeamGames(this.currentUser.teamID).pipe(
-      map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
-    ).subscribe(
-      result => {
-        console.log("Planned games for the user his team:", result);
-        this.plannedGames = result;
-      }
-    );
+    if (this.nextGame) {
+      this._gameService.GetPlannedFriendlyTeamGames(this.currentUser.teamID).pipe(
+        map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
+      ).subscribe(
+        result => {
+          console.log("Planned games for the user his team:", result);
+          this.plannedGames = result;
+        }
+      );
+    }
 
     this._gameService.GetPlayedFriendlyTeamGames(this.currentUser.teamID).pipe(
       tap(t => console.log("Played games of the user his team:", t)),

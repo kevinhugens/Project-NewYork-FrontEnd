@@ -13,8 +13,8 @@
       <div class="col-12">
         <h2 class="text-center">Eerstvolgende wedstrijd</h2>
       </div>
-      <div *ngIf="nextGame" class="col-12 text-center p-2 pl-md-5 pr-md-5 equal-height-test">
-        <app-game-card [competitionid]="" [gameid]="nextGame.gameID" [team1id]="nextGame.team1ID"
+      <div *ngIf="nextGame" class="col-12 text-center p-2 pl-md-5 pr-md-5 equal-height-test animate__animated animate__fadeIn gamecard">
+        <app-game-card class="" [competitionid]="" [gameid]="nextGame.gameID" [team1id]="nextGame.team1ID"
           [team2id]="nextGame.team2ID" [next]="true" [currentUser]="currentUser"
           (participationChanged)="onParticipationChanged($event)"></app-game-card>
       </div>
@@ -31,11 +31,10 @@
     <div class="row pr-md-3">
       <div class="col-12">
         <p>Andere geplande wedstrijden:</p>
-        <!-- <p class="text-danger">Lijst met andere geplande wedstrijden (kaarten kleiner) <br>Max aantal tonen?</p> -->
       </div>
       <div class="col-12">
         <div *ngIf="plannedGames?.length" class="row" id="plannedGamesSection">
-          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2">
+          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 gamecard">
             <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
               [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)">
             </app-game-card>
@@ -56,7 +55,7 @@
   <div class="col-12 col-md-6 border-md-left ">
     <div class="row">
       <div>
-        <div class="col-12">
+        <div class="col-12  mt-2 mt-md-0">
           <div *ngIf="numberNewChallenges">
             <h2 class="text-center"><span matBadge="{{numberNewChallenges}}" matBadgeOverlap="false"
                 matBadgePosition="after" matBadgeColor="warn">
@@ -85,7 +84,7 @@
         <div *ngIf="numberNewChallenges" class="col-12">
           <p>Klik op "Deelnemen" als u een van de openstaande challenges wilt spelen.</p>
         </div>
-        <div *ngIf="!renderOpen" id="challengesSection" class="col-12 mb-2">
+        <div *ngIf="!renderOpen" id="challengesSection" class="col-12 mb-2 gamecard">
           <app-open-challenges [currentUser]="currentUser" (numberNewChallenges)="onNumberNewChallenges($event)">
           </app-open-challenges>
         </div>
@@ -108,7 +107,7 @@
   </div>
   <div class="col-12">
     <div *ngIf="playedGames?.length" class="row">
-      <div *ngFor="let game of playedGames" class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2">
+      <div *ngFor="let game of playedGames" class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mt-2 gamecard">
         <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
           [next]="false" [currentUser]="currentUser" [passed]="true"></app-game-card>
       </div>
