@@ -33,9 +33,9 @@
         <p>Andere geplande wedstrijden:</p>
         <!-- <p class="text-danger">Lijst met andere geplande wedstrijden (kaarten kleiner) <br>Max aantal tonen?</p> -->
       </div>
-      <div class="col-12 border border-primary">
-        <div *ngIf="plannedGames?.length" class="row border border-danger" id="plannedGamesSection">
-          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 border border-info">
+      <div class="col-12">
+        <div *ngIf="plannedGames?.length" class="row" id="plannedGamesSection">
+          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2">
             <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
               [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)">
             </app-game-card>
@@ -43,8 +43,11 @@
         </div>
       </div>
       <div *ngIf="!plannedGames?.length" class="row" id="plannedGamesSection">
-        <div class="col-12 mb-1 mb-md-2 text-center">
-          Momenteel zijn er geen andere wedstrijden gepland voor jou team!
+        <div class="col-12">
+
+          <p class="col-12 mb-1 mb-md-2 text-center">
+            Momenteel zijn er geen andere wedstrijden gepland voor jou team
+          </p>
         </div>
       </div>
     </div>

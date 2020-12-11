@@ -66,8 +66,8 @@ export class CaptainGuard implements CanActivate {
   }
 
   nogOnInit(): void {
-    console.log("NogOnInit");
-    this.captain = this._authService.checkIfCaptain2();
+    // console.log("NogOnInit");
+    // this.captain = this._authService.checkIfCaptain2();
 
   }
 
