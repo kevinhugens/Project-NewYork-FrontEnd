@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
         this._competitionService.getCompetition(value.competitionID).subscribe(value => this.competition = value)
       })
       //this._teamService.getTeam(user.teamid).subscribe(value => console.log(value))
+      console.log("currentuser team id", this.currentUser.teamID)
       this._gameService.GetNextCompetitionGameByTeam(this.currentUser.teamID).subscribe(
         (value) => {this.nextGameComp = value; if(value.gameStatusID == 2){this.bezig = true}});
       this._gameService.GetNextFriendlyGameByTeam(this.currentUser.teamID).subscribe(value => this.nextGameFriend = value)

@@ -1,6 +1,7 @@
 <div class="container">
-    <h1 class="text-center">Live Wedstrijden</h1>
+    
     <div *ngIf="livegames">
+        <h1 class="text-center">Live Wedstrijden</h1>
         <div *ngFor="let game of livegames" class="d-inline-flex m-4">
             <div class="card" style="width: 490px;">
                 <div class="card-body">
@@ -43,5 +44,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="!livegames">
+        <h1 class="text-center">Geen live wedstrijden</h1>
+        <h2 class="text-center">Het lijkt erop dat er momenteel geen wedstrijden bezig zijn!</h2>
     </div>
 </div>
