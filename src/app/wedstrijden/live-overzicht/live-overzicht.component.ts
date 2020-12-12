@@ -23,7 +23,7 @@ export class LiveOverzichtComponent implements OnInit {
   spelersTeam1: UserGame[];
   spelersTeam2: UserGame[];
   userGames: UserGame[];
-  
+  noGames: boolean = true;
   constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router,
     private _uploadService: UploadService) { }
 
@@ -34,8 +34,8 @@ export class LiveOverzichtComponent implements OnInit {
   getData() {
     this._gameService.getLiveGames().subscribe((value) => {
       this.livegames = value;
-
-      if (this.livegames) {
+      if (this.livegames.length > 0) {
+        this.noGames = false;
         this.livegames.forEach(element => {
           if (element.competitionID == null) {
             element["competitionName"] = "Vriendschappelijke wedstrijd"

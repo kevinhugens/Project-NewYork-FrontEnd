@@ -125,12 +125,12 @@ export class GameCardComponent implements OnInit {
     else {
       this.game.gameStatusID = 2;
       this._gameService.updateGame(id, this.game).subscribe()
-      this.router.navigate(['wedstrijden/live', id])
+      this.router.navigate(['wedstrijden/overzicht/live', id])
     }
 
   }
   goBackLive(id: number) {
-    this.router.navigate(['wedstrijden/live', id])
+    this.router.navigate(['wedstrijden/overzicht/live', id])
   }
 
 }
