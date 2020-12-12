@@ -31,8 +31,6 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +68,7 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     multi: true
   },
   HomeComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

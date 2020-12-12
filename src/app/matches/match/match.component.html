@@ -13,7 +13,8 @@
       <div class="col-12">
         <h2 class="text-center">Eerstvolgende wedstrijd</h2>
       </div>
-      <div *ngIf="nextGame" class="col-12 text-center p-2 pl-md-5 pr-md-5 equal-height-test animate__animated animate__fadeIn gamecard">
+      <div *ngIf="nextGame"
+        class="col-12 text-center p-2 pl-md-5 pr-md-5 equal-height-test animate__animated animate__fadeIn gamecard">
         <app-game-card class="" [competitionid]="" [gameid]="nextGame.gameID" [team1id]="nextGame.team1ID"
           [team2id]="nextGame.team2ID" [next]="true" [currentUser]="currentUser"
           (participationChanged)="onParticipationChanged($event)"></app-game-card>
@@ -34,10 +35,13 @@
       </div>
       <div class="col-12">
         <div *ngIf="plannedGames?.length" class="row" id="plannedGamesSection">
-          <div *ngFor="let game of plannedGames" class="col-sm-6 mb-1 mb-md-2 gamecard">
-            <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
-              [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)">
-            </app-game-card>
+          <!-- <div *ngFor="let game of plannedGames" class="col-lg-6 mb-1 mb-md-2 gamecard d-flex flex-colum"> -->
+          <div *ngFor="let game of plannedGames" class="col-lg-6 mb-1 mb-md-2 gamecard">
+            <div class="m-auto">
+              <app-game-card [competitionid]="" [gameid]="game.gameID" [team1id]="game.team1ID" [team2id]="game.team2ID"
+                [next]="false" [currentUser]="currentUser" (participationChanged)="onParticipationChanged($event)">
+              </app-game-card>
+            </div>
           </div>
         </div>
       </div>
