@@ -1,13 +1,15 @@
-mat-icon[matSuffix]{
-    color: grey;
-    &:hover{
-        cursor: pointer;
-    }
+mat-icon[matSuffix] {
+  color: grey;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-button{
-    transition: all .2s ease-in-out;
-    &:hover {
-      transform: scale(1.05);
-    }
+button {
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }

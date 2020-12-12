@@ -18,11 +18,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
     this._authenticateService.isLoggedin.subscribe(e => {
+      console.log("IS logged in?");
       this.loggedIn = this._authenticateService.isLoggedIn();
     })
     this._authenticateService.loggedUser.subscribe(
       result => {
         this.currentUser = result;
+        console.log('Get current user');
       }
     )
   }

@@ -102,6 +102,7 @@
 
 .gamecard {
   transition: all .5s ease-in-out;
+
   &:hover {
     transform: scale(0.9);
   }
