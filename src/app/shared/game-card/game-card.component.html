@@ -10,9 +10,10 @@
           {{team1.teamName}}
         </div>
         <div class="row justify-content-center">
-          <span class="material-icons">
+          <span *ngIf="!team1Picture" class="material-icons" style="font-size: 60px;">
             stars
           </span>
+          <img *ngIf="team1Picture" src="team1Picture" alt="team1Picture">
         </div>
 
       </div>
@@ -24,14 +25,16 @@
           {{team2.teamName}}
         </div>
         <div class="row justify-content-center">
-          <span class="material-icons" style="font-size: 30px;">
+          <span *ngIf="!team2Picture" class="material-icons" style="font-size: 60px;">
             stars
           </span>
+          <img *ngIf="team2Picture" src="team1Picture" alt="team1Picture">
         </div>
       </div>
     </div>
     <div *ngIf="next" class="pt-3">
-      <a class="card-link btn btn-success" (click)="goLive(game.gameID)">Start wedstrijd</a>
+      <a *ngIf="!bezig" class="card-link btn btn-success" (click)="goLive(game.gameID)">Start wedstrijd</a>
+      <a *ngIf="bezig" class="card-link btn btn-success" (click)="goBackLive(game.gameID)">Ga terug naar wedstrijd</a>
     </div>
 
   </div>
