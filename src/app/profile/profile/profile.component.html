@@ -1,18 +1,34 @@
-<div class="container">
+<div class="container" style="text-align: center;">
     <h1 class="text-center  font-weight-bold">Profiel</h1>
     <h2 class="text-center">{{activeUser.firstName.toLowerCase()|titlecase}}
         {{activeUser.lastName.toLowerCase()|titlecase}}</h2>
-    <p class="text-center">
-        <img id="profilePicture" class="img-fluid rounded-circle border" src="../../../assets/userTest.jpg" alt="profielFoto">
-    </p>
+
+        <div *ngIf="!changepic" class="text-center">
+            <img *ngIf="profilepic" id="profilePicture" class="img-fluid rounded-circle border" [src]="profilepic"
+                alt="profielFoto">
+            <img *ngIf="!profilepic" id="noProfilePicture" src="../../../assets/userTest.jpg"
+                class="img-fluid rounded-circle border" alt="profielfoto">
+        </div>
+        <div *ngIf="changepic" class="text-center">
+            <h1 style="text-align: center;">Upload nieuwe profielfoto</h1>
+            <form class="form" enctype="multipart/form-data" style="text-align: center;">
+                <dropzone class="dropzone-container" [message]="'Click or drag a photo to upload'" [config]="config"
+                    (error)="onUploadError($event)"
+                    style="max-height:200px;max-width:200px;height:auto;width:auto;margin-left: auto;margin-right: auto;">
+                </dropzone>
+            </form>
+            <button class="button btn btn-success" (click)="onChangeProfilePic()" style="margin: 2px;">Update</button>
+            <button class="button btn btn-danger" (click)="removeFiles()" style="margin: 2px;">Remove files</button>
+        </div>
+        <button mat-raised-button (click)="changeProfilePicBtn()" style="margin:5px">Update profile
+            pic</button>
+
     <h1 class="text-center font-weight-bold">Statistieken</h1>
     <div class="text-center center">
         <h2>Gespeelde wedstrijden: {{playedGames}}</h2>
         <div class="text-center">
-            <canvas  baseChart [colors]="pieChartColors" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="barChartOptions"></canvas>
+            <canvas baseChart [colors]="pieChartColors" [data]="pieChartData" [labels]="pieChartLabels"
+                [chartType]="pieChartType" [options]="barChartOptions"></canvas>
         </div>
     </div>
-
-
 </div>

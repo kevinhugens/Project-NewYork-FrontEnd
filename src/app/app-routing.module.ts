@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 
 import { HomeComponent } from './home/home/home.component';
 import { RankingComponent } from './ranking/ranking/ranking.component';
@@ -50,6 +49,7 @@ const routes: Routes = [
   { path: 'teamGames/:id', component: TeamGamesComponent, canActivate: [AuthGuard] },
   { path: 'wedstrijden', component: MatchComponent, canActivate: [AuthGuard] },
   { path: 'wedstrijden/live/:id', component: LiveComponent, canActivate: [AuthGuard] },
+  { path: 'wedstrijden/live/overzicht', component: LiveOverzichtComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'teamsadd', component: TeamsAddComponent, canActivate: [AuthGuard] }, // A user can create a new team if he hasn't one
 
@@ -60,17 +60,18 @@ const routes: Routes = [
   { path: 'teamsadduser', component: TeamAddUserComponent, canActivate: [AuthGuard] },
 
   // Only admins can access these pages, no one else
-  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
-  { path: 'edituser', component: UsersEditComponent, canActivate: [AuthGuard] }, // User can edit his own profile
-  { path: 'adduser', component: UsersAddComponent, canActivate: [AuthGuard] },
-  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
-  { path: 'tablesadd', component: TablesAddComponent, canActivate: [AdminGuard] },
-  { path: 'tablesedit', component: TablesEditComponent, canActivate: [AdminGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'edituser', component: UsersEditComponent, canActivate: [AuthGuard], data: { roles : ["admin"] } }, // User can edit his own profile
+  { path: 'adduser', component: UsersAddComponent, canActivate: [AuthGuard], data: { roles : ["admin"] } },
+  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'tablesadd', component: TablesAddComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'tablesedit', component: TablesEditComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
 
   { path: 'geen-toegang', component: NoAccessComponent }, // 403 for no allowed access
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found 404
 
 ]
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

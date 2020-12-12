@@ -58,7 +58,7 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     TeamModule,
     TeamModule,
     ProfileModule,
-    ChartsModule,
+    ChartsModule
   ],
   providers: [
     {

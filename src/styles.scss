@@ -13,6 +13,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 10000000 !important;
 }
 
+.centerV {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 // Now possible to use border-MD-left
 @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
