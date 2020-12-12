@@ -19,6 +19,7 @@ import { RankingModule } from './ranking/ranking.module';
 import { ProfileModule } from './profile/profile.module';
 import { ChartsModule } from 'ng2-charts';
 
+import { CompetitionModule } from './competition/competition.module';
 import { UsersModule } from './users/users.module';
 import { TeamModule } from './team/team.module';
 import { TablesModule } from './tables/tables.module';
@@ -28,9 +29,8 @@ import { SecurityInterceptor } from './security/security.interceptor';
 import { LiveComponent } from './wedstrijden/live/live.component';
 import { HomeComponent } from './home/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { NoAccessComponent } from './no-access/no-access.component';
 import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
-
-
 
 @NgModule({
   declarations: [
@@ -39,8 +39,8 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     NavbarComponent,
     LiveComponent,
     SidenavComponent,
-    LiveOverzichtComponent
-
+    NoAccessComponent,
+    LiveOverzichtComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +60,8 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     TeamModule,
     ProfileModule,
     ChartsModule,
+    CompetitionModule,
+    ChartsModule
   ],
   providers: [
     {
@@ -69,6 +71,7 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     multi: true
   },
   HomeComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

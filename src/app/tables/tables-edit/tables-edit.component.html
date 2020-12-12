@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col col-md-12" style="text-align: center;">
+        <div class="col col-md-8" style="text-align: center;">
             <h1>Update table</h1>
             <form #updateTableForm="ngForm" (ngSubmit)="onSubmitUpdateTable()">
                 <p>
@@ -19,11 +19,6 @@
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field>
-                        <input matInput type="text" [(ngModel)]='selectedTable["photo"]' placeholder="photo" name="photo" required/>
-                    </mat-form-field>
-                </p>
-                <p>
                     <mat-form-field appearance="fill">
                         <mat-label>Manager</mat-label>
                         <mat-select name="manager" [(ngModel)]='selectedTable["managerID"]' required>
@@ -36,9 +31,25 @@
                 <button mat-raised-button color="primary" type="submit" [disabled]="!updateTableForm.form.valid">Save</button>
             </form>
         </div>
+        <div class="col-md-4" style="text-align: center;">
+            <h1>Upload table photo</h1>
+            <form class="form" enctype="multipart/form-data" >
+                <dropzone class="dropzone-container" [message]="'Click or drag a photo to upload'" [config]="config" (error)="onUploadError($event)" style="height:auto;width:auto;"></dropzone>
+            </form>
+            <button class="button btn btn-danger" (click)="removeFiles()" style="margin: 2px;">Remove files</button>
+        </div>
     </div>
-    <div class="row mt-5">
-        <div class="col" style="text-align: right;">
+    <div class="row mt-5" style="text-align: center;">
+        <div class="col col-md-8">
+            <h1>Huidige table foto</h1>
+            <p *ngIf="tablepic; else nopic">
+                <img [src]="tablepic" style="max-height: 200px;">
+            </p>
+            <ng-template #nopic>
+                <p>No picture uploaded</p>
+            </ng-template>
+        </div>
+        <div class="col col-md-4" style="text-align: right;">
             <button mat-raised-button color="accent" (click)="backToTables()">Back to tables</button>
         </div>
     </div>

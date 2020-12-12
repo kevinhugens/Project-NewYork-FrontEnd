@@ -78,6 +78,7 @@ export class TeamsAddComponent implements OnInit {
       this.newFilename = this.dropzone.files[0].name;
       this.dropzone.processQueue();
     } else {
+      this.newFilename = null;
       throw new Error("No file selected");
     }
   }

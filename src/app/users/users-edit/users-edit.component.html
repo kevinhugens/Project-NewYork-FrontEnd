@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col col-md-12" style="text-align: center;">
+        <div class="col col-md-8" style="text-align: center;">
             <h1>Edit user</h1>
             <form #updateUserForm="ngForm" (ngSubmit)="onSubmitUpdateUser()" *ngIf="selectedUser">
                 <p>
@@ -30,6 +30,15 @@
                 </p>
                 <button mat-raised-button color="primary" type="submit" [disabled]="!updateUserForm.form.valid || submittedSelected">Save</button>
             </form>
+        </div>
+        <div class="col col-md-4" style="text-align: center;">
+            <h1>Profielfoto</h1>
+            <p *ngIf="profilepic; else nopic">
+                <img [src]="profilepic" style="max-height: 200px;">
+            </p>
+            <ng-template #nopic>
+                <p>No picture uploaded</p>
+            </ng-template>
         </div>
     </div>
     <div class="row mt-5">

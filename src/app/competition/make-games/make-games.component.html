@@ -1,0 +1,51 @@
+<div class="container">
+    <h1 class="text-center">Matchen van <span class="font-weight-bold">{{competition.name}}</span></h1>
+
+    <div *ngFor="let game of games">
+        <div class="card m-2">
+            <div class="card-body">
+                <div class="card-subtitle text-center">
+                    <h3 *ngIf="!changeMode" class="text-center">{{game.date | date:"dd LLL yyyy - HH:mm"}}</h3>
+                    <h3 *ngIf="!changeMode" class="text-center">{{game.type}}</h3>
+                </div>
+
+                <div class="row card-text">
+                    <div class="col text-center">
+                        <ng-container *ngFor="let team of teams">
+                            <div *ngIf="team.teamID==game.team1ID" class="row justify-content-center">
+                                {{team.teamName}}
+                            </div>
+                        </ng-container>
+
+                        <div class="row justify-content-center">
+                            <span class="material-icons">
+                                stars
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col centerV">
+                        <p class="dash">-</p>
+                    </div>
+                    <div class="col">
+                        <ng-container *ngFor="let team of teams">
+                            <div *ngIf="team.teamID==game.team2ID" class="row justify-content-center">
+                                {{team.teamName}}
+                            </div>
+                        </ng-container>
+                        <div class="row justify-content-center">
+                            <span class="material-icons" style="font-size: 30px;">
+                                stars
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="text-center">
+                    <button mat-raised-button color="accent" class="mr-3" (click)="changeGame(game)">Wijzig wedstrijd</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>

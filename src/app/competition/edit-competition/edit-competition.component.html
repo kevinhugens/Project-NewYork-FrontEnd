@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12" style="text-align: center;">
+            <h1>Competitie aanpassen</h1>
+            <form #updateCompetitionForm="ngForm" (ngSubmit)="onSubmitUpdateCompetition()">
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='competition.name' placeholder="Naam competitie" name="competitionName" required/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]='competition.address' placeholder="Adres competitie" name="competitionAddress" required/>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!updateCompetitionForm.form.valid">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToCompetitions()">Terug naar het overzicht</button>
+        </div>
+    </div>
+</div>

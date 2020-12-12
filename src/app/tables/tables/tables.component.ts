@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UploadService } from 'src/app/shared/services/upload.service';
 import { Table } from '../../shared/models/table.model';
 import { TableService } from '../../shared/services/table.service';
 @Component({
@@ -10,7 +11,8 @@ import { TableService } from '../../shared/services/table.service';
 })
 export class TablesComponent implements OnInit {
   lijstTables: Table[];
-  constructor(private router: Router, private api: TableService, private snackBar: MatSnackBar) { }
+  allTablePics : string[] = [];
+  constructor(private router: Router, private api: TableService, private snackBar: MatSnackBar,private apiUpload : UploadService) { }
 
   ngOnInit(): void {
     this.updateList();
@@ -31,6 +33,7 @@ export class TablesComponent implements OnInit {
 
   onDelete(table: Table) {
     if (table) {
+      this.apiUpload.deletePhoto(table.photo).subscribe();
       this.api.deleteTable(table.tableID).subscribe(() => {
         this.updateList();
       });
@@ -42,6 +45,12 @@ export class TablesComponent implements OnInit {
   updateList() {
     this.api.getTables().subscribe((result) => {
       this.lijstTables = result;
+      for (let index = 0; index < this.lijstTables.length; index++) {
+        const element = this.lijstTables[index];
+        this.apiUpload.getPhoto(element.photo).subscribe((result) => {
+          element["linkfoto"] = result;
+        })
+      }
     })
   }
 

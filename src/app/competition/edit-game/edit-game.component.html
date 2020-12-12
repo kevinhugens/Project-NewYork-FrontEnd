@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 class="text-center">Wedstrijd bewerken</h1>
+
+    <form class="text-center"  [formGroup]="timeFormGroup" (ngSubmit)="onSubmitUpdateGame()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Kies een datum</mat-label>
+                <input matInput [min]="minDate" [matDatepicker]="picker" required formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </p>
+        <p>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Kies een tijd</mat-label>
+                <input matInput required min="06:00" max="23:59" [ngxTimepicker]="fullTime"
+                    [format]="24" formControlName="time">
+                <mat-icon matSuffix [ngxTimepicker]="fullTime">schedule</mat-icon>
+                <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+
+            </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="(timeFormGroup.controls.date.value && timeFormGroup.controls.time.value) ? 'false' : 'true'">Wijzig
+            wedstrijd</button>
+    </form>
+
+</div>

@@ -5,6 +5,7 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
 import { Team } from 'src/app/shared/models/team.model';
 import { User } from 'src/app/shared/models/user.model';
 import { TeamService } from 'src/app/shared/services/team.service';
+import { UploadService } from 'src/app/shared/services/upload.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -20,9 +21,12 @@ export class TeamComponent implements OnInit {
   isCaptain: boolean = false;
   noTeamJoined: boolean = false;
   lijstUsersVanTeam: User[];
+  teampic : string;
+  allTeamPics : Array<any> = [];
+  allUserProfilePics : string[] = [];
 
   constructor(private router: Router, private api: TeamService, private authApi: AuthenticateService,
-    private userApi: UserService, private snackBar: MatSnackBar) { }
+    private userApi: UserService, private snackBar: MatSnackBar, private apiUpload : UploadService) { }
 
   ngOnInit(): void {
     this.authApi.loggedUser.subscribe((result) => {
@@ -31,11 +35,20 @@ export class TeamComponent implements OnInit {
         this.isAdmin = true;
         this.api.getTeams().subscribe((result) => {
           this.lijstTeams = result;
+          for (let index = 0; index < this.lijstTeams.length; index++) {
+            const element = this.lijstTeams[index];
+            this.apiUpload.getPhoto(element.photo).subscribe((foto) => {
+              element['linkfoto'] = foto;
+            });
+          }
         });
       } else if (result.teamID != null) {
         this.api.getTeam(this.activeUser.teamID).subscribe((result) => {
           this.team = result;
           this.checkIfCaptain();
+          this.apiUpload.getPhoto(this.team.photo).subscribe((result) => {
+            this.teampic = result;
+          })
         });
       } else {
         this.noTeamJoined = true;
@@ -68,7 +81,6 @@ export class TeamComponent implements OnInit {
           this.api.getTeams().subscribe((result) => this.lijstTeams = result);
         });
       })
-
     } else {
       this.snackBar.open("Please select a team.", "", { duration: 5000 });
     }
@@ -99,6 +111,12 @@ export class TeamComponent implements OnInit {
     }
     this.userApi.getUsersByTeamID(this.team.teamID).subscribe((result) => {
       this.lijstUsersVanTeam = result;
+      for (let index = 0; index < result.length; index++) {
+        const element = result[index];
+        this.apiUpload.getPhoto(element.photo).subscribe((foto) => {
+          element["linkfoto"] = foto;
+        })
+      }
     });
   }
 }
