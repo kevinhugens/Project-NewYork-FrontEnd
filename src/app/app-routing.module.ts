@@ -24,6 +24,13 @@ import { TablesComponent } from './tables/tables/tables.component';
 import { TablesAddComponent } from './tables/tables-add/tables-add.component';
 import { TablesEditComponent } from './tables/tables-edit/tables-edit.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { CompetitionComponent } from './competition/competition/competition.component';
+import { AdminRankingComponent } from './competition/admin-ranking/admin-ranking.component';
+import { EditCompetitionComponent } from './competition/edit-competition/edit-competition.component';
+import { AddCompetitionComponent } from './competition/add-competition/add-competition.component';
+import { AddTeamComponent } from './competition/add-team/add-team.component';
+import { MakeGamesComponent } from './competition/make-games/make-games.component';
+import { EditGameComponent } from './competition/edit-game/edit-game.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 
 // Guards
@@ -48,6 +55,13 @@ const routes: Routes = [
   { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
   { path: 'teamGames/:id', component: TeamGamesComponent, canActivate: [AuthGuard] },
   { path: 'wedstrijden', component: MatchComponent, canActivate: [AuthGuard] },
+  { path: 'competition', component: CompetitionComponent },
+  { path: 'competition/:id', component: EditCompetitionComponent },
+  { path: 'addCompetition', component: AddCompetitionComponent },
+  { path: 'addTeam', component: AddTeamComponent },
+  { path: 'adminRanking/:id', component: AdminRankingComponent },
+  { path: 'makeGames/:id', component: MakeGamesComponent },
+  { path: 'editGame/:id', component: EditGameComponent },
   { path: 'wedstrijden/live/:id', component: LiveComponent, canActivate: [AuthGuard] },
   { path: 'wedstrijden/live/overzicht', component: LiveOverzichtComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -71,7 +85,6 @@ const routes: Routes = [
   { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found 404
 
 ]
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
+            <h1 class="text-center">Competities beheren</h1>
+            <mat-selection-list #competities [multiple]="false"
+                *ngIf="competitions != null && competitions.length > 0; else nocompetitions">
+                <div style="text-align: right;">
+                    <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
+                    <button mat-raised-button color="accent"
+                        (click)="onEdit(competities.selectedOptions.selected[0]?.value)"
+                        style="margin-left: 10px;">Edit</button>
+                    <button mat-raised-button color="warn" 
+                     mwlConfirmationPopover
+                    [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage"
+                    placement="left"
+                    cancelText="Annuleer" confirmText="Verwijder"
+                    (confirm)="onDelete(competities.selectedOptions.selected[0]?.value)"
+                    (cancel)="cancelClicked = true" 
+                        style="margin-left: 10px;">Delete</button>
+                </div>
+                <div mat-subheader>Tables</div>
+                <mat-list-option *ngFor="let c of competitions" [value]="c">
+                    <mat-icon mat-list-icon>leaderboard</mat-icon>
+                    <div mat-line>{{c.name}}</div>
+                    <div mat-line class="row">
+                        {{c.Address}}
+                    </div>
+                    <div >
+                        <button (click)="viewRanking(c.competitionID)">Bekijk competitie</button>
+                    </div>
+                </mat-list-option>
+                <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
+
+            </mat-selection-list>
+            <ng-template #nocompetitions>
+                <h3>Geen competities</h3>
+            </ng-template>
+        </div>
+    </div>
+</div>
