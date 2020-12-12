@@ -30,7 +30,6 @@ import { HomeComponent } from './home/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +56,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     TeamModule,
     TeamModule,
     ProfileModule,
-    ChartsModule,
+    ChartsModule
   ],
   providers: [
     {
