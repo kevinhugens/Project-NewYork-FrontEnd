@@ -1,0 +1,16 @@
+<div class="container">
+    <h1 class="text-center">Team toevoegen</h1>
+    <form class="text-center" #createRankingForm="ngForm" (ngSubmit)="onSubmitCreateRanking()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Team</mat-label>
+                <mat-select name="team" [(ngModel)]='ranking["teamID"]' required>
+                    <mat-option *ngFor="let team of teams" [value]='team["teamID"]'>
+                        {{team.teamName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!createRankingForm.form.valid">Toevoegen</button>
+    </form>
+</div>
