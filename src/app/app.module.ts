@@ -29,8 +29,8 @@ import { SecurityInterceptor } from './security/security.interceptor';
 import { LiveComponent } from './wedstrijden/live/live.component';
 import { HomeComponent } from './home/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-
-
+import { NoAccessComponent } from './no-access/no-access.component';
+import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     WildcardRouteComponent,
     NavbarComponent,
     LiveComponent,
-    SidenavComponent
-
+    SidenavComponent,
+    NoAccessComponent,
+    LiveOverzichtComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +61,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     ProfileModule,
     ChartsModule,
     CompetitionModule,
+    ChartsModule
   ],
   providers: [
     {
@@ -69,6 +71,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     multi: true
   },
   HomeComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

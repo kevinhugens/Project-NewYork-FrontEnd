@@ -11,6 +11,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { CompetitionService } from 'src/app/shared/services/competition.service';
 import { GameService } from 'src/app/shared/services/game.service';
 import { RankingService } from 'src/app/shared/services/ranking.service';
+import { UploadService } from 'src/app/shared/services/upload.service';
 import { UserGameService } from '../../shared/services/user-game.service';
 
 @Component({
@@ -28,8 +29,10 @@ export class LiveComponent implements OnInit {
   spelersTeam1: UserGame[];
   spelersTeam2: UserGame[];
   userGames: UserGame[];
+  team1Picture: string;
+  team2Picture: string;
   constructor(private route:ActivatedRoute, private _gameService: GameService, private _competitionService: CompetitionService, private snackBar: MatSnackBar, private _rankingService: RankingService, private router: Router, private home: HomeComponent,
-    private _userGameService: UserGameService) { }
+    private _userGameService: UserGameService, private _uploadService: UploadService) { }
 
   ngOnInit(): void {
     this.getData()
@@ -42,6 +45,14 @@ export class LiveComponent implements OnInit {
 
     this._gameService.getGame(this.gameID).subscribe((value) => {
       this.chosengame = value;
+      this._uploadService.getPhoto(value.team1.photo).subscribe((value) => {
+        this.team1Picture = value
+        console.log("foto team1", this.team1Picture)
+      });
+      this._uploadService.getPhoto(value.team2.photo).subscribe((value) => {
+        this.team2Picture = value
+        console.log("foto team2", this.team2Picture)
+      });
       console.log("game", this.chosengame)
       if(this.chosengame.competitionID != null){
         this._competitionService.getCompetition(this.chosengame.competitionID).subscribe((value) => {
@@ -56,10 +67,12 @@ export class LiveComponent implements OnInit {
       }
 
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
-        this.spelersTeam1 = value.filter((userGame: UserGame) => userGame.user.teamID == this.chosengame.team1ID)
+        console.log("value", value)
+        this.spelersTeam1 = value.filter((userGame: UserGame) => userGame.player.teamID== this.chosengame.team1ID)
+        console.log("spelers Team 1", this.spelersTeam1)
       })
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
-        this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.user.teamID == this.chosengame.team2ID)
+        this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.player.teamID == this.chosengame.team2ID)
       })
     })
 

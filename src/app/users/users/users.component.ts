@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UploadService } from 'src/app/shared/services/upload.service';
 import {User} from '../../shared/models/user.model';
 import {UserService} from '../../shared/services/user.service';
 @Component({
@@ -10,7 +11,7 @@ import {UserService} from '../../shared/services/user.service';
 })
 export class UsersComponent implements OnInit {
   lijstUsers: User[];
-  constructor(private router: Router, private api : UserService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private api : UserService, private snackBar: MatSnackBar,private apiUpload : UploadService) { }
 
   ngOnInit(): void {
     this.updateList();
@@ -31,6 +32,7 @@ export class UsersComponent implements OnInit {
 
   onDelete(user : User){
     if(user){
+      this.apiUpload.deletePhoto(user.photo).subscribe();
       this.api.deleteUser(user.userID).subscribe(() => {
         this.updateList();
       })
@@ -42,7 +44,12 @@ export class UsersComponent implements OnInit {
   updateList() {
     this.api.getUsers().subscribe((result) => {
       this.lijstUsers = result;
+      for (let index = 0; index < this.lijstUsers.length; index++) {
+        const element = this.lijstUsers[index];
+        this.apiUpload.getPhoto(element.photo).subscribe((result) => {
+          element["linkfoto"] = result;
+        })
+      }
     });
   }
-
 }

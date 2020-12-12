@@ -80,6 +80,7 @@ currentUser: User;
         // Need to get only the players of the user his team
         map(players => players.filter(player => player.teamID==this.currentUser.teamID)),
         tap(t => console.log("Players of the same team as the logged in user:", t))
+
       ).subscribe(
         result => {
           this.players = result;
@@ -142,14 +143,12 @@ currentUser: User;
 
     var date = new Date();
     date = this.timeFormGroup.controls.date.value;
-    date.setHours(parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[0]), parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[1]));
+    date.setHours(parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[0]) + 1, parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[1]));
     console.log("Date object:", date);
 
     // Create a new game
-    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, parseInt(this.locationFormGroup.controls.table.value), 1);
+    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, 1, parseInt(this.locationFormGroup.controls.table.value), );
 
-    // this.game = new Game(gameID, type, scoreteam1, scoreteam2, date, team1id, team2id, competitie, tableID);
-    console.log("Create game", this.game);
     this._gameService.addGame(this.game).subscribe(
       result => {
         console.log("Game added:", result);
@@ -176,6 +175,7 @@ currentUser: User;
                   () => {
                     console.log("De wedstrijd is verwijderd");
                     this.snackBar.open("De wedstrijd is verwijderd!", "");
+                    // UserGame gets automatical deleted
                   }
                 );
               } else {

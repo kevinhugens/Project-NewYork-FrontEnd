@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/scss/bootstrap-grid";
+@import "~animate.css/animate.min";
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -9,6 +11,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .timepicker-backdrop-overlay {
     z-index: 10000000 !important;
+}
+
+.centerV {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // Now possible to use border-MD-left

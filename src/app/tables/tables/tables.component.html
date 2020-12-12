@@ -9,13 +9,18 @@
                     <button mat-raised-button color="warn" (click)="onDelete(tables.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
                 </div>
                 <div mat-subheader>Tables</div>
-                <mat-list-option *ngFor="let table of lijstTables" [value]="table">
-                    <mat-icon mat-list-icon>info</mat-icon>
-                    <div mat-line>{{table.tableName}}</div>
-                    <div mat-line> {{table.companyName}} - {{table.address}} </div>
+                <mat-list-option *ngFor="let table of lijstTables; let i = index" [value]="table">
+                    <div class="row">
+                        <div class="col-md-2 centerV">
+                            <span *ngIf='!table["linkfoto"]' class="material-icons">info</span>
+                            <img *ngIf='table["linkfoto"]' [src]='table["linkfoto"]' style="max-width: 30%;">
+                        </div>
+                        <div class="col-md-10" style="vertical-align: center;text-align: left;">
+                            <div mat-line>{{table.tableName}}</div>
+                            <div mat-line>{{table.companyName}} - {{table.address}}</div>
+                        </div>
+                    </div>
                 </mat-list-option>
-                <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
-                
             </mat-selection-list>
             <ng-template #notables>
                 <h3>Geen tables</h3>

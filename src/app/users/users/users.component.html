@@ -10,13 +10,18 @@
                     <button mat-raised-button color="warn" (click)="onDelete(users.selectedOptions.selected[0]?.value)" style="margin-left: 10px;">Delete</button>
                 </div>
                 <div mat-subheader>Users</div>
-                <mat-list-option *ngFor="let user of lijstUsers" [value]="user">
-                    <mat-icon mat-list-icon>account_circle</mat-icon>
-                    <div mat-line>{{user.firstName}} {{user.lastName}}</div>
-                    <div mat-line> {{user.email}} </div>
+                <mat-list-option *ngFor="let user of lijstUsers; let i = index" [value]="user">
+                    <div class="row">
+                        <div class="col-md-2 centerV">
+                            <span *ngIf='!user["linkfoto"]' class="material-icons">account_circle</span>
+                            <img *ngIf='user["linkfoto"]' [src]='user["linkfoto"]' style="max-width: 30%;">
+                        </div>
+                        <div class="col-md-10" style="vertical-align: center;text-align: left;">
+                            <div mat-line>{{user.firstName}} {{user.lastName}}</div>
+                            <div mat-line>{{user.email}}</div>
+                        </div>
+                    </div>
                 </mat-list-option>
-                <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
-                
             </mat-selection-list>
             <ng-template #nousers>
                 <h3>Geen users</h3>

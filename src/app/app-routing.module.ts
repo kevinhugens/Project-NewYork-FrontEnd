@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 
 import { HomeComponent } from './home/home/home.component';
 import { RankingComponent } from './ranking/ranking/ranking.component';
@@ -20,8 +19,7 @@ import { LiveComponent } from './wedstrijden/live/live.component';
 
 import { TeamAddUserComponent } from './team/team-add-user/team-add-user.component';
 import { TeamCaptainEditComponent } from './team/team-captain-edit/team-captain-edit.component';
-// Guards
-import { AuthGuard } from './security/guards/auth.guard'
+
 import { TablesComponent } from './tables/tables/tables.component';
 import { TablesAddComponent } from './tables/tables-add/tables-add.component';
 import { TablesEditComponent } from './tables/tables-edit/tables-edit.component';
@@ -33,30 +31,30 @@ import { AddCompetitionComponent } from './competition/add-competition/add-compe
 import { AddTeamComponent } from './competition/add-team/add-team.component';
 import { MakeGamesComponent } from './competition/make-games/make-games.component';
 import { EditGameComponent } from './competition/edit-game/edit-game.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+
+// Guards
+import { AuthGuard } from './security/guards/auth.guard'
+import { CaptainGuard } from './security/guards/captain.guard';
+import { AdminGuard } from './security/guards/admin.guard'
+
+import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
+
 
 
 const routes: Routes = [
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'ranking', component: RankingComponent },
-  { path: 'teamGames/:id', component: TeamGamesComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+
+  // Everyone that isn't authentiicated
   { path: 'aanmelden', component: LoginComponent },
   { path: 'registreren', component: SignupComponent },
+
+  // Authenticated users
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
+  { path: 'teamGames/:id', component: TeamGamesComponent, canActivate: [AuthGuard] },
   { path: 'wedstrijden', component: MatchComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent },
-  { path: 'adduser', component: UsersAddComponent },
-  { path: 'edituser', component: UsersEditComponent },
-  { path: 'teams', component: TeamComponent },
-  { path: 'teamsadd', component: TeamsAddComponent },
-  { path: 'teamsedit', component: TeamsEditComponent },
-  { path: 'wedstrijden/live/:id', component: LiveComponent},
-  { path: 'teamsadduser', component: TeamAddUserComponent },
-  { path: 'teamscaptainedit', component: TeamCaptainEditComponent },
-  { path: 'tables', component: TablesComponent },
-  { path: 'tablesadd', component: TablesAddComponent },
-  { path: 'tablesedit', component: TablesEditComponent },
-  { path: 'profile', component: ProfileComponent },
   { path: 'competition', component: CompetitionComponent },
   { path: 'competition/:id', component: EditCompetitionComponent },
   { path: 'addCompetition', component: AddCompetitionComponent },
@@ -64,9 +62,29 @@ const routes: Routes = [
   { path: 'adminRanking/:id', component: AdminRankingComponent },
   { path: 'makeGames/:id', component: MakeGamesComponent },
   { path: 'editGame/:id', component: EditGameComponent },
+  { path: 'wedstrijden/live/:id', component: LiveComponent, canActivate: [AuthGuard] },
+  { path: 'wedstrijden/live/overzicht', component: LiveOverzichtComponent , canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'teamsadd', component: TeamsAddComponent, canActivate: [AuthGuard] }, // A user can create a new team if he hasn't one
 
-  { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found
-];
+  // Only admin and captains
+  { path: 'teams', component: TeamComponent, canActivate: [AuthGuard] },
+  { path: 'teamsedit', component: TeamsEditComponent, canActivate: [AuthGuard] },
+  { path: 'teamscaptainedit', component: TeamCaptainEditComponent, canActivate: [AuthGuard] },
+  { path: 'teamsadduser', component: TeamAddUserComponent, canActivate: [AuthGuard] },
+
+  // Only admins can access these pages, no one else
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'edituser', component: UsersEditComponent, canActivate: [AuthGuard], data: { roles : ["admin"] } }, // User can edit his own profile
+  { path: 'adduser', component: UsersAddComponent, canActivate: [AuthGuard], data: { roles : ["admin"] } },
+  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'tablesadd', component: TablesAddComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+  { path: 'tablesedit', component: TablesEditComponent, canActivate: [AdminGuard], data: { roles : ["admin"] } },
+
+  { path: 'geen-toegang', component: NoAccessComponent }, // 403 for no allowed access
+  { path: '**', component: WildcardRouteComponent }, // Wildcard route --> page not found 404
+
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
