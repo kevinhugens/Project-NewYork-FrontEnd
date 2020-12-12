@@ -1,11 +1,18 @@
 <mat-toolbar color="primary">
 
+  <!-- Small -->
   <div fxHide.gt-xs>
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 
+  <div fxHide.gt-xs fxFlex fxLayout fxLayoutAlign="end">
+    <a class="" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">{{currentUser.firstName}}</a>
+  </div>
+
+  <!-- Large -->
   <div>
     <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -15,50 +22,82 @@
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
 
       <!-- Registreren -->
-      <li *ngIf="!loggedIn"><a class="align-middle text-danger" routerLink="/registreren" routerLinkActive="active"
+      <li *ngIf="!loggedIn"><a class="align-middle mr-2 mr-lg-4" routerLink="/registreren" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
 
       <!-- Aanmelden -->
-      <li *ngIf="!loggedIn" class="ml-3"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
+      <li *ngIf="!loggedIn"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
 
       <li *ngIf="loggedIn">
 
         <!-- Overzicht van de live wedstrijden -->
-        <a class="mr-2" routerLink="/wedstrijden/live/overzicht" routerLinkActive="active"
+        <a class="mr-2 mr-lg-4" routerLink="/wedstrijden/live/overzicht" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Live</a>
 
 
         <!-- Wedstrijden -->
-        <a class="mr-2" routerLink="/wedstrijden" routerLinkActive="active"
+        <a class="mr-2 mr-lg-4" routerLink="/wedstrijden" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Wedstrijden</a>
 
-          <!-- Rabnking -->
-        <a class="mr-2" routerLink="/ranking" routerLinkActive="active"
+        <!-- Ranking -->
+        <a class="mr-2 mr-lg-4" routerLink="/ranking" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Ranking</a>
 
-        <!-- Tables -->
-        <a class="mr-2" routerLink="/tables" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">Tables</a>
+        <!-- Tables -Only ADMIN -->
+        <!-- <a class="mr-2 mr-lg-4" routerLink="/tables" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Tafels</a> -->
 
         <!-- Teams -->
-        <a class="mr-2" routerLink="/teams" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">Teams</a>
+        <a class="mr-2 mr-lg-4 mr-lg-4" routerLink="/teams" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Team</a>
 
-        <!-- Users -->
-        <a class="mr-2" routerLink="/users" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">Users</a>
+        <!-- Users - ADMIN-->
+        <!-- <a class="mr-2  mr-lg-4" routerLink="/users" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Users</a> -->
 
-        <a class="profile-menu" [matMenuTriggerFor]="menu">Menu<mat-icon>more_vert</mat-icon></a>
+        <!-- Menu -->
+        <a class="profile-menu" [matMenuTriggerFor]="menu" *ngIf="currentUser">{{currentUser.firstName}}
+          {{currentUser.lastName}}<mat-icon>more_vert</mat-icon></a>
 
         <mat-menu #menu="matMenu">
           <a class="profile-menu-item" mat-menu-item routerLink="/profile" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
             <mat-icon>account_circle</mat-icon>
             <span>Profiel</span>
-        </a>
+          </a>
 
           <hr>
+
+          <!-- Only for admins -->
+          <div *ngIf="currentUser.role==='admin'">
+            <!-- Teams -->
+            <!-- <a class="profile-menu-item" mat-menu-item routerLink="/teams" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <mat-icon>group_add</mat-icon>
+              <span>Ploegen</span>
+            </a> -->
+
+            <!-- Gebruikers -->
+            <a class="profile-menu-item" mat-menu-item routerLink="/users" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <mat-icon>group</mat-icon>
+              <span>Gebruikers</span>
+            </a>
+
+            <!-- Tafels -->
+            <a class="profile-menu-item" mat-menu-item routerLink="/tables" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <mat-icon>pin_drop</mat-icon>
+              <span>Tafels</span>
+            </a>
+
+            <!-- <a class="mr-2 mr-lg-4" routerLink="/tables" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Tafels</a> -->
+
+            <hr>
+          </div>
+
           <!-- Logout -->
           <a class="profile-menu-item" mat-menu-item (click)="logout()">
             <mat-icon id="logout" color="warn">power_settings_new</mat-icon>

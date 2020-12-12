@@ -72,4 +72,8 @@ export class GameService {
   deleteGame(id: number){
     return this.http.delete<Game>("https://localhost:44300/api/game/" + id)
   }
+
+
+
+  
 }

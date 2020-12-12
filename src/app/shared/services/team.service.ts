@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ConstantPool } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from '../models/team.model';
@@ -11,11 +12,12 @@ export class TeamService {
   constructor(private http: HttpClient) { }
 
   getTeams(): Observable<Team[]>{
-    return this.http.get<Team[]>("https://localhost:44300/api/team");
+    return this.http.get<Team[]>("https://newyork-backend.azurewebsites.net/api/team");
   }
 
   getTeam(id: number): Observable<Team>{
-    return this.http.get<Team>("https://localhost:44300/api/team/" + id);
+    console.log("GET TEAMID", id)
+    return this.http.get<Team>("https://localhost:44300/api/Team/" + id);
   }
 
   updateTeam(id: number, team: Team){
