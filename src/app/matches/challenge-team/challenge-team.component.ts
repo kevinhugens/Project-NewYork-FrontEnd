@@ -21,6 +21,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserGame } from 'src/app/shared/models/user-game.model';
+import { UploadService } from 'src/app/shared/services/upload.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ import { UserGame } from 'src/app/shared/models/user-game.model';
 })
 export class ChallengeTeamComponent implements OnInit {
 
-currentUser: User;
+  currentUser: User;
 
   teamFormGroup: FormGroup;
   timeFormGroup: FormGroup;
@@ -48,22 +49,32 @@ currentUser: User;
   maxDate = new Date();
   minDate = new Date();
 
-  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private _userGameService: UserGameService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private _formBuilder: FormBuilder, private _teamService: TeamService, private _tableService: TableService, private _userService: UserService, private _gameService: GameService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private _userGameService: UserGameService, @Inject(MAT_DIALOG_DATA) public data: any, private apiUpload: UploadService) {
     this.currentUser = this.data.currentUser;
-    
+
     // Get Teams
     this._teamService.getTeams()
       .pipe(
         tap(t => console.log("All teams:", t)),
         // Need to only get the teams were the user isn't part of
-        map(teams => teams.filter(team => team.teamID!=this.currentUser.teamID)),
+        map(teams => teams.filter(team => team.teamID != this.currentUser.teamID)),
         tap(t => console.log("Filtered teams:", t))
       ).subscribe(
         result => {
-          this.teams = result;
           console.log("In result", this.teams);
+          this.teams = result;
+
+          // Images
+          for (let index = 0; index < this.teams.length; index++) {
+            const element = this.teams[index];
+            this.apiUpload.getPhoto(element.photo).subscribe((foto) => {
+              element['linkfoto'] = foto;
+            });
+          }
+
         }
-      )
+      );
+
     // Get Tables
     this._tableService.getTables()
       .pipe(
@@ -71,19 +82,38 @@ currentUser: User;
       ).subscribe(
         result => {
           this.tables = result;
+
+          // Images
+          for (let index = 0; index < this.tables.length; index++) {
+            const elementTable = this.teams[index];
+            this.apiUpload.getPhoto(elementTable.photo).subscribe((foto) => {
+              elementTable['linkfoto'] = foto;
+            });
+          }
+
         }
-      )
+      );
+
     // Get Users
     this._userService.getUsers()
       .pipe(
         tap(t => console.log("All users:", t)),
         // Need to get only the players of the user his team
-        map(players => players.filter(player => player.teamID==this.currentUser.teamID)),
+        map(players => players.filter(player => player.teamID == this.currentUser.teamID)),
         tap(t => console.log("Players of the same team as the logged in user:", t))
 
       ).subscribe(
         result => {
           this.players = result;
+
+          // Images
+          for (let index = 0; index < this.players.length; index++) {
+            const elementPlayer = this.players[index];
+            this.apiUpload.getPhoto(elementPlayer.photo).subscribe((foto) => {
+              elementPlayer['linkfoto'] = foto;
+            });
+          }
+
         }
       )
 
@@ -140,14 +170,13 @@ currentUser: User;
     console.log("Game type:", this.playerFormGroup.controls.type.value);
     console.log("Selected player ID's:", this.playerFormGroup.controls.player.value);
 
-
     var date = new Date();
     date = this.timeFormGroup.controls.date.value;
     date.setHours(parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[0]) + 1, parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[1]));
     console.log("Date object:", date);
 
     // Create a new game
-    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, 1, parseInt(this.locationFormGroup.controls.table.value), );
+    this.game = new Game(0, this.playerFormGroup.controls.type.value, 0, 0, date, 1, parseInt(this.teamFormGroup.controls.team.value), null, 1, parseInt(this.locationFormGroup.controls.table.value),);
 
     this._gameService.addGame(this.game).subscribe(
       result => {
@@ -201,7 +230,6 @@ currentUser: User;
 
       }
     );
-
 
   }
 
