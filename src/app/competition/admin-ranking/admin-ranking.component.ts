@@ -18,11 +18,11 @@ import { TeamService } from 'src/app/shared/services/team.service';
 export class AdminRankingComponent implements OnInit {
   rankings: Ranking[] = [];
   teams: Team[];
-  teams2: Team[]=[];
+  teams2: Team[] = [];
   rankLength: number;
   competition: Competition;
-  game: Game = new Game(0, "1v1", 0,0,new Date(), null, null, null, 1, 1);
-  games: Game[];
+  game: Game = new Game(0, "1v1", 0, 0, new Date(), null, null, null, 1, 1);
+  games: Game[] = [];
   teamIDs: number[] = [];
 
   id = this.route.snapshot.params['id'];
@@ -47,14 +47,24 @@ export class AdminRankingComponent implements OnInit {
 
     this._competitionService.getCompetition(this.id).subscribe(result => {
       this.competition = result;
+      this.getGames();
     });
-    this._gameService.getGames().subscribe(result=>{
-      this.games = result;
-    })
+
   }
 
   ngOnInit(): void {
     this.getTeams();
+  }
+
+  getGames() {
+    this._gameService.getGames().subscribe(result => {
+      result.map(res => {
+        if (res.competitionID == this.competition.competitionID) {
+          this.games.push(res);
+          console.log(this.games)
+        }
+      })
+    })
   }
 
   onAdd(competition: Competition) {
@@ -62,10 +72,10 @@ export class AdminRankingComponent implements OnInit {
     this.router.navigate(['addTeam']);
   }
 
-  getTeams(){
+  getTeams() {
     this._teamService.getTeams().subscribe(result => {
-      result.map(res=>{
-        if(this.teamIDs.includes(res.teamID)){
+      result.map(res => {
+        if (this.teamIDs.includes(res.teamID)) {
           this.teams2.push(res);
         }
       });
@@ -80,32 +90,32 @@ export class AdminRankingComponent implements OnInit {
           console.log(this.teams2[i].teamID + "vs" + this.teams2[j + 1].teamID);
           //eerste matchen
           this.game.team1ID = this.teams2[i].teamID;
-          this.game.team2ID = this.teams2[j+1].teamID;
+          this.game.team2ID = this.teams2[j + 1].teamID;
           this.game.competitionID = competition.competitionID;
-          this._gameService.addGame(this.game).subscribe(()=>{
-            this._gameService.getGames().subscribe(result=>{
+          this._gameService.addGame(this.game).subscribe(() => {
+            this._gameService.getGames().subscribe(result => {
               this.games = result;
             })
           });
-          console.log(this.teams2[j+1].teamID + "vs" + this.teams2[i].teamID);
+          console.log(this.teams2[j + 1].teamID + "vs" + this.teams2[i].teamID);
           //terugmatchen
           this.game.team2ID = this.teams2[i].teamID;
-          this.game.team1ID = this.teams2[j+1].teamID;
+          this.game.team1ID = this.teams2[j + 1].teamID;
           this.game.competitionID = competition.competitionID;
-          this._gameService.addGame(this.game).subscribe(()=>{
-            this._gameService.getGames().subscribe(result=>{
+          this._gameService.addGame(this.game).subscribe(() => {
+            this._gameService.getGames().subscribe(result => {
               this.games = result;
             })
           });
-          
+
         }
       }
       this.teams2 = this.teams2.slice(1);
     }
-    this.router.navigate(['makeGames/'+this.id]);
+    this.router.navigate(['makeGames/' + this.id]);
   }
 
-  viewGames(){
-    this.router.navigate(['makeGames/'+this.id]);
+  viewGames() {
+    this.router.navigate(['makeGames/' + this.id]);
   }
 }
