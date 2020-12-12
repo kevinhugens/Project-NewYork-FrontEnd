@@ -85,7 +85,8 @@ export class ChallengeTeamComponent implements OnInit {
 
           // Images
           for (let index = 0; index < this.tables.length; index++) {
-            const elementTable = this.teams[index];
+            const elementTable = this.tables[index];
+            console.log("TAFEL FOTOS");
             this.apiUpload.getPhoto(elementTable.photo).subscribe((foto) => {
               elementTable['linkfoto'] = foto;
             });
