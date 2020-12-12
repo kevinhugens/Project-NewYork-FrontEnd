@@ -102,6 +102,10 @@ export class AdminRankingComponent implements OnInit {
       }
       this.teams2 = this.teams2.slice(1);
     }
-    this.router.navigate(['makeGames'+this.id]);
+    this.router.navigate(['makeGames/'+this.id]);
+  }
+
+  viewGames(){
+    this.router.navigate(['makeGames/'+this.id]);
   }
 }

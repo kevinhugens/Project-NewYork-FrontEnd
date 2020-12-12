@@ -1,7 +1,8 @@
 <div class="container">
     <h1 class="text-center">Ranking <span *ngIf="competition" class="font-weight-bold">{{competition.name}}</span></h1>
     <div class="text-right mb-2">
-        <button mat-raised-button color="accent" class="mr-3" (click)="makeGames(competition)">Maak competitiewedstrijden</button>
+        <button *ngIf="!games" mat-raised-button color="accent" class="mr-3" (click)="makeGames(competition)">Maak competitiewedstrijden</button>
+        <button *ngIf="games" mat-raised-button color="accent" class="mr-3" (click)="viewGames()">Bekijk competitiewedstrijden</button>
         <button mat-raised-button color="primary" (click)="onAdd(competition)">+ Team toevoegen</button>
     </div>
     <table *ngIf="rankings" class="table">
@@ -27,9 +28,4 @@
 
         </tbody>
     </table>
-    <a href="makeGames/1">MakeGames</a>
-    <div *ngFor="let g of games">
-        <p>{{g.team1ID}} speelt tegen {{g.team2ID}}</p>
-    </div>
-
 </div>

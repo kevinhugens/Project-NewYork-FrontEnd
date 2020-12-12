@@ -3,7 +3,7 @@
         <div class="col" style="margin-left: auto;margin-right: auto;text-align: center;">
             <h1 class="text-center">Competities beheren</h1>
             <mat-selection-list #competities [multiple]="false"
-                *ngIf="competitions != null && competitions.length > 0; else notables">
+                *ngIf="competitions != null && competitions.length > 0; else nocompetitions">
                 <div style="text-align: right;">
                     <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
                     <button mat-raised-button color="accent"
@@ -33,8 +33,8 @@
                 <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
 
             </mat-selection-list>
-            <ng-template #notables>
-                <h3>Geen tables</h3>
+            <ng-template #nocompetitions>
+                <h3>Geen competities</h3>
             </ng-template>
         </div>
     </div>
