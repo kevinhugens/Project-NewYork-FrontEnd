@@ -1,5 +1,10 @@
 <div class="container">
     <h1 class="text-center">Matchen van <span class="font-weight-bold">{{competition.name}}</span></h1>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToCompetitions()">Terug naar het overzicht</button>
+        </div>
+    </div>
 
     <div *ngFor="let game of games">
         <div class="card m-2">
@@ -15,14 +20,13 @@
                             <div *ngIf="team.teamID==game.team1ID" class="row justify-content-center">
                                 {{team.teamName}}
                             </div>
+                            <div class="row justify-content-center">
+                                <span *ngIf="team.teamID==game.team1ID && !team.foto" class="material-icons">
+                                    stars
+                                </span>
+                                <img *ngIf="team.teamID==game.team1ID && team.foto"[src]="team.foto" alt="team1Picture" style="max-width: 40%;">
+                            </div>
                         </ng-container>
-
-                        <div class="row justify-content-center">
-                            <span class="material-icons">
-                                stars
-                            </span>
-                        </div>
-
                     </div>
                     <div class="col centerV">
                         <p class="dash">-</p>
@@ -32,12 +36,13 @@
                             <div *ngIf="team.teamID==game.team2ID" class="row justify-content-center">
                                 {{team.teamName}}
                             </div>
+                            <div class="row justify-content-center">
+                                <span *ngIf="team.teamID==game.team2ID && !team.foto" class="material-icons">
+                                    stars
+                                </span>
+                                <img *ngIf="team.teamID==game.team2ID && team.foto"[src]="team.foto" alt="team1Picture" style="max-width: 40%;">
+                            </div>
                         </ng-container>
-                        <div class="row justify-content-center">
-                            <span class="material-icons" style="font-size: 30px;">
-                                stars
-                            </span>
-                        </div>
                     </div>
 
                 </div>
