@@ -63,7 +63,7 @@ const routes: Routes = [
   { path: 'makeGames/:id', component: MakeGamesComponent },
   { path: 'editGame/:id', component: EditGameComponent },
   { path: 'wedstrijden/live/:id', component: LiveComponent, canActivate: [AuthGuard] },
-  { path: 'wedstrijden/live/overzicht', component: LiveOverzichtComponent , canActivate: [AuthGuard]},
+  { path: 'wedstrijden/overzicht/live', component: LiveOverzichtComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'teamsadd', component: TeamsAddComponent, canActivate: [AuthGuard] }, // A user can create a new team if he hasn't one
 

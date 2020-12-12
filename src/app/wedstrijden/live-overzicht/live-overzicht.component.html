@@ -1,6 +1,6 @@
 <div class="container">
     
-    <div *ngIf="livegames">
+    <div *ngIf="!noGames">
         <h1 class="text-center">Live Wedstrijden</h1>
         <div *ngFor="let game of livegames" class="d-inline-flex m-4">
             <div class="card" style="width: 490px;">
@@ -37,7 +37,7 @@
                                 <span *ngIf="!game.team2Picture" class="material-icons" style="font-size: 60px;">
                                     stars
                                 </span>
-                                <img *ngIf="game.team2Picture" src="game.team1Picture" alt="team1Picture">
+                                <img *ngIf="game.team2Picture" src="game.team2Picture" alt="team2Picture">
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!livegames">
+    <div *ngIf="noGames">
         <h1 class="text-center">Geen live wedstrijden</h1>
         <h2 class="text-center">Het lijkt erop dat er momenteel geen wedstrijden bezig zijn!</h2>
     </div>

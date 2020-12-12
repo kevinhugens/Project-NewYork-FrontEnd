@@ -64,7 +64,7 @@ export class GameCardComponent implements OnInit {
         this.team1 = value;
         this._uploadService.getPhoto(value.photo).subscribe((value) => {
           this.team1Picture = value
-          //console.log("foto team1", this.team1Picture)
+          console.log("foto team1", this.team1Picture)
         })
         //console.log("team1:", this.team1)
       })
@@ -72,6 +72,7 @@ export class GameCardComponent implements OnInit {
         this.team2 = value;
         this._uploadService.getPhoto(value.photo).subscribe((value) => {
           this.team2Picture = value
+          console.log("Foto team2", this.team2Picture)
         })
         //console.log("team2:", this.team2)
       })
@@ -125,12 +126,12 @@ export class GameCardComponent implements OnInit {
     else {
       this.game.gameStatusID = 2;
       this._gameService.updateGame(id, this.game).subscribe()
-      this.router.navigate(['wedstrijden/live', id])
+      this.router.navigate(['wedstrijden/overzicht/live', id])
     }
 
   }
   goBackLive(id: number) {
-    this.router.navigate(['wedstrijden/live', id])
+    this.router.navigate(['wedstrijden/overzicht/live', id])
   }
 
 }
