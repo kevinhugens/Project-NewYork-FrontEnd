@@ -23,6 +23,7 @@ export class LiveOverzichtComponent implements OnInit {
   spelersTeam1: UserGame[];
   spelersTeam2: UserGame[];
   userGames: UserGame[];
+  noGames: boolean = true;
   constructor(private _competitionService: CompetitionService, private _teamService: TeamService, private _gameService: GameService, private _authService: AuthenticateService, private _userGameService: UserGameService, private snackBar: MatSnackBar, private router: Router,
     private _uploadService: UploadService) { }
 
@@ -30,37 +31,40 @@ export class LiveOverzichtComponent implements OnInit {
     this.getData()
   }
 
-  getData(){
-    this._gameService.getLiveGames().subscribe((value) =>{
+  getData() {
+    this._gameService.getLiveGames().subscribe((value) => {
       this.livegames = value;
-      
-      this.livegames.forEach(element => {
-        if(element.competitionID == null){
-          element["competitionName"] = "Vriendschappelijke wedstrijd"
-        }
-        if(element.competitionID != null){
-          this._competitionService.getCompetition(element.competitionID).subscribe((value) => {
-            element["competitionName"] = value.name;
+      if (this.livegames.length > 0) {
+        this.noGames = false;
+        this.livegames.forEach(element => {
+          if (element.competitionID == null) {
+            element["competitionName"] = "Vriendschappelijke wedstrijd"
+          }
+          if (element.competitionID != null) {
+            this._competitionService.getCompetition(element.competitionID).subscribe((value) => {
+              element["competitionName"] = value.name;
+            })
+          }
+          this._uploadService.getPhoto(element.team1.photo).subscribe((value) => {
+            element["team1Picture"] = value
+          });
+          this._uploadService.getPhoto(element.team2.photo).subscribe((value) => {
+            element["team2Picture"] = value
+          });
+
+          this._competitionService
+          this._userGameService.getUserGameByGame(element.gameID).subscribe((value) => {
+            element["userGames"] = value;
+
+            // element["spelersTeam1"] = value.filter((userGame: UserGame) => userGame.player.teamID== element.team1ID)
+
+            // this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.player.teamID== element.team2ID)
+            // console.log("spelers team 2", this.spelersTeam2)
           })
-        }
-        this._uploadService.getPhoto(element.team1.photo).subscribe((value) => {
-          element["team1Picture"] = value
         });
-        this._uploadService.getPhoto(element.team2.photo).subscribe((value) => {
-          element["team2Picture"] = value
-        });
+        console.log("livegames", this.livegames);
+      }
 
-        this._competitionService
-        this._userGameService.getUserGameByGame(element.gameID).subscribe((value) =>{
-          element["userGames"] = value;
-
-          // element["spelersTeam1"] = value.filter((userGame: UserGame) => userGame.player.teamID== element.team1ID)
-          
-          // this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.player.teamID== element.team2ID)
-          // console.log("spelers team 2", this.spelersTeam2)
-        })
-      });
-      console.log("livegames", this.livegames);
     })
   }
 

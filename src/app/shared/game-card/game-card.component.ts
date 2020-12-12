@@ -72,6 +72,7 @@ export class GameCardComponent implements OnInit {
         this.team2 = value;
         this._uploadService.getPhoto(value.photo).subscribe((value) => {
           this.team2Picture = value
+          console.log("Foto team2", this.team2Picture)
         })
         //console.log("team2:", this.team2)
       })
@@ -117,7 +118,7 @@ export class GameCardComponent implements OnInit {
   }
 
   goLive(id: number) {
-    console.log("vergelijking datum vandaag", this.datumVandaag.toDateString(), new Date(this.game.date).toDateString())
+    //console.log("vergelijking datum vandaag", this.datumVandaag.toDateString(), new Date(this.game.date).toDateString())
     if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
       this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
 
@@ -125,12 +126,12 @@ export class GameCardComponent implements OnInit {
     else {
       this.game.gameStatusID = 2;
       this._gameService.updateGame(id, this.game).subscribe()
-      this.router.navigate(['wedstrijden/live', id])
+      this.router.navigate(['wedstrijden/overzicht/live', id])
     }
 
   }
   goBackLive(id: number) {
-    this.router.navigate(['wedstrijden/live', id])
+    this.router.navigate(['wedstrijden/overzicht/live', id])
   }
 
 }
