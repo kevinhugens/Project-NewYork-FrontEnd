@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Ranking } from 'src/app/shared/models/ranking.model';
 import { Team } from 'src/app/shared/models/team.model';
@@ -15,7 +16,7 @@ export class AddTeamComponent implements OnInit {
   ranking: Ranking = new Ranking(0, 0, 0, 0);
   teamIDs: number[] = [];
 
-  constructor(private router: Router, private _rankingService: RankingService, private _teamService: TeamService) {
+  constructor(private router: Router, private _rankingService: RankingService, private _teamService: TeamService, private dialogRef: MatDialogRef<AddTeamComponent>) {
     this._rankingService.getRankings().subscribe(result => {
       result.map(res => {
         this.teamIDs.push(res.teamID);
@@ -31,7 +32,7 @@ export class AddTeamComponent implements OnInit {
 
   onSubmitCreateRanking() {
     this._rankingService.addRanking(this.ranking).subscribe(() => {
-      this.router.navigate(['adminRanking/' + this._rankingService.selectedCompetion.competitionID]);
+      this.dialogRef.close();
     });
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Competition } from 'src/app/shared/models/competition.model';
 import { Game } from 'src/app/shared/models/game.model';
@@ -8,6 +10,7 @@ import { CompetitionService } from 'src/app/shared/services/competition.service'
 import { GameService } from 'src/app/shared/services/game.service';
 import { RankingService } from 'src/app/shared/services/ranking.service';
 import { TeamService } from 'src/app/shared/services/team.service';
+import { AddTeamComponent } from '../add-team/add-team.component';
 
 
 @Component({
@@ -25,13 +28,19 @@ export class AdminRankingComponent implements OnInit {
   games: Game[] = [];
   teamIDs: number[] = [];
 
+    //confirmation
+    popoverTitle = 'Wedstrijden aanmaken';
+    popoverMessage = 'Wat is het type wedstrijd binnen de competitie?';
+    confirmClicked = false;
+    cancelClicked = false;
+
   id = this.route.snapshot.params['id'];
   constructor(private router: Router, private _rankingService: RankingService, private _teamService: TeamService, private route: ActivatedRoute,
-    private _competitionService: CompetitionService, private _gameService: GameService) {
+    private _competitionService: CompetitionService,private dialog: MatDialog, private _gameService: GameService, private snackbar: MatSnackBar) {
     this._rankingService.getRankings().subscribe(result => {
       result.map(res => {
-        this.teamIDs.push(res.teamID);
         if (res.competitionID == this.id) {
+          this.teamIDs.push(res.teamID);
           this.rankings.push(res);
           this.rankings.sort((a, b) => b.points - a.points);
           this.rankLength = this.rankings.length;
@@ -54,6 +63,8 @@ export class AdminRankingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeams();
+    console.log("Dit", this.teams2);
+    
   }
 
   getGames() {
@@ -69,7 +80,12 @@ export class AdminRankingComponent implements OnInit {
 
   onAdd(competition: Competition) {
     this._rankingService.selectedCompetion = competition;
-    this.router.navigate(['addTeam']);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    this.dialog.open(AddTeamComponent, dialogConfig)
+
+    // this.router.navigate(['addTeam']);
   }
 
   getTeams() {
@@ -83,8 +99,21 @@ export class AdminRankingComponent implements OnInit {
     });
   }
 
+  onePersonComp(competition : Competition){
+    this.game.type = "1vs1";
+    this.makeGames(competition);
+  }
+
+  twoPersonComp(competition : Competition){
+    this.game.type = "2vs2";
+    this.makeGames(competition);
+  }
+
   makeGames(competition: Competition) {
-    for (let i = 0; i < this.teams2.length; i += 0) {
+    if(this.rankings.length<2){
+      this.snackbar.open("Er moeten minstens 2 teams in een competitie aanwezig zijn", "", { duration: 5000 });
+    }else{
+      for (let i = 0; i < this.teams2.length; i += 0) {
       for (let j = 0; j < this.teams2.length; j++) {
         if (j + 1 < this.teams2.length) {
           console.log(this.teams2[i].teamID + "vs" + this.teams2[j + 1].teamID);
@@ -113,9 +142,15 @@ export class AdminRankingComponent implements OnInit {
       this.teams2 = this.teams2.slice(1);
     }
     this.router.navigate(['makeGames/' + this.id]);
+    }
+    
   }
 
   viewGames() {
     this.router.navigate(['makeGames/' + this.id]);
+  }
+
+  backToCompetitions() {
+    this.router.navigate(["competition"]);
   }
 }

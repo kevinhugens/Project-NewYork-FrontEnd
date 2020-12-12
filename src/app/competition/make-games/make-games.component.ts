@@ -34,7 +34,7 @@ export class MakeGamesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+console.log(this.games)
   }
 
   getGames() {
@@ -49,6 +49,10 @@ export class MakeGamesComponent implements OnInit {
 
   changeGame(game: Game){
     this.router.navigate(['editGame/' + game.gameID])
+  }
+
+  backToCompetitions() {
+    this.router.navigate(["adminRanking/" + this.competition.competitionID]);
   }
 
 }

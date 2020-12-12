@@ -1,7 +1,14 @@
 <div class="container">
     <h1 class="text-center">Ranking <span *ngIf="competition" class="font-weight-bold">{{competition.name}}</span></h1>
     <div class="text-right mb-2">
-        <button *ngIf="games.length==0" mat-raised-button color="accent" class="mr-3" (click)="makeGames(competition)">Maak competitiewedstrijden</button>
+        <button *ngIf="games.length==0" mat-raised-button color="accent" class="mr-3"  mwlConfirmationPopover
+        [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage"
+        placement="left"
+        cancelText="1vs1" confirmText="2vs2" cancelButtonType="dark" confirmButtonType="dark"
+        (confirm)="twoPersonComp(competition)"
+        (cancel)="onePersonComp(competition)" >Maak competitiewedstrijden</button>
+        <!-- <button *ngIf="games.length==0" mat-raised-button color="accent" class="mr-3" (click)="makeGames(competition)">Maak competitiewedstrijden</button> -->
         <button *ngIf="games.length>0" mat-raised-button color="accent" class="mr-3" (click)="viewGames()">Bekijk competitiewedstrijden</button>
         <button mat-raised-button color="primary" (click)="onAdd(competition)">+ Team toevoegen</button>
     </div>
@@ -28,4 +35,9 @@
 
         </tbody>
     </table>
+    <div class="row mt-5">
+        <div class="col" style="text-align: right;">
+            <button mat-raised-button color="accent" (click)="backToCompetitions()">Terug naar het overzicht</button>
+        </div>
+    </div>
 </div>

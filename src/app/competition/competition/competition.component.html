@@ -5,6 +5,7 @@
             <mat-selection-list #competities [multiple]="false"
                 *ngIf="competitions != null && competitions.length > 0; else nocompetitions">
                 <div style="text-align: right;">
+                    <button mat-raised-button color="basic" (click)="viewRanking(competities.selectedOptions.selected[0]?.value)"  style="margin-right: 10px;">Bekijk competitie</button>
                     <button mat-raised-button color="primary" (click)="onAdd()" style="margin-top: 10px;">Add</button>
                     <button mat-raised-button color="accent"
                         (click)="onEdit(competities.selectedOptions.selected[0]?.value)"
@@ -27,10 +28,10 @@
                         {{c.Address}}
                     </div>
                     <div >
-                        <button (click)="viewRanking(c.competitionID)">Bekijk competitie</button>
+                        
                     </div>
                 </mat-list-option>
-                <!-- <button mat-raised-button color="warn" (click)="onDeleteJournalist(journalist.selectedOptions.selected[0]?.value)" style="margin-top: 10px;">Verwijder</button> -->
+
 
             </mat-selection-list>
             <ng-template #nocompetitions>
