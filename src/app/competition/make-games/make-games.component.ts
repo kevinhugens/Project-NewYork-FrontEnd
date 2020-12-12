@@ -7,6 +7,7 @@ import { Team } from 'src/app/shared/models/team.model';
 import { CompetitionService } from 'src/app/shared/services/competition.service';
 import { GameService } from 'src/app/shared/services/game.service';
 import { TeamService } from 'src/app/shared/services/team.service';
+import { UploadService } from 'src/app/shared/services/upload.service';
 import { EditGameComponent } from '../edit-game/edit-game.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class MakeGamesComponent implements OnInit {
 
   id = this.route.snapshot.params['id'];
   constructor(private route: ActivatedRoute, private router: Router, private _competitionService: CompetitionService, private _gameService: GameService,
-    private _teamService: TeamService, private dialog: MatDialog) {
+    private _teamService: TeamService, private _uploadService: UploadService) {
     this._competitionService.getCompetition(this.id).subscribe(result => {
       this.competition = result;
       this.getGames();
@@ -29,6 +30,11 @@ export class MakeGamesComponent implements OnInit {
 
     this._teamService.getTeams().subscribe(result=>{
       this.teams = result;
+      result.map(res=>{
+        this._uploadService.getPhoto(res.photo).subscribe(value=>{
+          res["foto"]= value;
+        })
+      })
     });
 
   }
