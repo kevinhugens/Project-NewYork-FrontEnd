@@ -7,14 +7,14 @@
     </button>
   </div>
 
-  <div fxHide.gt-xs fxFlex fxLayout fxLayoutAlign="end">
+  <div *ngIf="loggedIn" fxHide.gt-xs fxFlex fxLayout fxLayoutAlign="end">
     <a class="" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">{{currentUser.firstName}}</a>
   </div>
 
   <!-- Large -->
   <div>
-    <a fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
+    <a *ngIf="loggedIn" fxHide.xs class="align-middle" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">Home</a>
   </div>
 
@@ -29,12 +29,12 @@
       <li *ngIf="!loggedIn"><a class="align-middle" routerLink="/aanmelden" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Aanmelden</a></li>
 
+          <!-- If user is authenticated -->
       <li *ngIf="loggedIn">
 
         <!-- Overzicht van de live wedstrijden -->
         <a class="mr-2 mr-lg-4" routerLink="wedstrijden/overzicht/live" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Live</a>
-
 
         <!-- Wedstrijden -->
         <a class="mr-2 mr-lg-4" routerLink="/wedstrijden" routerLinkActive="active"
@@ -44,7 +44,7 @@
         <a class="mr-2 mr-lg-4" routerLink="/ranking" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Ranking</a>
 
-        <!-- Tables -Only ADMIN -->
+        <!-- Tables - Only ADMIN -->
         <!-- <a class="mr-2 mr-lg-4" routerLink="/tables" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Tafels</a> -->
 

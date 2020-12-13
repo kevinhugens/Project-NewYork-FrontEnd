@@ -31,6 +31,7 @@ import { HomeComponent } from './home/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzicht.component';
+import { AddTeamComponent } from './competition/add-team/add-team.component'
 
 @NgModule({
   declarations: [
@@ -63,14 +64,17 @@ import { LiveOverzichtComponent } from './wedstrijden/live-overzicht/live-overzi
     CompetitionModule,
     ChartsModule
   ],
+  entryComponents: [
+    AddTeamComponent
+  ],
   providers: [
     {
 
-    provide: HTTP_INTERCEPTORS,
-    useClass: SecurityInterceptor,
-    multi: true
-  },
-  HomeComponent],
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    },
+    HomeComponent],
 
   bootstrap: [AppComponent]
 })

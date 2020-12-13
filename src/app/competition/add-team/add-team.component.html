@@ -11,6 +11,6 @@
                 </mat-select>
             </mat-form-field>
         </p>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!createRankingForm.form.valid">Toevoegen</button>
+        <button mat-raised-button [mat-dialog-close]="createRankingForm.value" color="primary" type="submit" [disabled]="!createRankingForm.form.valid">Toevoegen</button>
     </form>
 </div>

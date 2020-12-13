@@ -50,6 +50,12 @@
         (click)="onSidenavClose()">
         <mat-icon>group_add</mat-icon><span class="nav-caption">Ploegen</span>
       </a>
+      <!-- Competities -->
+      <a mat-list-item routerLink="/competition" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        (click)="onSidenavClose()">
+        <mat-icon>emoji_events</mat-icon><span class="nav-caption">Competities</span>
+      </a>
+
     </div>
     <hr>
 
