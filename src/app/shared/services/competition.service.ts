@@ -11,22 +11,22 @@ export class CompetitionService {
   constructor(private http: HttpClient) { }
 
   getCompetitions(): Observable<Competition[]>{
-    return this.http.get<Competition[]>("https://localhost:44300/api/competition");
+    return this.http.get<Competition[]>("https://newyork-backend.azurewebsites.net/api/competition");
   }
 
   getCompetition(id: number): Observable<Competition>{
-    return this.http.get<Competition>("https://localhost:44300/api/competition/" + id);
+    return this.http.get<Competition>("https://newyork-backend.azurewebsites.net/api/competition/" + id);
   }
 
   updateCompetition(id: number, competitie: Competition){
-    return this.http.put<Competition>("https://localhost:44300/api/competition/" + id, competitie)
+    return this.http.put<Competition>("https://newyork-backend.azurewebsites.net/api/competition/" + id, competitie)
   }
 
   addCompetition(competitie: Competition){
-    return this.http.post<Competition>("https://localhost:44300/api/competition" , competitie);
+    return this.http.post<Competition>("https://newyork-backend.azurewebsites.net/api/competition" , competitie);
   }
 
   deleteCompetition(id: number){
-    return this.http.delete<Competition>("https://localhost:44300/api/competition/" + id)
+    return this.http.delete<Competition>("https://newyork-backend.azurewebsites.net/api/competition/" + id)
   }
 }

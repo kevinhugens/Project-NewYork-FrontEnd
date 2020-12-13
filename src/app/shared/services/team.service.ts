@@ -17,18 +17,18 @@ export class TeamService {
 
   getTeam(id: number): Observable<Team>{
     //console.log("GET TEAMID", id)
-    return this.http.get<Team>("https://localhost:44300/api/Team/" + id);
+    return this.http.get<Team>("https://newyork-backend.azurewebsites.net/api/Team/" + id);
   }
 
   updateTeam(id: number, team: Team){
-    return this.http.put<Team>("https://localhost:44300/api/team/" + id, team)
+    return this.http.put<Team>("https://newyork-backend.azurewebsites.net/api/team/" + id, team)
   }
 
   addTeam(team: Team){
-    return this.http.post<Team>("https://localhost:44300/api/team" , team);
+    return this.http.post<Team>("https://newyork-backend.azurewebsites.net/api/team" , team);
   }
 
   deleteTeam(id: number){
-    return this.http.delete<Team>("https://localhost:44300/api/team/" + id)
+    return this.http.delete<Team>("https://newyork-backend.azurewebsites.net/api/team/" + id)
   }
 }

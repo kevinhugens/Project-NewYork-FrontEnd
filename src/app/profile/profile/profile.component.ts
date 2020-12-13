@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   profilepic: string;
   changepic: boolean = false;
   public config: DropzoneConfigInterface = {
-    url: "https://localhost:44300/api/upload",
+    url: "https://newyork-backend.azurewebsites.net/api/upload",
     acceptedFiles: "image/*",
     autoProcessQueue: false,
     maxFiles: 1

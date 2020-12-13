@@ -10,12 +10,12 @@ export class UploadService {
   constructor(private http: HttpClient) { }
   
   getPhoto(filename : string) : any {
-    return this.http.get<any>("https://localhost:44300/api/upload/" +filename);
+    return this.http.get<any>("https://newyork-backend.azurewebsites.net/api/upload/" +filename);
   }
   deletePhoto(filename : string) : any {
-    return this.http.delete<any>("https://localhost:44300/api/upload/" +filename);
+    return this.http.delete<any>("https://newyork-backend.azurewebsites.net/api/upload/" +filename);
   }
   updateUserProfilePicture(filename : string, user : User) {
-    return this.http.put<any>("https://localhost:44300/api/user/updateprofilepicture/" +filename,user);
+    return this.http.put<any>("https://newyork-backend.azurewebsites.net/api/user/updateprofilepicture/" +filename,user);
   }
 }

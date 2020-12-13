@@ -87,7 +87,7 @@ export class AuthenticateService {
 
   authenticate(userLogin: UserLogin): Observable<User> {
     //console.log("Authenticate");
-    return this._httpClient.post<User>("https://localhost:44300/api/User/authenticate", userLogin);
+    return this._httpClient.post<User>("https://newyork-backend.azurewebsites.net/api/User/authenticate", userLogin);
   }
 
 }

@@ -17,28 +17,26 @@ export class NavbarComponent implements OnInit {
   currentUser: User;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
-    this._authenticateService.isLoggedin.subscribe(e => {
 
-      console.log("User is authenticated:", e);
-      this.loggedIn = e;
-      if(e){
-        // If the user is logged in, get the data of the current user
-        this._authenticateService.loggedUser.subscribe(
-          result => {
-            console.log('User is authenticated, get the current user');
-            this.currentUser = result;
-          }
-        )
-      }
-    })
 
   }
 
   ngOnInit(): void {
+    this._authenticateService.loggedUser.subscribe(
+      result => {
+        this.loggedIn = this._authenticateService.isLoggedIn();
+        if(this.loggedIn){
+          console.log('User is authenticated, get the current user');
+        }
+        this.currentUser = result;
+
+      }
+    );
   }
 
   logout() {
     //console.log("User wants to logout");
+    this.loggedIn = false;
     localStorage.clear();
     this._authenticateService.isLoggedin.next(false);
     this.snackBar.open("Tot later " + this.currentUser.firstName + " " + this.currentUser.lastName + "!", "", { duration: 5000 });

@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     //console.log("User wants to login:", this.userLogin);
-
     this._authenticateService.authenticate(this.userLogin).subscribe(
       result => {
         //console.log("Result:", result);
@@ -32,7 +31,6 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token", result.token);
           localStorage.setItem("currentUser",JSON.stringify(result));
           this._authenticateService.logUser(result);
-          this._authenticateService.isLoggedin.next(result.token ? true : false);
           this.router.navigate(['']); 
           this.snackBar.open("Welkom " + result.firstName + " " + result.lastName + "!", "", { duration: 5000 });
         }else{

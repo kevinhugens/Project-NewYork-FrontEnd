@@ -11,22 +11,22 @@ export class TableService {
   constructor(private http: HttpClient) { }
 
   getTables(): Observable<Table[]>{
-    return this.http.get<Table[]>("https://localhost:44300/api/table");
+    return this.http.get<Table[]>("https://newyork-backend.azurewebsites.net/api/table");
   }
 
   getTable(id: number): Observable<Table>{
-    return this.http.get<Table>("https://localhost:44300/api/table/" + id);
+    return this.http.get<Table>("https://newyork-backend.azurewebsites.net/api/table/" + id);
   }
 
   updateTable(id: number, table: Table){
-    return this.http.put<Table>("https://localhost:44300/api/table/" + id, table)
+    return this.http.put<Table>("https://newyork-backend.azurewebsites.net/api/table/" + id, table)
   }
 
   addTable(table: Table){
-    return this.http.post<Table>("https://localhost:44300/api/table" , table);
+    return this.http.post<Table>("https://newyork-backend.azurewebsites.net/api/table" , table);
   }
 
   deleteTable(id: number){
-    return this.http.delete<Table>("https://localhost:44300/api/table/" + id)
+    return this.http.delete<Table>("https://newyork-backend.azurewebsites.net/api/table/" + id)
   }
 }

@@ -11,32 +11,32 @@ export class UserGameService {
   constructor(private http: HttpClient) { }
 
   getUserGames(): Observable<UserGame[]>{
-    return this.http.get<UserGame[]>("https://localhost:44300/api/userGame");
+    return this.http.get<UserGame[]>("https://newyork-backend.azurewebsites.net/api/userGame");
   }
 
   getUserGame(id: number): Observable<UserGame>{
-    return this.http.get<UserGame>("https://localhost:44300/api/userGame/" + id);
+    return this.http.get<UserGame>("https://newyork-backend.azurewebsites.net/api/userGame/" + id);
   }
 
   getUserGameByGame(id: number): Observable<UserGame[]>{
-    return this.http.get<UserGame[]>("https://localhost:44300/api/userGame/game/" + id);
+    return this.http.get<UserGame[]>("https://newyork-backend.azurewebsites.net/api/userGame/game/" + id);
   }
 
   updateUserGame(id: number, userGame: UserGame){
-    return this.http.put<UserGame>("https://localhost:44300/api/userGame/" + id, userGame)
+    return this.http.put<UserGame>("https://newyork-backend.azurewebsites.net/api/userGame/" + id, userGame)
   }
 
   addUserGame(userGame: UserGame){
-    return this.http.post<UserGame>("https://localhost:44300/api/userGame" , userGame);
+    return this.http.post<UserGame>("https://newyork-backend.azurewebsites.net/api/userGame" , userGame);
   }
 
   deleteUserGame(id: number){
-    return this.http.delete<UserGame>("https://localhost:44300/api/userGame/" + id)
+    return this.http.delete<UserGame>("https://newyork-backend.azurewebsites.net/api/userGame/" + id)
   }
   
   deleteUserGameByGameAndUser(gameID: number, userID: number){
     //console.log("Inside service, gameID:", gameID, "userID:", userID);
-    return this.http.delete<UserGame>("https://localhost:44300/deletegameanduser/" + gameID + "/" + userID)
+    return this.http.delete<UserGame>("https://newyork-backend.azurewebsites.net/deletegameanduser/" + gameID + "/" + userID)
   }
   
 }
