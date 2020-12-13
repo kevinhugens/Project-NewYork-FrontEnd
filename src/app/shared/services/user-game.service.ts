@@ -35,7 +35,7 @@ export class UserGameService {
   }
   
   deleteUserGameByGameAndUser(gameID: number, userID: number){
-    console.log("Inside service, gameID:", gameID, "userID:", userID);
+    //console.log("Inside service, gameID:", gameID, "userID:", userID);
     return this.http.delete<UserGame>("https://localhost:44300/deletegameanduser/" + gameID + "/" + userID)
   }
   

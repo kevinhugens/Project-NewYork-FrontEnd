@@ -64,7 +64,7 @@ export class GameCardComponent implements OnInit {
         this.team1 = value;
         this._uploadService.getPhoto(value.photo).subscribe((value) => {
           this.team1Picture = value
-          console.log("foto team1", this.team1Picture)
+          //console.log("foto team1", this.team1Picture)
         })
         //console.log("team1:", this.team1)
       })
@@ -72,7 +72,7 @@ export class GameCardComponent implements OnInit {
         this.team2 = value;
         this._uploadService.getPhoto(value.photo).subscribe((value) => {
           this.team2Picture = value
-          console.log("Foto team2", this.team2Picture)
+          //console.log("Foto team2", this.team2Picture)
         })
         //console.log("team2:", this.team2)
       })
@@ -105,10 +105,10 @@ export class GameCardComponent implements OnInit {
 
 
   deleteParticipation() {
-    console.log("User wants to delete his participation!");
+    //console.log("User wants to delete his participation!");
     this._userGameService.deleteUserGameByGameAndUser(this.game.gameID, this.currentUser.userID).subscribe(
       result => {
-        console.log("Deelname is verwijderd:", result);
+        //console.log("Deelname is verwijderd:", result);
         this.userParticipateGame = false;
         this.getData();
         this.snackBar.open("Deelname verwijderd!", "");
@@ -119,19 +119,21 @@ export class GameCardComponent implements OnInit {
 
   goLive(id: number) {
     //console.log("vergelijking datum vandaag", this.datumVandaag.toDateString(), new Date(this.game.date).toDateString())
-    if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
-      this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
 
-    }
-    else {
+
+    // if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
+    //   this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
+
+    // }
+    //else {
       this.game.gameStatusID = 2;
       this._gameService.updateGame(id, this.game).subscribe()
-      this.router.navigate(['wedstrijden/overzicht/live', id])
-    }
+      this.router.navigate(['wedstrijden/live', id])
+    //}
 
   }
   goBackLive(id: number) {
-    this.router.navigate(['wedstrijden/overzicht/live', id])
+    this.router.navigate(['wedstrijden/live', id])
   }
 
 }

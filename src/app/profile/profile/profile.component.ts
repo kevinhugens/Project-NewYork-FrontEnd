@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
     private _gameService: GameService, private apiUpload: UploadService, private apiUser: UserService) {
     this._authenticateService.loggedUser.subscribe(result => {
       this.activeUser = result;
-      console.log(this.activeUser);
+      //console.log(this.activeUser);
       this.updateProfilePicture();
     });
     this._gameService.getGames().subscribe(result => {
@@ -147,7 +147,7 @@ export class ProfileComponent implements OnInit {
     }
   
     onUploadError(event): void {
-      console.log(event[0].upload.filename + ": " + event[1].message);
+      //console.log(event[0].upload.filename + ": " + event[1].message);
     }
   
     removeFiles(): void {

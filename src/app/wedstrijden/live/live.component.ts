@@ -47,13 +47,13 @@ export class LiveComponent implements OnInit {
       this.chosengame = value;
       this._uploadService.getPhoto(value.team1.photo).subscribe((value) => {
         this.team1Picture = value
-        console.log("foto team1", this.team1Picture)
+        //console.log("foto team1", this.team1Picture)
       });
       this._uploadService.getPhoto(value.team2.photo).subscribe((value) => {
         this.team2Picture = value
-        console.log("foto team2", this.team2Picture)
+        //console.log("foto team2", this.team2Picture)
       });
-      console.log("game", this.chosengame)
+      //console.log("game", this.chosengame)
       if(this.chosengame.competitionID != null){
         this._competitionService.getCompetition(this.chosengame.competitionID).subscribe((value) => {
           this.competition = value;
@@ -67,9 +67,9 @@ export class LiveComponent implements OnInit {
       }
 
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
-        console.log("value", value)
+        //console.log("value", value)
         this.spelersTeam1 = value.filter((userGame: UserGame) => userGame.player.teamID== this.chosengame.team1ID)
-        console.log("spelers Team 1", this.spelersTeam1)
+        //console.log("spelers Team 1", this.spelersTeam1)
       })
       this._userGameService.getUserGameByGame(this.chosengame.gameID).subscribe((value) => {
         this.spelersTeam2 = value.filter((userGame: UserGame) => userGame.player.teamID == this.chosengame.team2ID)
@@ -102,7 +102,7 @@ export class LiveComponent implements OnInit {
 
         if(this.chosengame.scoreTeam1 > this.chosengame.scoreTeam2){
           this._rankingService.getRankingByTeam(this.chosengame.team1ID).subscribe((value) => {
-            console.log("ranking team 1", value)
+            //console.log("ranking team 1", value)
             this.rankingTeam1 = value;
             this.rankingTeam1.points +=3;
             this._rankingService.updateRanking(this.rankingTeam1.rankingID, this.rankingTeam1).subscribe(value => this.home.getData());
@@ -111,7 +111,7 @@ export class LiveComponent implements OnInit {
         }
         if(this.chosengame.scoreTeam1 < this.chosengame.scoreTeam2){
           this._rankingService.getRankingByTeam(this.chosengame.team2ID).subscribe((value) => {
-            console.log("ranking team 2", value)
+            //console.log("ranking team 2", value)
             this.rankingTeam2 = value;
             this.rankingTeam2.points +=3;
             this._rankingService.updateRanking(this.rankingTeam2.rankingID, this.rankingTeam2).subscribe(value => this.home.getData());

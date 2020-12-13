@@ -17,7 +17,7 @@
                         <span *ngIf="!team1Picture" class="material-icons" style="font-size: 100px;">
                             stars
                           </span>
-                          <img *ngIf="team1Picture" src="team1Picture" alt="team1Picture">
+                          <img *ngIf="team1Picture" [src]="team1Picture" alt="team1Picture" style="max-width: 100%;">
                     </div>
                 </div>
                 <div class="col-lg-8 col-sm-8 centerV">
@@ -60,7 +60,7 @@
                         <span *ngIf="!team2Picture" class="material-icons" style="font-size: 100px;">
                             stars
                           </span>
-                          <img *ngIf="team2Picture" src="team2Picture" alt="team2Picture">
+                          <img *ngIf="team2Picture" [src]="team2Picture" alt="team2Picture" style="max-width: 100%;">
                     </div>
                 </div>
             </div>

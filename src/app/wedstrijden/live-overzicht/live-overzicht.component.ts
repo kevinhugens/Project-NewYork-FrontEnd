@@ -62,7 +62,7 @@ export class LiveOverzichtComponent implements OnInit {
             // console.log("spelers team 2", this.spelersTeam2)
           })
         });
-        console.log("livegames", this.livegames);
+        //console.log("livegames", this.livegames);
       }
 
     })

@@ -63,7 +63,7 @@ export class AdminRankingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeams();
-    console.log("Dit", this.teams2);
+    //console.log("Dit", this.teams2);
     
   }
 
@@ -72,7 +72,7 @@ export class AdminRankingComponent implements OnInit {
       result.map(res => {
         if (res.competitionID == this.competition.competitionID) {
           this.games.push(res);
-          console.log(this.games)
+          //console.log(this.games)
         }
       })
     })
@@ -95,7 +95,7 @@ export class AdminRankingComponent implements OnInit {
           this.teams2.push(res);
         }
       });
-      console.log(this.teams2)
+      //console.log(this.teams2)
     });
   }
 
@@ -116,7 +116,7 @@ export class AdminRankingComponent implements OnInit {
       for (let i = 0; i < this.teams2.length; i += 0) {
       for (let j = 0; j < this.teams2.length; j++) {
         if (j + 1 < this.teams2.length) {
-          console.log(this.teams2[i].teamID + "vs" + this.teams2[j + 1].teamID);
+          //console.log(this.teams2[i].teamID + "vs" + this.teams2[j + 1].teamID);
           //eerste matchen
           this.game.team1ID = this.teams2[i].teamID;
           this.game.team2ID = this.teams2[j + 1].teamID;
@@ -126,7 +126,7 @@ export class AdminRankingComponent implements OnInit {
               this.games = result;
             })
           });
-          console.log(this.teams2[j + 1].teamID + "vs" + this.teams2[i].teamID);
+          //console.log(this.teams2[j + 1].teamID + "vs" + this.teams2[i].teamID);
           //terugmatchen
           this.game.team2ID = this.teams2[i].teamID;
           this.game.team1ID = this.teams2[j + 1].teamID;

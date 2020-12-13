@@ -40,7 +40,7 @@ export class MakeGamesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-console.log(this.games)
+//console.log(this.games)
   }
 
   getGames() {

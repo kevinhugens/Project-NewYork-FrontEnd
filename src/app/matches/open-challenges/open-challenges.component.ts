@@ -28,11 +28,11 @@ export class OpenChallengesComponent implements OnInit {
   }
 
   participateGame(gameID: number) {
-    console.log("User wants to participate on game with id:", gameID);
+    //console.log("User wants to participate on game with id:", gameID);
     // Make new user game
     this._userGameService.addUserGame(new UserGame(0, this.currentUser.userID, gameID)).subscribe(
       result => {
-        console.log("User participates on the game!", result);
+        //console.log("User participates on the game!", result);
         this.snackBar.open("Je neemt deel aan de wedstrijd!", "", { duration: 5000 }); // UNDO ERBIJ STEKEN?
         // Refresh the list of challenges
         this.getGameChallenges();

@@ -33,7 +33,7 @@ export class MatchComponent implements OnInit {
 
     this._authService.loggedUser.subscribe(
       result => {
-        console.log("Current user is:", result);
+        //console.log("Current user is:", result);
         this.currentUser = result;
       }
     );
@@ -48,7 +48,7 @@ export class MatchComponent implements OnInit {
       tap(t => console.log("Next friendly game of the user his team:", t)),
     ).subscribe(
       result => {
-        console.log("Next friendly game of the user his team:", result);
+        //console.log("Next friendly game of the user his team:", result);
         this.nextGame = result;
       }
     );
@@ -58,7 +58,7 @@ export class MatchComponent implements OnInit {
         map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
       ).subscribe(
         result => {
-          console.log("Planned games for the user his team:", result);
+          //console.log("Planned games for the user his team:", result);
           this.plannedGames = result;
         }
       );
@@ -68,7 +68,7 @@ export class MatchComponent implements OnInit {
       tap(t => console.log("Played games of the user his team:", t)),
     ).subscribe(
       result => {
-        console.log("Played games of the user his team:", result);
+        //console.log("Played games of the user his team:", result);
         this.playedGames = result;
       }
     );
@@ -98,7 +98,7 @@ export class MatchComponent implements OnInit {
   ngOnInit(): void {
     this._authService.loggedUser.subscribe(
       result => {
-        console.log("Current user is:", result);
+        //console.log("Current user is:", result);
         this.currentUser = result;
       }
     );
@@ -115,7 +115,7 @@ export class MatchComponent implements OnInit {
       tap(t => console.log("Next friendly game of the user his team:", t)),
     ).subscribe(
       result => {
-        console.log("Next friendly game of the user his team:", result);
+        //console.log("Next friendly game of the user his team:", result);
         this.nextGame = result;
       }
     );
@@ -124,7 +124,7 @@ export class MatchComponent implements OnInit {
       map(games => games.filter(game => game.gameID != this.nextGame.gameID)) // Filter the next game out of the planned games because this is showed separate
     ).subscribe(
       result => {
-        console.log("Planned games for the user his team:", result);
+        //console.log("Planned games for the user his team:", result);
         this.plannedGames = result;
       }
     );

@@ -13,7 +13,7 @@ export class CreatedMatchDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.game = this.data.game;
-    console.log("Game in dialog", this.game);
+    //console.log("Game in dialog", this.game);
   }
 
   ngOnInit(): void {

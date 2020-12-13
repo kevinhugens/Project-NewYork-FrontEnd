@@ -35,7 +35,7 @@ export class SidenavComponent implements OnInit {
   }
 
   logout() {
-    console.log("User wants to logout");
+    //console.log("User wants to logout");
     localStorage.clear();
     this._authenticateService.isLoggedin.next(false);
     this.snackBar.open("Tot later " + this.currentUser.firstName + " " + this.currentUser.lastName + "!", "", { duration: 5000 });

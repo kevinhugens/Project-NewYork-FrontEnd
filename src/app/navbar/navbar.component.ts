@@ -18,13 +18,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
     this._authenticateService.isLoggedin.subscribe(e => {
-      console.log("IS logged in?");
+      //console.log("IS logged in?");
       this.loggedIn = this._authenticateService.isLoggedIn();
     })
     this._authenticateService.loggedUser.subscribe(
       result => {
         this.currentUser = result;
-        console.log('Get current user');
+        //console.log('Get current user');
       }
     )
   }
@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    console.log("User wants to logout");
+    //console.log("User wants to logout");
     localStorage.clear();
     this._authenticateService.isLoggedin.next(false);
     this.snackBar.open("Tot later " + this.currentUser.firstName + " " + this.currentUser.lastName + "!", "", { duration: 5000 });

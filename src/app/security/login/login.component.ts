@@ -21,12 +21,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("User wants to login:", this.userLogin);
+    //console.log("User wants to login:", this.userLogin);
 
     this._authenticateService.authenticate(this.userLogin).subscribe(
       result => {
-        console.log("Result:", result);
-        console.log("Token is:", result.token);
+        //console.log("Result:", result);
+        //console.log("Token is:", result.token);
         if (result.token) {
           // Save in localStorage before setting the user as logged in!
           localStorage.setItem("token", result.token);

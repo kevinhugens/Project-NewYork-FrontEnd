@@ -16,7 +16,7 @@ export class TeamService {
   }
 
   getTeam(id: number): Observable<Team>{
-    console.log("GET TEAMID", id)
+    //console.log("GET TEAMID", id)
     return this.http.get<Team>("https://localhost:44300/api/Team/" + id);
   }
 

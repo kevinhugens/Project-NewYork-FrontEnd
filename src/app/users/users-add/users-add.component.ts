@@ -25,7 +25,7 @@ export class UsersAddComponent implements OnInit {
       this.submittedNew = false;
     });
     this.newUser = new User(0,"","","","","",new Date,null,null,"");
-    console.log(this.newUser);
+    //console.log(this.newUser);
   }
 
 }

@@ -92,7 +92,7 @@ export class TeamsEditComponent implements OnInit {
   }
 
   onUploadError(event) : void {
-    console.log(event[0].upload.filename + ": " + event[1].message);
+    //console.log(event[0].upload.filename + ": " + event[1].message);
   }
 
   removeFiles() : void {

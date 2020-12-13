@@ -21,29 +21,29 @@ export class CaptainGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log("CAPTAAAAAAAAAIN", this.captain);
+    //console.log("CAPTAAAAAAAAAIN", this.captain);
 
     if (localStorage.getItem('currentUser')) {
-      console.log("User is authenticated - auth");
+      //console.log("User is authenticated - auth");
       this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
       if (this.currentUser.teamID != null) {
-        console.log("User has an team - auth", this.currentUser.teamID);
+        //console.log("User has an team - auth", this.currentUser.teamID);
         // Get the team
         this._teamService.getTeam(this.currentUser.teamID).subscribe(
           result => {
-            console.log("RESULT:", result);
+            //console.log("RESULT:", result);
             if (result) {
-              console.log("Team is found");
+              //console.log("Team is found");
               if (this.currentUser.userID == result.captainID) {
-                console.log("The user is an captain - auth");
-                console.log("Return facking trueeeeeee")
+                //console.log("The user is an captain - auth");
+                //console.log("Return facking trueeeeeee")
                 return true;
               } else {
-                console.log("The user is no captain - auth");
+                //console.log("The user is no captain - auth");
                 return false;
               }
             } else {
-              console.log("No team found - auth");
+              //console.log("No team found - auth");
               return false;
             }
 
@@ -51,12 +51,12 @@ export class CaptainGuard implements CanActivate {
         );
 
       } else {
-        console.log("User has no team - auth")
+        //console.log("User has no team - auth")
         return false;
       }
 
     } else {
-      console.log("User isn't authenticated - auth");
+      //console.log("User isn't authenticated - auth");
       return false;
     }
 

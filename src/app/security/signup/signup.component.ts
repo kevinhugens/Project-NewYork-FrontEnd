@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
 
 
   removeFiles(): void {
-    console.log("User removed his image");
+    //console.log("User removed his image");
     this.dropzone = this.componentRef.directiveRef.dropzone();
     this.dropzone.removeAllFiles(true);
   }
@@ -77,13 +77,13 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 10);
     this.minDate.setFullYear(this.minDate.getFullYear() - 100);
-    console.log("Mindate", this.minDate);
-    console.log("MaxDate", this.maxDate);
+    //console.log("Mindate", this.minDate);
+    //console.log("MaxDate", this.maxDate);
     this.newUser = new User(0, "", "", "", "", null, this.maxDate, this.newFilename, null, "user", null);
   }
 
   onSubmit() {
-    console.log("User wants to sign up:", this.newUser);
+    //console.log("User wants to sign up:", this.newUser);
     this.submitted = true;
     this.newUser.photo = this.newFilename;
     this.processQueue();
@@ -92,7 +92,7 @@ export class SignupComponent implements OnInit {
         // Login & navigate to home
         if (result) {
           // Log the user in
-          console.log("Log the user in:", result.email, this.newUser.password);
+          //console.log("Log the user in:", result.email, this.newUser.password);
           this._authenticateService.authenticate(new UserLogin(result.email, this.newUser.password)).subscribe(
             result => {
               // Save in localStorage before setting the user as logged in!
@@ -104,7 +104,7 @@ export class SignupComponent implements OnInit {
               this.router.navigate(['']); // Navigate to homepage
             },
             error => {
-              console.log(error);
+              //console.log(error);
               this.snackBar.open("Aanmelden niet gelukt!", "", { duration: 5000 });
               this.submitted = false;
             }

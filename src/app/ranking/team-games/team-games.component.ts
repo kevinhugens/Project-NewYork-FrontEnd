@@ -25,7 +25,7 @@ export class TeamGamesComponent implements OnInit {
     this._gameService.getGames().subscribe(result=>{
       this.games = result;
     });
-    console.log(this.team1)
+    //console.log(this.team1)
     
   }
 

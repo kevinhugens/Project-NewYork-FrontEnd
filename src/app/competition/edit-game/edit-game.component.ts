@@ -53,15 +53,15 @@ export class EditGameComponent implements OnInit {
 
   onSubmitUpdateGame() {
     this.date = this.timeFormGroup.controls.date.value;
-    console.log(this.date)
-    console.log(this.timeFormGroup.controls.time.value)
-    console.log(this.game);
+    //console.log(this.date)
+    //console.log(this.timeFormGroup.controls.time.value)
+    //console.log(this.game);
     this.date.setHours(parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[0])+1, parseInt(this.timeFormGroup.controls.time.value.toString().split(":")[1]));
     this.game.date = this.date;
     this._gameService.updateGame(this.game.gameID, this.game).subscribe(()=>{
       this.router.navigate(["makeGames/" + this.game.competitionID]);
     });
-    console.log(this.game)
+    //console.log(this.game)
 
   }
 

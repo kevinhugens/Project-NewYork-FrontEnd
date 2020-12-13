@@ -37,19 +37,19 @@ export class HomeComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
     //this.currentUser.teamID = null
     if (this.currentUser) {
-      console.log(this.currentUser)
+      //console.log(this.currentUser)
       this._rankingService.getRankingByTeam(this.currentUser.teamID).subscribe((value) => {
         this._competitionService.getCompetition(value.competitionID).subscribe(value => this.competition = value)
       })
       //this._teamService.getTeam(user.teamid).subscribe(value => console.log(value))
-      console.log("currentuser team id", this.currentUser.teamID)
+      //console.log("currentuser team id", this.currentUser.teamID)
       this._gameService.GetNextCompetitionGameByTeam(this.currentUser.teamID).subscribe(
         (value) => {this.nextGameComp = value; if(value.gameStatusID == 2){this.bezig = true}});
       this._gameService.GetNextFriendlyGameByTeam(this.currentUser.teamID).subscribe(value => this.nextGameFriend = value)
 
       //Ophalen van alle games
       this._gameService.getNextGamesByTeam(this.currentUser.teamID).subscribe((value) => {
-        console.log("games", value);
+        //console.log("games", value);
         //Sorteren van de games obv datum
         if (value.length == 0) {
           this.sortedGames = null;

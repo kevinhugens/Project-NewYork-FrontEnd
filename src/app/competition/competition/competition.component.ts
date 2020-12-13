@@ -53,7 +53,7 @@ export class CompetitionComponent implements OnInit {
   }
 
   onDelete(competition: Competition) {
-    console.log(competition);
+    //console.log(competition);
     if (competition) {
       this._gameService.getGames().subscribe(result => {
         result.map(res => {
