@@ -121,15 +121,15 @@ export class GameCardComponent implements OnInit {
     //console.log("vergelijking datum vandaag", this.datumVandaag.toDateString(), new Date(this.game.date).toDateString())
 
 
-    // if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
-    //   this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
+    if (new Date(this.game.date).toDateString() != this.datumVandaag.toDateString()) {
+      this.snackBar.open("U kan de wedstrijd nog niet starten, gelieve nog enkele dagen te wachten", "", { duration: 5000 });
 
-    // }
-    //else {
+    }
+    else {
       this.game.gameStatusID = 2;
       this._gameService.updateGame(id, this.game).subscribe()
       this.router.navigate(['wedstrijden/live', id])
-    //}
+    }
 
   }
   goBackLive(id: number) {
