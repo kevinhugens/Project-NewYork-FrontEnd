@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
         if (result.token) {
           // Save in localStorage before setting the user as logged in!
           localStorage.setItem("token", result.token);
+          delete(result.role);
           localStorage.setItem("currentUser",JSON.stringify(result));
           this._authenticateService.logUser(result);
           this._authenticateService.isLoggedin.next(result.token ? true : false);
