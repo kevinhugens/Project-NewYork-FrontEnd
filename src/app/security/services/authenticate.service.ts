@@ -81,46 +81,7 @@ export class AuthenticateService {
   }
 
 
-
-  // checkIfCaptain(): boolean {
-  //   if (localStorage.getItem("currentUser")) {
-  //     console.log("User is authenticated - auth");
-  //     if (this.currentUser.teamID != null) {
-  //       console.log("The user belongs to a team - auth");
-
-  //       this._teamService.getTeam(this.currentUser.teamID).subscribe(
-  //         result => {
-  //           console.log(result),
-  //           if (result.captainID === this.currentUser.userID) {
-  //             console.log("The user is an captain - auth");
-  //             return true;
-  //           } else {
-  //             console.log("The user is no captain - auth");
-  //             return false;
-  //           }
-  //         }
-  //       );
-
-  //     } else {
-  //       console.log("The user has no team");
-  //       return false;
-  //     }
-  //   } else {
-  //     console.log("User isn't authenticated");
-  //     return false;
-  //   }
-  // }
-
-
   user = new BehaviorSubject(String);
-
-  // ifUser() {
-  //   if (localStorage.getItem("userRole")) {
-  //     return localStorage.getItem("userRole");
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   constructor(private _httpClient: HttpClient, private _teamService: TeamService) { }
 
