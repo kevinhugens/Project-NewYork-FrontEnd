@@ -32,7 +32,7 @@ export class AddTeamComponent implements OnInit {
 
   onSubmitCreateRanking() {
     this._rankingService.addRanking(this.ranking).subscribe(() => {
-      this.dialogRef.close();
+      this.dialogRef.close(this.ranking);
     });
   }
 
