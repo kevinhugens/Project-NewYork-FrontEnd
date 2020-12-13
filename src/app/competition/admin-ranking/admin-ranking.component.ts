@@ -27,6 +27,7 @@ export class AdminRankingComponent implements OnInit {
   game: Game = new Game(0, "1v1", 0, 0, new Date(), null, null, null, 1, 1);
   games: Game[] = [];
   teamIDs: number[] = [];
+  fileNameDialogRef: MatDialogRef<AddTeamComponent>;
 
     //confirmation
     popoverTitle = 'Wedstrijden aanmaken';
@@ -37,22 +38,7 @@ export class AdminRankingComponent implements OnInit {
   id = this.route.snapshot.params['id'];
   constructor(private router: Router, private _rankingService: RankingService, private _teamService: TeamService, private route: ActivatedRoute,
     private _competitionService: CompetitionService,private dialog: MatDialog, private _gameService: GameService, private snackbar: MatSnackBar) {
-    this._rankingService.getRankings().subscribe(result => {
-      result.map(res => {
-        if (res.competitionID == this.id) {
-          this.teamIDs.push(res.teamID);
-          this.rankings.push(res);
-          this.rankings.sort((a, b) => b.points - a.points);
-          this.rankLength = this.rankings.length;
-          for (let i = 0; i < this.rankLength; i++) {
-            this.rankings[i]["rank"] = i + 1;
-          }
-        }
-      });
-    });
-    this._teamService.getTeams().subscribe(result => {
-      this.teams = result;
-    });
+    
 
     this._competitionService.getCompetition(this.id).subscribe(result => {
       this.competition = result;
@@ -63,7 +49,7 @@ export class AdminRankingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeams();
-    console.log("Dit", this.teams2);
+    this.getData();
     
   }
 
@@ -80,12 +66,41 @@ export class AdminRankingComponent implements OnInit {
 
   onAdd(competition: Competition) {
     this._rankingService.selectedCompetion = competition;
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = false;
-    this.dialog.open(AddTeamComponent, dialogConfig)
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = false;
+    // dialogConfig.autoFocus = false;
+    // let dialogref2 = this.dialog.open(AddTeamComponent, dialogConfig);
+    let ref = this.dialog.open(AddTeamComponent);
+    ref.afterClosed().subscribe(result=>{
+      this._teamService.getTeam(result.team).subscribe(res=>{
+        this.teams.push(res)
+        console.log(this.teams)
+      });
+      this.rankings = [];
+      this.getData();
+      console.log(result)
+    })
 
     // this.router.navigate(['addTeam']);
+  }
+
+  getData(){
+    this._rankingService.getRankings().subscribe(result => {
+      result.map(res => {
+        if (res.competitionID == this.id) {
+          this.teamIDs.push(res.teamID);
+          this.rankings.push(res);
+          this.rankings.sort((a, b) => b.points - a.points);
+          this.rankLength = this.rankings.length;
+          for (let i = 0; i < this.rankLength; i++) {
+            this.rankings[i]["rank"] = i + 1;
+          }
+        }
+      });
+    });
+    this._teamService.getTeams().subscribe(result => {
+      this.teams = result;
+    });
   }
 
   getTeams() {
